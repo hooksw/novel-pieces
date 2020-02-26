@@ -1,0 +1,39 @@
+{
+  "name": "novel-pieces",
+  "private": true,
+  "version": "0.0.1",
+  "description": "a novel editor",
+  "main": "./dist/main.js",
+  "scripts": {
+    "tool": "node tool.js",
+    "prestart": "webpack --config webpack.config.js",
+    "dev": "webpack --watch --mode development",
+    "start": "electron ."
+  },
+  "author": "Alan Feng",
+  "license": "GPL",
+  "dependencies": {
+    "color": "^3.1.2",
+    "electron": "^6.1.7",
+    "fs-extra": "^8.1.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "styled-components": "^5.0.0",
+    "uuid": "^3.4.0",
+    "electron-store": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/uuid": "^3.4.7",
+    "@types/color": "^3.0.1",
+    "@types/fs-extra": "^8.0.1",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "@types/styled-components": "^4.4.2",
+    "file-loader": "^5.0.2",
+    "source-map-loader": "^0.2.4",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  }
+}

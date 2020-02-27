@@ -1,5 +1,6 @@
 import {bindTrigger} from "./hooks/bindTrigger";
 import {Events} from "./observer-events";
+import {curPath} from "../common/CurPath";
 
 export async function initWorkbench(dir: string) {
     const settings:Array<[Events,any]>=[

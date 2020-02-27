@@ -4,7 +4,7 @@ import {TreeNode} from './TreeNode'
 import styled from 'styled-components'
 import fold from "../../assests/icon/fold.svg"
 import {SmallIcon} from './styled-componets'
-import {Menu} from "../../lib/types/Menu";
+import {Menu} from "../../lib/types/menu";
 
 interface ExpandProps {
     expand: boolean

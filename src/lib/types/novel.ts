@@ -1,18 +1,33 @@
-export class SectionData {
+export class Section {
     name: string
     uuid: string
+
+    constructor(name: string, uuid: string) {
+        this.name = name;
+        this.uuid = uuid;
+    }
 }
-export class ChapterData {
+export class Chapter {
     name: string
-    content: SectionData[]
+    content: Section[]
+
+    constructor(name: string, content: Section[]=[]) {
+        this.name = name;
+        this.content = content;
+    }
 }
-export class PartData {
+export class Part {
     name: string
-    content: ChapterData[]
+    content: Chapter[]
+
+    constructor(name: string, content: Chapter[]=[]) {
+        this.name = name;
+        this.content = content;
+    }
 }
 export class Novel{
     cur:number[]
-    content:PartData[]
+    content:Part[]
 }
 export class Meta {
     name:string
@@ -22,7 +37,7 @@ export class Meta {
 }
 export class Project {
     meta:Meta
-    novel:PartData[]
+    novel:Part[]
 }
 
 export interface NovelListItem {

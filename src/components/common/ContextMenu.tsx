@@ -1,4 +1,4 @@
-import {Menu} from "../../lib/types/Menu";
+import {Menu} from "../../lib/types/menu";
 import styled from "styled-components";
 import * as React from "react";
 import MenuItem = Electron.MenuItem;

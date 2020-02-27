@@ -37170,7 +37170,6 @@ exports.ExpandNode = ExpandNode;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 const Container = styled_components_1.default.div `
     width:100%;
@@ -37191,7 +37190,6 @@ const Container = styled_components_1.default.div `
     padding-left:${p => (p.indent * 2) + "rem"}
 `;
 function TreeNode(props) {
-    const [selected, setSelected] = react_1.useState(props.selected != ( false || null));
     // const menuContext=useContext(MenuContext)
     // function contextMenuHandle(event:any) {
     //     event.preventDefault()
@@ -37212,7 +37210,7 @@ function TreeNode(props) {
     }
     return (React.createElement(Container, { onClick: clickHandle, 
         // onContextMenu={contextMenuHandle}
-        selected: selected == null ? false : selected, indent: props.indent, hasOperation: props.operation != null },
+        selected: props.selected != null || props.selected, indent: props.indent, hasOperation: props.operation != null },
         props.front,
         props.name,
         props.operation));
@@ -37373,7 +37371,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 const App_1 = __webpack_require__(/*! ./components/App */ "./src/components/App.tsx");
+const novel_1 = __webpack_require__(/*! ./lib/types/novel */ "./src/lib/types/novel.ts");
 ReactDOM.render(React.createElement(App_1.App, null), document.getElementById('root'));
+const c = new novel_1.Chapter();
+console.log(c + ":" + c.toString() + ":" + JSON.stringify(c));
 
 
 /***/ }),
@@ -37506,6 +37507,38 @@ class ColorTheme {
 exports.ColorTheme = ColorTheme;
 exports.defalutTheme = new ColorTheme("#EEE8D5", "FDF6E3", "#B58900", "#ccc", "#ccc");
 exports.warnColor = "#d81e06";
+
+
+/***/ }),
+
+/***/ "./src/lib/types/novel.ts":
+/*!********************************!*\
+  !*** ./src/lib/types/novel.ts ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class Section {
+}
+exports.Section = Section;
+class Chapter {
+}
+exports.Chapter = Chapter;
+class Part {
+}
+exports.Part = Part;
+class Novel {
+}
+exports.Novel = Novel;
+class Meta {
+}
+exports.Meta = Meta;
+class Project {
+}
+exports.Project = Project;
 
 
 /***/ }),

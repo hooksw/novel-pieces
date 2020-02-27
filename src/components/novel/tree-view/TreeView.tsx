@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import {PartData} from "../../../lib/types/novel";
+import {Part} from "../../../lib/types/novel";
 import {ExpandNode} from "../../common/ExpandNode";
 import part from "../../../assests/icon/part.svg"
 import chapter from "../../../assests/icon/chapter.svg"
@@ -16,7 +16,7 @@ const Container = styled.div`
     position: relative;
 `
 
-const list: PartData[] = [
+const list: Part[] = [
     {
         name: "",
         content: [{

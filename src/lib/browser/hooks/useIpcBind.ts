@@ -1,4 +1,4 @@
-import {Channels} from "../../types/ipc-channels";
+import {Channels} from "../../types/msg";
 import {useEffect} from "react";
 import ipcRenderer = Electron.ipcRenderer;
 

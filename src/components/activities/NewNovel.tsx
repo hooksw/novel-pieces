@@ -5,9 +5,8 @@ import {BaseButton, SmallIcon, FullScreen} from "../common/styled-componets";
 import {BaseInput} from "../common/BaseInput";
 import loading from "../../assests/icon/loading.svg"
 import {Warn} from "../common/Warn";
-import {Events} from "../../lib/browser/observer-events";
-import {initWorkbench} from "../../lib/browser/novel-operation";
-import {tools} from "../../lib/node/preload";
+import {initWorkbench} from "../../lib/browser/initWorkBench";
+import {createNewNovel} from "../../lib/node/novel/createNewNovel";
 
 const BG = styled(FullScreen)`
   z-index: 200;
@@ -66,7 +65,7 @@ export function NewNovel() {
         setCreating(!check)
 
         if(!check){
-            tools.novel.createNewNovel(name,author).then((dir:string)=>initWorkbench(dir))
+            createNewNovel(name,author).then((dir:string)=>initWorkbench(dir))
         }
     }
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import * as React from "react"
-import {MsgType} from "../../lib/types/ipc-channels";
+import {MsgType} from "../../lib/types/msg";
 import {LargeIcon} from "../common/styled-componets";
 import warn from "../../assests/icon/warn.svg"
 import {useEffect, useState} from "react";

@@ -30,6 +30,6 @@ export async function createNewNovel(name: string, author: string) {
     await fs.writeJSON(getPath(name,metafile), meta)
     await fs.writeJSON(getPath(name,novelfile), defaultNovel)
     await fs.writeFile(getPath(name,firstSectionUUID), "")
-    await new Promise(()=>initWorkbench(name))
+    await initWorkbench(name)
 }
 

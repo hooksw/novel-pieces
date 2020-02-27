@@ -41010,15 +41010,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const getNovelList_1 = __webpack_require__(/*! ../../../../lib/node/novel/getNovelList */ "./src/lib/node/novel/getNovelList.ts");
+const initWorkBench_1 = __webpack_require__(/*! ../../../../lib/common/initWorkBench */ "./src/lib/common/initWorkBench.ts");
 function NovelList() {
     const [list, setList] = react_1.useState([]);
     react_1.useEffect(() => {
         getNovelList_1.getNovelList().then(e => {
             setList(e);
-            console.log("getno:" + e.length);
         });
     }, []);
-    return (React.createElement("div", null, list.map(e => React.createElement("li", { key: e.dir }, e.meta.name))));
+    function clickHandle(dir) {
+        initWorkBench_1.initWorkbench(dir);
+    }
+    return (React.createElement("div", null, list.map(e => React.createElement("li", { key: e.dir, onClick: () => clickHandle(e.dir) }, e.meta.name))));
 }
 exports.NovelList = NovelList;
 
@@ -41460,12 +41463,13 @@ exports.CurContext = React.createContext(null);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const useBind_1 = __webpack_require__(/*! ../../lib/browser/hooks/useBind */ "./src/lib/browser/hooks/useBind.ts");
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const TreeView_1 = __webpack_require__(/*! ../novel/tree-view/TreeView */ "./src/components/novel/tree-view/TreeView.tsx");
 const ContentManager_1 = __webpack_require__(/*! ../novel/editor/ContentManager */ "./src/components/novel/editor/ContentManager.tsx");
 const novel_1 = __webpack_require__(/*! ../../lib/types/novel */ "./src/lib/types/novel.ts");
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function Workbench() {
     const project = useBind_1.useBind(4 /* project_data */, new novel_1.Project());
+    console.log(JSON.stringify(project));
     return (React.createElement(React.Fragment, null,
         React.createElement(TreeView_1.TreeView, { novel: project.novel }),
         React.createElement(ContentManager_1.ContentManager, null)));
@@ -41728,39 +41732,50 @@ exports.ProjectIO = ProjectIO;
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const uuid_1 = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
 const fs = __webpack_require__(/*! fs-extra */ "./node_modules/_fs-extra@8.1.0@fs-extra/lib/index.js");
 const storage_info_1 = __webpack_require__(/*! ../node/storage-info */ "./src/lib/node/storage-info.ts");
 const initWorkBench_1 = __webpack_require__(/*! ./initWorkBench */ "./src/lib/common/initWorkBench.ts");
-async function createNewNovel(name, author) {
-    const firstSectionUUID = uuid_1.v1();
-    const defaultNovel = {
-        cur: [0, 0, 0],
-        content: [
-            {
-                name: "",
-                content: [{
-                        name: "",
-                        content: [{
-                                name: "",
-                                uuid: firstSectionUUID
-                            }]
-                    }]
-            }
-        ]
-    };
-    const meta = {
-        name: name,
-        author: author,
-        startTime: new Date().toDateString(),
-        lastUpdateTime: this.startTime
-    };
-    await fs.promises.mkdir(storage_info_1.getPath(name), { recursive: true });
-    await fs.writeJSON(storage_info_1.getPath(name, storage_info_1.metafile), meta);
-    await fs.writeJSON(storage_info_1.getPath(name, storage_info_1.novelfile), defaultNovel);
-    await fs.writeFile(storage_info_1.getPath(name, firstSectionUUID), "");
-    await new Promise(() => initWorkBench_1.initWorkbench(name));
+function createNewNovel(name, author) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const firstSectionUUID = uuid_1.v1();
+        const defaultNovel = {
+            cur: [0, 0, 0],
+            content: [
+                {
+                    name: "",
+                    content: [{
+                            name: "",
+                            content: [{
+                                    name: "",
+                                    uuid: firstSectionUUID
+                                }]
+                        }]
+                }
+            ]
+        };
+        const meta = {
+            name: name,
+            author: author,
+            startTime: new Date().toDateString(),
+            lastUpdateTime: this.startTime
+        };
+        yield fs.promises.mkdir(storage_info_1.getPath(name), { recursive: true });
+        yield fs.writeJSON(storage_info_1.getPath(name, storage_info_1.metafile), meta);
+        yield fs.writeJSON(storage_info_1.getPath(name, storage_info_1.novelfile), defaultNovel);
+        yield fs.writeFile(storage_info_1.getPath(name, firstSectionUUID), "");
+        yield initWorkBench_1.initWorkbench(name);
+    });
 }
 exports.createNewNovel = createNewNovel;
 
@@ -41776,19 +41791,31 @@ exports.createNewNovel = createNewNovel;
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const bindTrigger_1 = __webpack_require__(/*! ../browser/hooks/bindTrigger */ "./src/lib/browser/hooks/bindTrigger.ts");
 const getProject_1 = __webpack_require__(/*! ../node/novel/getProject */ "./src/lib/node/novel/getProject.ts");
 const ProjectIO_1 = __webpack_require__(/*! ./ProjectIO */ "./src/lib/common/ProjectIO.ts");
-async function initWorkbench(dir) {
-    ProjectIO_1.setProjectIO(new ProjectIO_1.ProjectIO(dir));
-    const settings = [
-        [2 /* newnovel_show */, false],
-        [1 /* welcomepage_show */, false],
-        [4 /* project_data */, getProject_1.getProject()]
-    ];
-    settings.forEach(e => {
-        bindTrigger_1.bindTrigger(e[0], e[1]);
+function initWorkbench(dir) {
+    return __awaiter(this, void 0, void 0, function* () {
+        ProjectIO_1.setProjectIO(new ProjectIO_1.ProjectIO(dir));
+        const settings = [
+            [2 /* newnovel_show */, false],
+            [1 /* welcomepage_show */, false],
+            [3 /* launch_show */, false],
+            [4 /* project_data */, yield getProject_1.getProject()]
+        ];
+        settings.forEach(e => {
+            bindTrigger_1.bindTrigger(e[0], e[1]);
+        });
     });
 }
 exports.initWorkbench = initWorkbench;
@@ -41805,19 +41832,30 @@ exports.initWorkbench = initWorkbench;
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __webpack_require__(/*! fs-extra */ "./node_modules/_fs-extra@8.1.0@fs-extra/lib/index.js");
 const storage_info_1 = __webpack_require__(/*! ../storage-info */ "./src/lib/node/storage-info.ts");
 const path = __webpack_require__(/*! path */ "path");
-async function getNovelList() {
-    let dirs = await fs.readdir(storage_info_1.dir_store);
-    const d1 = dirs.filter((v) => (fs.statSync(path.join(storage_info_1.dir_store, v))).isDirectory()).map(async (e) => {
-        return {
-            dir: e,
-            meta: await fs.readJSON(storage_info_1.getPath(e, storage_info_1.metafile))
-        };
+function getNovelList() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let dirs = yield fs.readdir(storage_info_1.dir_store);
+        const d1 = dirs.filter((v) => (fs.statSync(path.join(storage_info_1.dir_store, v))).isDirectory()).map((e) => __awaiter(this, void 0, void 0, function* () {
+            return {
+                dir: e,
+                meta: yield fs.readJSON(storage_info_1.getPath(e, storage_info_1.metafile))
+            };
+        }));
+        return (yield Promise.all(d1)).flat();
     });
-    return (await Promise.all(d1)).flat();
 }
 exports.getNovelList = getNovelList;
 
@@ -41833,15 +41871,23 @@ exports.getNovelList = getNovelList;
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const novel_1 = __webpack_require__(/*! ../../types/novel */ "./src/lib/types/novel.ts");
 const fs = __webpack_require__(/*! fs-extra */ "./node_modules/_fs-extra@8.1.0@fs-extra/lib/index.js");
 const ProjectIO_1 = __webpack_require__(/*! ../../common/ProjectIO */ "./src/lib/common/ProjectIO.ts");
-async function getProject() {
-    const p = {
-        meta: await fs.readJSON(ProjectIO_1.projectIO.metaPath),
-        novel: await fs.readJSON(ProjectIO_1.projectIO.novelPath)
-    };
-    return p;
+function getProject() {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new novel_1.Project(yield fs.readJSON(ProjectIO_1.projectIO.metaPath), yield fs.readJSON(ProjectIO_1.projectIO.novelPath));
+    });
 }
 exports.getProject = getProject;
 
@@ -41857,13 +41903,24 @@ exports.getProject = getProject;
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __webpack_require__(/*! fs-extra */ "./node_modules/_fs-extra@8.1.0@fs-extra/lib/index.js");
-async function safeWrite(path, data) {
-    const tmp = path + ".tmp";
-    await fs.writeFile(tmp, data, "utf8");
-    await fs.unlink(path);
-    await fs.rename(tmp, path);
+function safeWrite(path, data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const tmp = path + ".tmp";
+        yield fs.writeFile(tmp, data, "utf8");
+        yield fs.unlink(path);
+        yield fs.rename(tmp, path);
+    });
 }
 exports.safeWrite = safeWrite;
 

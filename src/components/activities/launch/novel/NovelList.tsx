@@ -2,6 +2,7 @@ import * as React from 'react'
 import {useState, useEffect} from 'react';
 import {NovelListItem} from "../../../../lib/types/novel";
 import {getNovelList} from "../../../../lib/node/novel/getNovelList";
+import {initWorkbench} from "../../../../lib/common/initWorkBench";
 
 
 export function NovelList() {
@@ -10,15 +11,18 @@ export function NovelList() {
     useEffect(() => {
         getNovelList().then(e => {
             setList(e)
-            console.log("getno:" + e.length)
         })
     }, [])
+
+    function clickHandle(dir:string) {
+        initWorkbench(dir)
+    }
 
     return (
         <div>
             {
                 list.map(e =>
-                    <li key={e.dir}>{e.meta.name}</li>
+                    <li key={e.dir} onClick={()=>clickHandle(e.dir)}>{e.meta.name}</li>
                 )
             }
         </div>

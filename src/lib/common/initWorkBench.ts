@@ -8,7 +8,8 @@ export async function initWorkbench(dir: string) {
     const settings:Array<[Events,any]>=[
         [Events.newnovel_show,false],
         [Events.welcomepage_show,false],
-        [Events.project_data,getProject()]
+        [Events.launch_show,false],
+        [Events.project_data,await getProject()]
     ]
     settings.forEach(e=>{
         bindTrigger(e[0],e[1])

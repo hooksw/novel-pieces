@@ -3,6 +3,6 @@ export const enum Events {
     welcomepage_show,
     newnovel_show,
     launch_show,
-    dir_data,
+    project_data,
     curnovel_data
 }

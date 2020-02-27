@@ -1,11 +1,11 @@
 import {Project} from "../../types/novel";
 import * as fs from "fs-extra";
-import {metaPath, novelPath} from "../storage-info";
+import {projectIO} from "../../common/ProjectIO";
 
-export async function getProject(dir:string) {
+export async function getProject() {
     const p:Project={
-        meta:await fs.readJSON(metaPath(dir)),
-        novel:await fs.readJSON(novelPath(dir))
+        meta:await fs.readJSON(projectIO.metaPath),
+        novel:await fs.readJSON(projectIO.novelPath)
     }
     return p
 }

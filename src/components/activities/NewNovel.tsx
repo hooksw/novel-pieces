@@ -6,7 +6,7 @@ import {BaseInput} from "../common/BaseInput";
 import loading from "../../assests/icon/loading.svg"
 import {Warn} from "../common/Warn";
 import {initWorkbench} from "../../lib/browser/initWorkBench";
-import {createNewNovel} from "../../lib/node/novel/createNewNovel";
+import {createNewNovel} from "../../lib/common/createNewNovel";
 
 const BG = styled(FullScreen)`
   z-index: 200;

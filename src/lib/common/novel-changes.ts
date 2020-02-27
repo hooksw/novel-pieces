@@ -1,7 +1,6 @@
 import {Chapter, Novel, Part, Section} from "../types/novel";
 import v1 = require("uuid/v1");
-import {curPath} from "./CurPath";
-import {saveContent} from "../node/novel/saveContent";
+import {projectIO} from "./ProjectIO";
 
 export function novelHolder(data: Novel) {
     const dataTrans = (pos: number[], callback: (e: any) => void, countChange: number = 0) => {
@@ -31,18 +30,22 @@ export function novelHolder(data: Novel) {
             case 3:
                 const uuid=v1()
                 item = new Section(name,uuid);
-                saveContent(curPath.curSectionPath(uuid),"")
+                projectIO.saveSection(uuid,"")
                 break;
             default:
                 throw new Error("wrong pos!in add function of novelHolder")
         }
         dataTrans(pos, e => {
-            e.content.push()
+            e.content.push(item)
         })
+        return data
     }
 
     function remove(pos: number[]) {
-
+        dataTrans(pos,e=>{
+            e.contents.splice(pos[pos.length-1],0)
+        },-1)
+        return data
     }
 
     return {

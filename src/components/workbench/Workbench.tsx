@@ -3,10 +3,10 @@ import {Events} from "../../lib/browser/observer-events";
 import {useEffect, useState} from "react";
 import React = require("react");
 import {getProject} from "../../lib/node/novel/getProject";
-import {curPath} from "../../lib/common/CurPath";
+import {curPath} from "../../lib/common/ProjectIO";
 
 export function Workbench() {
-    const projectDir = useBind<string>(Events.dir_data, null)
+    const projectDir = useBind<string>(Events.project_data, null)
     let [project, setProject] = useState(null)
     useEffect(() => {
         if (projectDir != null) {

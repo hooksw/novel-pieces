@@ -1,11 +1,10 @@
 import * as React from "react";
 import {useState} from "react";
 import styled, {keyframes} from "styled-components";
-import {BaseButton, SmallIcon, FullScreen} from "../common/styled-componets";
+import {BaseButton, FullScreen, SmallIcon} from "../common/styled-componets";
 import {BaseInput} from "../common/BaseInput";
 import loading from "../../assests/icon/loading.svg"
 import {Warn} from "../common/Warn";
-import {initWorkbench} from "../../lib/browser/initWorkBench";
 import {createNewNovel} from "../../lib/common/createNewNovel";
 
 const BG = styled(FullScreen)`
@@ -60,12 +59,13 @@ export function NewNovel() {
 
     function clickHandle() {
         if (creating) return;
-        const check = name.trim().length == 0 || author.trim().length == 0
-        setWarn("所填项不能为空或为空格")
-        setCreating(!check)
+        const isEmpty = name.trim().length == 0 || author.trim().length == 0
 
-        if(!check){
-            createNewNovel(name,author).then((dir:string)=>initWorkbench(dir))
+        setWarn(isEmpty?"所填项不能为空或为空格":null)
+
+        if(!isEmpty){
+            setCreating(true)
+            createNewNovel(name,author)
         }
     }
 

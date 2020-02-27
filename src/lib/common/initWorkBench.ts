@@ -1,7 +1,7 @@
-import {bindTrigger} from "./hooks/bindTrigger";
-import {Events} from "./observer-events";
+import {bindTrigger} from "../browser/hooks/bindTrigger";
+import {Events} from "../browser/observer-events";
 import {getProject} from "../node/novel/getProject";
-import {ProjectIO, setProjectIO} from "../common/ProjectIO";
+import {ProjectIO, setProjectIO} from "./ProjectIO";
 
 export async function initWorkbench(dir: string) {
     setProjectIO(new ProjectIO(dir))

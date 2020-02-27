@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import {Part} from "../../../lib/types/novel";
+import {Novel, Part} from "../../../lib/types/novel";
 import {ExpandNode} from "../../common/ExpandNode";
 import part from "../../../assests/icon/part.svg"
 import chapter from "../../../assests/icon/chapter.svg"
@@ -16,22 +16,12 @@ const Container = styled.div`
     position: relative;
 `
 
-const list: Part[] = [
-    {
-        name: "",
-        content: [{
-            name: "",
-            content: [{
-                name: "",
-                uuid: "firstSectionUUID"
-            }]
-        }]
-    }
-]
 
 const nameTrans = (name: string) => name.trim().length == 0 ? "untitled" : name
 
-export function TreeView() {
+export function TreeView(props:{
+    novel:Novel
+}) {
     // const [menu, setMenu] = useState<Menu>(null)
     // const [menuPos,setMenuPos]=useState<Pos>(null)
     //
@@ -40,13 +30,13 @@ export function TreeView() {
     //     setMenu(m);
     // }
 
-    const [cur,curObs]=useBindObs<Array<number>>(Events.curnovel_data,[0,0,0] )
+    const [cur,curObs]=useBindObs<Array<number>>(Events.curnovel_data,props.novel.cur)
 
     return (
         // <MenuContext.Provider value={menuChange}>
         <CurContext.Provider  value={curObs}>
             <Container>
-                {list.map((e0,i0) => <ExpandNode key={e0.name} indent={0} name={nameTrans(e0.name)} icon={<SmallIcon src={part}/>}
+                {props.novel.content.map((e0,i0) => <ExpandNode key={e0.name} indent={0} name={nameTrans(e0.name)} icon={<SmallIcon src={part}/>}
                                            expanded={i0===cur[0]}>
                     {e0.content.map((e1,i1) => <ExpandNode key={e1.name} indent={1} name={nameTrans(e1.name)} icon={<SmallIcon src={chapter}/>}
                                                     expanded={i0===cur[0]&&i1===cur[1]}>

@@ -28,16 +28,33 @@ export class Part {
 export class Novel{
     cur:number[]
     content:Part[]
+
+    constructor(cur: number[]=[], content: Part[]=[]) {
+        this.cur = cur;
+        this.content = content;
+    }
+}
+export class Project {
+    meta:Meta
+    novel:Novel
+
+    constructor(meta: Meta=new Meta(), novel: Novel=new Novel()) {
+        this.meta = meta;
+        this.novel = novel;
+    }
 }
 export class Meta {
     name:string
     author: string
     startTime: string
     lastUpdateTime: string
-}
-export class Project {
-    meta:Meta
-    novel:Part[]
+
+    constructor(name: string="", author: string="", startTime: string="", lastUpdateTime: string="") {
+        this.name = name;
+        this.author = author;
+        this.startTime = startTime;
+        this.lastUpdateTime = lastUpdateTime;
+    }
 }
 
 export interface NovelListItem {

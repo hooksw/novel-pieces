@@ -1,10 +1,8 @@
 import {v1 as uuidv1} from "uuid";
 import {Meta, Novel} from "../types/novel";
 import * as fs from "fs-extra";
-import {ProjectIO, projectIO, setProjectIO} from "./ProjectIO";
-import {dir_project, getPath, metafile, novelfile} from "../node/storage-info";
-import * as path from "path";
-import {initWorkbench} from "../browser/initWorkBench";
+import {getPath, metafile, novelfile} from "../node/storage-info";
+import {initWorkbench} from "./initWorkBench";
 
 export async function createNewNovel(name: string, author: string) {
     const firstSectionUUID = uuidv1()
@@ -28,7 +26,7 @@ export async function createNewNovel(name: string, author: string) {
         startTime: new Date().toDateString(),
         lastUpdateTime: this.startTime
     }
-    await fs.mkdir(getPath(name))
+    await fs.promises.mkdir(getPath(name),{ recursive: true })
     await fs.writeJSON(getPath(name,metafile), meta)
     await fs.writeJSON(getPath(name,novelfile), defaultNovel)
     await fs.writeFile(getPath(name,firstSectionUUID), "")

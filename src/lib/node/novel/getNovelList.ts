@@ -1,16 +1,16 @@
 import * as fs from "fs-extra";
-import {dir_project,  metaPath, novelPath} from "../storage-info";
+import {dir_store, getPath, metafile} from "../storage-info";
 import * as path from "path";
 import {NovelListItem} from "../../types/novel";
 
 export async function getNovelList() :Promise<NovelListItem[]>{
-    let dirs = await fs.readdir(dir_project)
+    let dirs = await fs.readdir(dir_store)
     const d1 = dirs.filter((v: string) =>
-        (fs.statSync(path.join(dir_project, v))).isDirectory()
+        (fs.statSync(path.join(dir_store, v))).isDirectory()
     ).map(async (e: string) => {
             return  {
                 dir: e,
-                meta: await fs.readJSON(metaPath(e))
+                meta: await fs.readJSON(getPath(e,metafile))
 
             }
         }

@@ -7,7 +7,7 @@ import {defaultConfig} from "./default-config";
 export function getConfig() {
     let isFirst: boolean=false
     try {
-        fs.accessSync(path.join(app.getPath("userdata"), "config.json"))
+        fs.accessSync(path.join(app.getPath("userData"), "config.json"))
     } catch (e) {
             isFirst=true
     }

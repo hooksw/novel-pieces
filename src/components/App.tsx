@@ -6,7 +6,7 @@ import { observer } from '../lib/browser/Observer';
 import { defalutTheme, ColorTheme } from '../lib/browser/theme/theme';
 import {GlobalStyle} from "./common/globalStyle";
 import {ActivityManager} from "./activities/ActivityManager";
-import {TreeView} from "./novel/tree-view/TreeView";
+import {Workbench} from "./workbench/Workbench";
 
 export function App() {
   const [theme, setTheme] = React.useState(defalutTheme)
@@ -19,8 +19,8 @@ export function App() {
     <ThemeChange.Provider value={changeTheme}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        {/*<ActivityManager/>*/}
-        <TreeView/>
+        <ActivityManager/>
+        <Workbench/>
       </ThemeProvider>
     </ThemeChange.Provider>
   );

@@ -17,4 +17,4 @@ export class ColorTheme {
 }
 
 
-export const defaultTheme=new ColorTheme("##f5f5f5","#096dd9")
+export const defaultTheme=new ColorTheme("#f5f5f5","#096dd9")

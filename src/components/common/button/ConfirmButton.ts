@@ -8,7 +8,7 @@ export const ConfirmButton = styled.button`
     outline: none;
     border: none;
     background:${p=>p.theme.point};
-    color:${p=>p.theme.text};
+    color:${p=>p.theme.point_text};
     user-select:none;
     &:hover{
         box-shadow:${design.shadow_s};

@@ -40835,7 +40835,7 @@ const BG = styled_components_1.default(styled_componets_1.FullScreen) `
   justify-content: center;
 `;
 const Container = styled_components_1.default.div `
-  background: ${p => p.theme.app};
+  background: ${p => p.theme.panel};
   width:60%;
   height: 80%;
   min-width:20rem;
@@ -41083,7 +41083,7 @@ exports.ScrollContainer = styled_components_1.default.div `
     display: inline-block;
   };
   &::-webkit-scrollbar-thumb {
-     background-color: ${p => p.scrollColor};
+     background-color: ${p => p.forPanel ? p.theme.panel : p.theme.content};
      border-radius: 1rem;
   };
 `;
@@ -41606,7 +41606,7 @@ function TreeView(props) {
     const cur = props.cur;
     return (
     // <MenuContext.Provider value={menuChange}>
-    React.createElement(Container, { isScrollDec: false }, props.novel.content.map((e0, i0) => React.createElement(PartNode_1.PartNode, { depth: [i0], key: e0.name, name: nameTrans(e0.name), expanded: i0 === cur[0] }, e0.content.map((e1, i1) => React.createElement(ChapterNode_1.ChapterNode, { depth: [i0, i1], key: e1.name, name: nameTrans(e1.name), expanded: i0 === cur[0] && i1 === cur[1] }, e1.content.map((e2, i2) => React.createElement(SectionNode_1.SectionNode, { depth: [i0, i1, i2], key: e2.name, name: nameTrans(e2.name), selected: i0 === cur[0] && i1 === cur[1] && i2 == cur[2] })))))))
+    React.createElement(Container, { forPanel: true }, props.novel.content.map((e0, i0) => React.createElement(PartNode_1.PartNode, { depth: [i0], key: e0.name, name: nameTrans(e0.name), expanded: i0 === cur[0] }, e0.content.map((e1, i1) => React.createElement(ChapterNode_1.ChapterNode, { depth: [i0, i1], key: e1.name, name: nameTrans(e1.name), expanded: i0 === cur[0] && i1 === cur[1] }, e1.content.map((e2, i2) => React.createElement(SectionNode_1.SectionNode, { depth: [i0, i1, i2], key: e2.name, name: nameTrans(e2.name), selected: i0 === cur[0] && i1 === cur[1] && i2 == cur[2] })))))))
     // </MenuContext.Provider>
     );
 }
@@ -41841,7 +41841,7 @@ class ColorTheme {
     }
 }
 exports.ColorTheme = ColorTheme;
-exports.defaultTheme = new ColorTheme("##f5f5f5", "#096dd9");
+exports.defaultTheme = new ColorTheme("#f5f5f5", "#096dd9");
 
 
 /***/ }),

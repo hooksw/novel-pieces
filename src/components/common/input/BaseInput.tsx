@@ -15,7 +15,6 @@ const Container = styled.div`
     position: relative;
 `
 const Input = styled.input<InputProp>`
-    background:${p => p.theme.content};
     width: 100%;
     border: none;
     border-bottom: 2px solid ${p => p.focus ? p.theme.point : p.theme.panel};
@@ -24,7 +23,7 @@ const Input = styled.input<InputProp>`
     vertical-align: baseline;
     color:${p => p.theme.text};
      &:hover {
-        border-bottom-color: ${p=>p.theme.panel};
+        border-bottom-color: ${p=>p.theme.point};
      }
 `
 const Label = styled.span<LabelProp>`

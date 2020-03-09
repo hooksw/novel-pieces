@@ -1,12 +1,13 @@
 import * as React from "react";
 import {useState} from "react";
 import styled, {keyframes} from "styled-components";
-import {BaseButton, FullScreen, SIcon} from "../common/styled-componets";
+import {FullScreen, SIcon} from "../common/styled-componets";
 import {BaseInput} from "../common/input/BaseInput";
 import loading from "../../assests/icon/loading.svg"
 import {Warn} from "../common/Warn";
 import {createNewNovel} from "../../lib/common/createNewNovel";
 import {design} from "../common/design";
+import {ConfirmButton} from "../common/button/ConfirmButton";
 
 const BG = styled(FullScreen)`
   z-index: ${design.z_panel};
@@ -16,7 +17,7 @@ const BG = styled(FullScreen)`
   justify-content: center;
 `
 const Container = styled.div`
-  background: ${p => p.theme.app};
+  background: ${p => p.theme.panel};
   width:60%;
   height: 80%;
   min-width:20rem;
@@ -34,7 +35,7 @@ const Input = styled(BaseInput)`
 const Title = styled.h2`
 
 `
-const Button = styled(BaseButton)`
+const Button = styled(ConfirmButton)`
   display: flex;
   justify-content: space-around;
 `

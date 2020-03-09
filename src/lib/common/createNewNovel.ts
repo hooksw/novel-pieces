@@ -1,13 +1,13 @@
 import {v1 as uuidv1} from "uuid";
-import {Meta, Novel} from "../types/novel";
+import {Meta, Novel,Record} from "../types/project";
 import * as fs from "fs-extra";
-import {getPath, metafile, novelfile} from "../node/storage-info";
+import {getPath, metafile, novelfile, recordfile} from "../node/storage-info";
 import {initWorkbench} from "./initWorkBench";
 
 export async function createNewNovel(name: string, author: string) {
     const firstSectionUUID = uuidv1()
+    const record:Record=new Record([0,0,0])
     const defaultNovel: Novel = {
-        cur:[0,0,0],
         content:[
             {
                 name: "",
@@ -30,6 +30,7 @@ export async function createNewNovel(name: string, author: string) {
     await fs.writeJSON(getPath(name,metafile), meta)
     await fs.writeJSON(getPath(name,novelfile), defaultNovel)
     await fs.writeFile(getPath(name,firstSectionUUID), "")
+    await fs.writeFile(getPath(name,recordfile), record)
     await initWorkbench(name)
 }
 

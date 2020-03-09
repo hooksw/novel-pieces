@@ -7,17 +7,17 @@ export const FullScreen = styled.div`
     top:0;
     left:0;
 `
-export const SmallIcon = styled.img`
+export const SIcon = styled.img`
+    width:0.8rem;
+    height:0.8rem;
+`
+export const MIcon = styled.img`
     width:1.2rem;
     height:1.2rem;
 `
-export const MediumIcon = styled.img`
+export const LIcon = styled.img`
     width:2rem;
     height:2rem;
-`
-export const LargeIcon = styled.img`
-    width:3rem;
-    height:3rem;
 `
 export const BaseButton = styled.button`
     min-height:2rem;

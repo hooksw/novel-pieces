@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useState, useEffect} from 'react';
-import {NovelListItem} from "../../../../lib/types/novel";
+import {NovelListItem} from "../../../../lib/types/project";
 import {getNovelList} from "../../../../lib/node/novel/getNovelList";
 import {initWorkbench} from "../../../../lib/common/initWorkBench";
 

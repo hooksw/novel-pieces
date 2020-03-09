@@ -2,7 +2,7 @@ import * as React from 'react'
 import {useState, useEffect, useContext} from 'react'
 import styled from 'styled-components'
 // import {MenuContext} from "../novel/tree-view/TreeView";
-import {Menu} from "../../lib/types/menu";
+import {Menu} from "../../../lib/types/menu";
 
 interface NodeProps{
     hasOperation:boolean

@@ -1,20 +1,21 @@
-import {TreeNode} from "../../common/TreeNode";
+import {TreeNode} from "../../common/tree/TreeNode";
 import section from "../../../assests/icon/section.svg";
-import {SmallIcon} from "../../common/styled-componets";
+import {SIcon} from "../../common/styled-componets";
 import * as React from "react";
-import {Menu} from "../../../lib/types/menu";
+import {useContext} from "react";
 
 export function SectionNode(props:{
     name:string,
     depth:Array<number>
+    selected:boolean
 }) {
 
 
     function clickHandle() {
-
+        if(!props.selected){}
     }
 
     return(
-        <TreeNode indent={2} front={<SmallIcon src={section}/>} name={props.name} />
+        <TreeNode indent={2} front={<SIcon src={section}/>} name={props.name} selected={props.selected}/>
     )
 }

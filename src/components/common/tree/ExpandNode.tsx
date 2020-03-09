@@ -2,15 +2,15 @@ import * as React from 'react'
 import {useState, useEffect} from 'react'
 import {TreeNode} from './TreeNode'
 import styled from 'styled-components'
-import fold from "../../assests/icon/fold.svg"
-import {SmallIcon} from './styled-componets'
-import {Menu} from "../../lib/types/menu";
+import fold from "../../../assests/icon/fold.svg"
+import {SIcon} from '../styled-componets'
+import {Menu} from "../../../lib/types/menu";
 
 interface ExpandProps {
     expand: boolean
 }
 
-const ExpandIcon = styled(SmallIcon) <ExpandProps>`
+const ExpandIcon = styled(SIcon) <ExpandProps>`
     transform:${props => props.expand ? "rotate(90deg)" : "rotate(0deg)"}
 `
 const ItemContainer = styled.div<ExpandProps>`

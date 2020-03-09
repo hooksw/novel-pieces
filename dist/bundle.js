@@ -40711,7 +40711,7 @@ const globalStyle_1 = __webpack_require__(/*! ./common/globalStyle */ "./src/com
 const ActivityManager_1 = __webpack_require__(/*! ./activities/ActivityManager */ "./src/components/activities/ActivityManager.tsx");
 const Workbench_1 = __webpack_require__(/*! ./workbench/Workbench */ "./src/components/workbench/Workbench.tsx");
 function App() {
-    const [theme, setTheme] = React.useState(theme_1.defalutTheme);
+    const [theme, setTheme] = React.useState(theme_1.defaultTheme);
     const changeTheme = (theme) => {
         setTheme(theme);
     };
@@ -40744,8 +40744,8 @@ const useBind_1 = __webpack_require__(/*! ../../lib/browser/hooks/useBind */ "./
 const Welcome_1 = __webpack_require__(/*! ./Welcome */ "./src/components/activities/Welcome.tsx");
 const Launch_1 = __webpack_require__(/*! ./launch/Launch */ "./src/components/activities/launch/Launch.tsx");
 function ActivityManager() {
-    const welcomeShow = useBind_1.useBind(1 /* welcomepage_show */, false);
-    const newNovelShow = useBind_1.useBind(2 /* newnovel_show */, false);
+    const welcomeShow = useBind_1.useBind(1 /* welcomePage_show */, false);
+    const newNovelShow = useBind_1.useBind(2 /* newNovel_show */, false);
     const launchShow = useBind_1.useBind(3 /* launch_show */, true);
     return (React.createElement(React.Fragment, null,
         welcomeShow && React.createElement(Welcome_1.Welcome, null),
@@ -40782,7 +40782,7 @@ const ItemContainer = styled_components_1.default.div `
 `;
 function MsgItem(props) {
     return (React.createElement(ItemContainer, null,
-        React.createElement(styled_componets_1.LargeIcon, { src: warn_svg_1.default }),
+        React.createElement(styled_componets_1.LIcon, { src: warn_svg_1.default }),
         React.createElement("span", null, props.msg)));
 }
 const Container = styled_components_1.default.div `
@@ -40821,7 +40821,7 @@ const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 const styled_componets_1 = __webpack_require__(/*! ../common/styled-componets */ "./src/components/common/styled-componets.ts");
-const BaseInput_1 = __webpack_require__(/*! ../common/BaseInput */ "./src/components/common/BaseInput.tsx");
+const BaseInput_1 = __webpack_require__(/*! ../common/input/BaseInput */ "./src/components/common/input/BaseInput.tsx");
 const loading_svg_1 = __webpack_require__(/*! ../../assests/icon/loading.svg */ "./src/assests/icon/loading.svg");
 const Warn_1 = __webpack_require__(/*! ../common/Warn */ "./src/components/common/Warn.tsx");
 const createNewNovel_1 = __webpack_require__(/*! ../../lib/common/createNewNovel */ "./src/lib/common/createNewNovel.ts");
@@ -40863,7 +40863,7 @@ const rotate = styled_components_1.keyframes `
     transform: rotate(360deg);
   }
 `;
-const LoadingIcon = styled_components_1.default(styled_componets_1.SmallIcon) `
+const LoadingIcon = styled_components_1.default(styled_componets_1.SIcon) `
   filter: drop-shadow(${p => p.theme.appTxt} 80 0);
   animation: ${rotate} 1s linear 0s infinite;
   margin: 0 0.3rem;
@@ -40989,7 +40989,7 @@ const CreateButton = styled_components_1.default.button `
 function NovelLaunch() {
     return (React.createElement(Container, null,
         React.createElement(Title, null, "Novels"),
-        React.createElement(CreateButton, { onClick: () => bindTrigger_1.bindTrigger(2 /* newnovel_show */, true) }, "create new Novel"),
+        React.createElement(CreateButton, { onClick: () => bindTrigger_1.bindTrigger(2 /* newNovel_show */, true) }, "create new Novel"),
         React.createElement(NovelList_1.NovelList, null)));
 }
 exports.NovelLaunch = NovelLaunch;
@@ -41028,10 +41028,136 @@ exports.NovelList = NovelList;
 
 /***/ }),
 
-/***/ "./src/components/common/BaseInput.tsx":
-/*!*********************************************!*\
-  !*** ./src/components/common/BaseInput.tsx ***!
-  \*********************************************/
+/***/ "./src/components/common/Warn.tsx":
+/*!****************************************!*\
+  !*** ./src/components/common/Warn.tsx ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const theme_1 = __webpack_require__(/*! ../../lib/browser/theme/theme */ "./src/lib/browser/theme/theme.ts");
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const styled_componets_1 = __webpack_require__(/*! ./styled-componets */ "./src/components/common/styled-componets.ts");
+const warn_svg_1 = __webpack_require__(/*! ../../assests/icon/warn.svg */ "./src/assests/icon/warn.svg");
+const Container = styled_components_1.default.span `
+    border-radius:2px;
+    display:inline-flex;
+    background:rgba(256,256,256,0.5);
+    padding:8px;
+    color:${theme_1.warnColor};
+    font-size:75%;
+    max-width:80%;
+`;
+function Warn(props) {
+    return (React.createElement(Container, null,
+        React.createElement(styled_componets_1.SIcon, { src: warn_svg_1.default }),
+        props.msg));
+}
+exports.Warn = Warn;
+
+
+/***/ }),
+
+/***/ "./src/components/common/container/ScrollContainer.tsx":
+/*!*************************************************************!*\
+  !*** ./src/components/common/container/ScrollContainer.tsx ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+exports.ScrollContainer = styled_components_1.default.div `
+  overflow: auto;
+  &::-webkit-scrollbar{
+    width:1rem;
+    display: inline-block;
+  };
+  &::-webkit-scrollbar-thumb {
+     background-color: ${p => p.isScrollDec ? p.theme.dec : p.theme.main};
+     border-radius: 1rem;
+  };
+`;
+
+
+/***/ }),
+
+/***/ "./src/components/common/design.ts":
+/*!*****************************************!*\
+  !*** ./src/components/common/design.ts ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.design = {
+    fw: "1rem",
+    fw_s: "1.5rem",
+    shadow_s: `0px 1px 2px -2px rgba(0, 0, 0, 0.16), 
+        0px 3px 6px 0px rgba(0, 0, 0, 0.12), 
+        0px 5px 12px 4px rgba(0,0,0,0.09)`,
+    shadow_m: `0px 3px 6px -4px rgba(0,0,0,0.12),
+        0px 6px 16px 0px rgba(0,0,0,0.08),
+        0px 9px 28px 8px rgba(0,0,0,0.05)`,
+    shadow_l: `0px 6px 16px -8px rgba(0,0,0,0.08),
+        0px 9px 28px 0px rgba(0,0,0,0.05),
+        0px 12px 48px 16px rgba(0,0,0,0.03)`,
+    space_s: "8px",
+    space_m: "16px",
+    space_l: "24px",
+    color: {
+        warn: "#f5222d"
+    },
+    radius: '2px',
+    z_panel: 900,
+    z_float: 100,
+    z_msg: 1000,
+    z_launch: 200,
+};
+
+
+/***/ }),
+
+/***/ "./src/components/common/globalStyle.ts":
+/*!**********************************************!*\
+  !*** ./src/components/common/globalStyle.ts ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+exports.GlobalStyle = styled_components_1.createGlobalStyle `
+*{
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+`;
+
+
+/***/ }),
+
+/***/ "./src/components/common/input/BaseInput.tsx":
+/*!***************************************************!*\
+  !*** ./src/components/common/input/BaseInput.tsx ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41041,7 +41167,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-const theme_1 = __webpack_require__(/*! ../../lib/browser/theme/theme */ "./src/lib/browser/theme/theme.ts");
+const design_1 = __webpack_require__(/*! ../design */ "./src/components/common/design.ts");
 const Container = styled_components_1.default.div `
     position: relative;
 `;
@@ -41074,13 +41200,14 @@ const Count = styled_components_1.default.span `
     font-size:50%
 `;
 const Warn = styled_components_1.default.span `
-    color:${theme_1.warnColor};
+    color:${design_1.design.color.warn};
 `;
 function BaseInput(props) {
     const maxSize = props.maxSize || 100;
     const [focus, setFocus] = react_1.useState(false);
     const [labelUp, setLabelUp] = react_1.useState(false);
     const [size, setSize] = react_1.useState(0);
+    const [warn, setWarn] = react_1.useState(false);
     function blurHandle() {
         setFocus(false);
         if (size == 0) {
@@ -41091,12 +41218,16 @@ function BaseInput(props) {
     function changeHandle(e) {
         setSize(e.length);
         props.valueChangeHandle(e);
+        if (props.errorCheck) {
+            setWarn(props.errorCheck.check(e));
+        }
     }
     return (React.createElement(Container, { className: props.className },
         React.createElement(Input, { type: "text", focus: focus, onFocus: e => {
                 setFocus(true);
                 setLabelUp(true);
             }, onBlur: e => blurHandle(), onChange: e => changeHandle(e.target.value), maxLength: maxSize }),
+        warn && React.createElement(Warn, null, props.errorCheck.error),
         React.createElement(Label, { labelUp: labelUp }, props.label),
         props.count && (React.createElement(Count, null,
             size,
@@ -41108,10 +41239,59 @@ exports.BaseInput = BaseInput;
 
 /***/ }),
 
-/***/ "./src/components/common/ExpandNode.tsx":
-/*!**********************************************!*\
-  !*** ./src/components/common/ExpandNode.tsx ***!
-  \**********************************************/
+/***/ "./src/components/common/styled-componets.ts":
+/*!***************************************************!*\
+  !*** ./src/components/common/styled-componets.ts ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+//define basic components style in layout and base colors like shadow,when used ,they need  to be colored based on theme
+exports.FullScreen = styled_components_1.default.div `
+    width: 100vw;
+    height: 100vh;
+    position:fixed;
+    top:0;
+    left:0;
+`;
+exports.SIcon = styled_components_1.default.img `
+    width:0.8rem;
+    height:0.8rem;
+`;
+exports.MIcon = styled_components_1.default.img `
+    width:1.2rem;
+    height:1.2rem;
+`;
+exports.LIcon = styled_components_1.default.img `
+    width:2rem;
+    height:2rem;
+`;
+exports.BaseButton = styled_components_1.default.button `
+    min-height:2rem;
+    border-radius:2px;
+    padding-left:16px;
+    padding-right:16px;
+    outline: none;
+    border: none;
+    background:${p => p.theme.decoration};
+    color:${p => p.theme.appTxt};
+    user-select:none;
+    &:hover{
+        box-shadow: 3px 3px 3px #ccc;
+    }
+`;
+
+
+/***/ }),
+
+/***/ "./src/components/common/tree/ExpandNode.tsx":
+/*!***************************************************!*\
+  !*** ./src/components/common/tree/ExpandNode.tsx ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41120,11 +41300,11 @@ exports.BaseInput = BaseInput;
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const TreeNode_1 = __webpack_require__(/*! ./TreeNode */ "./src/components/common/TreeNode.tsx");
+const TreeNode_1 = __webpack_require__(/*! ./TreeNode */ "./src/components/common/tree/TreeNode.tsx");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-const fold_svg_1 = __webpack_require__(/*! ../../assests/icon/fold.svg */ "./src/assests/icon/fold.svg");
-const styled_componets_1 = __webpack_require__(/*! ./styled-componets */ "./src/components/common/styled-componets.ts");
-const ExpandIcon = styled_components_1.default(styled_componets_1.SmallIcon) `
+const fold_svg_1 = __webpack_require__(/*! ../../../assests/icon/fold.svg */ "./src/assests/icon/fold.svg");
+const styled_componets_1 = __webpack_require__(/*! ../styled-componets */ "./src/components/common/styled-componets.ts");
+const ExpandIcon = styled_components_1.default(styled_componets_1.SIcon) `
     transform:${props => props.expand ? "rotate(90deg)" : "rotate(0deg)"}
 `;
 const ItemContainer = styled_components_1.default.div `
@@ -41153,10 +41333,10 @@ exports.ExpandNode = ExpandNode;
 
 /***/ }),
 
-/***/ "./src/components/common/TreeNode.tsx":
-/*!********************************************!*\
-  !*** ./src/components/common/TreeNode.tsx ***!
-  \********************************************/
+/***/ "./src/components/common/tree/TreeNode.tsx":
+/*!*************************************************!*\
+  !*** ./src/components/common/tree/TreeNode.tsx ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41214,113 +41394,31 @@ exports.TreeNode = TreeNode;
 
 /***/ }),
 
-/***/ "./src/components/common/Warn.tsx":
-/*!****************************************!*\
-  !*** ./src/components/common/Warn.tsx ***!
-  \****************************************/
+/***/ "./src/components/novel/NovelStateManager.tsx":
+/*!****************************************************!*\
+  !*** ./src/components/novel/NovelStateManager.tsx ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const TreeView_1 = __webpack_require__(/*! ./tree-view/TreeView */ "./src/components/novel/tree-view/TreeView.tsx");
+const ContentManager_1 = __webpack_require__(/*! ./editor/ContentManager */ "./src/components/novel/editor/ContentManager.tsx");
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const theme_1 = __webpack_require__(/*! ../../lib/browser/theme/theme */ "./src/lib/browser/theme/theme.ts");
-const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-const styled_componets_1 = __webpack_require__(/*! ./styled-componets */ "./src/components/common/styled-componets.ts");
-const warn_svg_1 = __webpack_require__(/*! ../../assests/icon/warn.svg */ "./src/assests/icon/warn.svg");
-const Container = styled_components_1.default.span `
-    border-radius:2px;
-    display:inline-flex;
-    background:rgba(256,256,256,0.5);
-    padding:8px;
-    color:${theme_1.warnColor};
-    font-size:75%;
-    max-width:80%;
+const useBind_1 = __webpack_require__(/*! ../../lib/browser/hooks/useBind */ "./src/lib/browser/hooks/useBind.ts");
+const Container = styled_components_1.default.div `
+  
 `;
-function Warn(props) {
+function NovelStateManager(props) {
+    const novel = useBind_1.useBind(6 /* updateNovel_data */, props.novel);
     return (React.createElement(Container, null,
-        React.createElement(styled_componets_1.SmallIcon, { src: warn_svg_1.default }),
-        props.msg));
+        React.createElement(TreeView_1.TreeView, { novel: novel, cur: props.record.cur }),
+        React.createElement(ContentManager_1.ContentManager, null)));
 }
-exports.Warn = Warn;
-
-
-/***/ }),
-
-/***/ "./src/components/common/globalStyle.ts":
-/*!**********************************************!*\
-  !*** ./src/components/common/globalStyle.ts ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-exports.GlobalStyle = styled_components_1.createGlobalStyle `
-*{
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-`;
-
-
-/***/ }),
-
-/***/ "./src/components/common/styled-componets.ts":
-/*!***************************************************!*\
-  !*** ./src/components/common/styled-componets.ts ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-//define basic components style in layout and base colors like shadow,when used ,they need  to be colored based on theme
-exports.FullScreen = styled_components_1.default.div `
-    width: 100vw;
-    height: 100vh;
-    position:fixed;
-    top:0;
-    left:0;
-`;
-exports.SmallIcon = styled_components_1.default.img `
-    width:1.2rem;
-    height:1.2rem;
-`;
-exports.MediumIcon = styled_components_1.default.img `
-    width:2rem;
-    height:2rem;
-`;
-exports.LargeIcon = styled_components_1.default.img `
-    width:3rem;
-    height:3rem;
-`;
-exports.BaseButton = styled_components_1.default.button `
-    min-height:2rem;
-    border-radius:2px;
-    padding-left:16px;
-    padding-right:16px;
-    outline: none;
-    border: none;
-    background:${p => p.theme.decoration};
-    color:${p => p.theme.appTxt};
-    user-select:none;
-    &:hover{
-        box-shadow: 3px 3px 3px #ccc;
-    }
-`;
+exports.NovelStateManager = NovelStateManager;
 
 
 /***/ }),
@@ -41403,6 +41501,75 @@ exports.State = State;
 
 /***/ }),
 
+/***/ "./src/components/novel/tree-view/ChapterNode.tsx":
+/*!********************************************************!*\
+  !*** ./src/components/novel/tree-view/ChapterNode.tsx ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const ExpandNode_1 = __webpack_require__(/*! ../../common/tree/ExpandNode */ "./src/components/common/tree/ExpandNode.tsx");
+const chapter_svg_1 = __webpack_require__(/*! ../../../assests/icon/chapter.svg */ "./src/assests/icon/chapter.svg");
+const styled_componets_1 = __webpack_require__(/*! ../../common/styled-componets */ "./src/components/common/styled-componets.ts");
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function ChapterNode(props) {
+    return (React.createElement(ExpandNode_1.ExpandNode, { indent: 1, name: props.name, icon: React.createElement(styled_componets_1.SIcon, { src: chapter_svg_1.default }), expanded: props.expanded }, props.children));
+}
+exports.ChapterNode = ChapterNode;
+
+
+/***/ }),
+
+/***/ "./src/components/novel/tree-view/PartNode.tsx":
+/*!*****************************************************!*\
+  !*** ./src/components/novel/tree-view/PartNode.tsx ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const ExpandNode_1 = __webpack_require__(/*! ../../common/tree/ExpandNode */ "./src/components/common/tree/ExpandNode.tsx");
+const part_svg_1 = __webpack_require__(/*! ../../../assests/icon/part.svg */ "./src/assests/icon/part.svg");
+const styled_componets_1 = __webpack_require__(/*! ../../common/styled-componets */ "./src/components/common/styled-componets.ts");
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function PartNode(props) {
+    return (React.createElement(ExpandNode_1.ExpandNode, { indent: 0, name: props.name, icon: React.createElement(styled_componets_1.SIcon, { src: part_svg_1.default }), expanded: props.expanded }, props.children));
+}
+exports.PartNode = PartNode;
+
+
+/***/ }),
+
+/***/ "./src/components/novel/tree-view/SectionNode.tsx":
+/*!********************************************************!*\
+  !*** ./src/components/novel/tree-view/SectionNode.tsx ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const TreeNode_1 = __webpack_require__(/*! ../../common/tree/TreeNode */ "./src/components/common/tree/TreeNode.tsx");
+const section_svg_1 = __webpack_require__(/*! ../../../assests/icon/section.svg */ "./src/assests/icon/section.svg");
+const styled_componets_1 = __webpack_require__(/*! ../../common/styled-componets */ "./src/components/common/styled-componets.ts");
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function SectionNode(props) {
+    function clickHandle() {
+        if (!props.selected) { }
+    }
+    return (React.createElement(TreeNode_1.TreeNode, { indent: 2, front: React.createElement(styled_componets_1.SIcon, { src: section_svg_1.default }), name: props.name, selected: props.selected }));
+}
+exports.SectionNode = SectionNode;
+
+
+/***/ }),
+
 /***/ "./src/components/novel/tree-view/TreeView.tsx":
 /*!*****************************************************!*\
   !*** ./src/components/novel/tree-view/TreeView.tsx ***!
@@ -41415,14 +41582,11 @@ exports.State = State;
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-const ExpandNode_1 = __webpack_require__(/*! ../../common/ExpandNode */ "./src/components/common/ExpandNode.tsx");
-const part_svg_1 = __webpack_require__(/*! ../../../assests/icon/part.svg */ "./src/assests/icon/part.svg");
-const chapter_svg_1 = __webpack_require__(/*! ../../../assests/icon/chapter.svg */ "./src/assests/icon/chapter.svg");
-const section_svg_1 = __webpack_require__(/*! ../../../assests/icon/section.svg */ "./src/assests/icon/section.svg");
-const TreeNode_1 = __webpack_require__(/*! ../../common/TreeNode */ "./src/components/common/TreeNode.tsx");
-const styled_componets_1 = __webpack_require__(/*! ../../common/styled-componets */ "./src/components/common/styled-componets.ts");
-const useBindObs_1 = __webpack_require__(/*! ../../../lib/browser/hooks/useBindObs */ "./src/lib/browser/hooks/useBindObs.ts");
-const Container = styled_components_1.default.div `
+const PartNode_1 = __webpack_require__(/*! ./PartNode */ "./src/components/novel/tree-view/PartNode.tsx");
+const ChapterNode_1 = __webpack_require__(/*! ./ChapterNode */ "./src/components/novel/tree-view/ChapterNode.tsx");
+const SectionNode_1 = __webpack_require__(/*! ./SectionNode */ "./src/components/novel/tree-view/SectionNode.tsx");
+const ScrollContainer_1 = __webpack_require__(/*! ../../common/container/ScrollContainer */ "./src/components/common/container/ScrollContainer.tsx");
+const Container = styled_components_1.default(ScrollContainer_1.ScrollContainer) `
     min-width:20rem;
     height:100%;
     position: relative;
@@ -41436,16 +41600,14 @@ function TreeView(props) {
     //     setMenuPos(pos)
     //     setMenu(m);
     // }
-    const [cur, curObs] = useBindObs_1.useBindObs(5 /* curnovel_data */, props.novel.cur);
+    const cur = props.cur;
     return (
     // <MenuContext.Provider value={menuChange}>
-    React.createElement(exports.CurContext.Provider, { value: curObs },
-        React.createElement(Container, null, props.novel.content.map((e0, i0) => React.createElement(ExpandNode_1.ExpandNode, { key: e0.name, indent: 0, name: nameTrans(e0.name), icon: React.createElement(styled_componets_1.SmallIcon, { src: part_svg_1.default }), expanded: i0 === cur[0] }, e0.content.map((e1, i1) => React.createElement(ExpandNode_1.ExpandNode, { key: e1.name, indent: 1, name: nameTrans(e1.name), icon: React.createElement(styled_componets_1.SmallIcon, { src: chapter_svg_1.default }), expanded: i0 === cur[0] && i1 === cur[1] }, e1.content.map((e2, i2) => React.createElement(TreeNode_1.TreeNode, { key: e2.name, indent: 2, front: React.createElement(styled_componets_1.SmallIcon, { src: section_svg_1.default }), name: nameTrans(e2.name), selected: i0 === cur[0] && i1 === cur[1] && i2 == cur[2] }))))))))
+    React.createElement(Container, { isScrollDec: false }, props.novel.content.map((e0, i0) => React.createElement(PartNode_1.PartNode, { depth: [i0], key: e0.name, name: nameTrans(e0.name), expanded: i0 === cur[0] }, e0.content.map((e1, i1) => React.createElement(ChapterNode_1.ChapterNode, { depth: [i0, i1], key: e1.name, name: nameTrans(e1.name), expanded: i0 === cur[0] && i1 === cur[1] }, e1.content.map((e2, i2) => React.createElement(SectionNode_1.SectionNode, { depth: [i0, i1, i2], key: e2.name, name: nameTrans(e2.name), selected: i0 === cur[0] && i1 === cur[1] && i2 == cur[2] })))))))
     // </MenuContext.Provider>
     );
 }
 exports.TreeView = TreeView;
-exports.CurContext = React.createContext(null);
 // export const MenuContext=React.createContext<MenuChange>(null)
 // type MenuChange =(e:Menu,pos:Pos)=>void
 
@@ -41463,16 +41625,13 @@ exports.CurContext = React.createContext(null);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const useBind_1 = __webpack_require__(/*! ../../lib/browser/hooks/useBind */ "./src/lib/browser/hooks/useBind.ts");
-const TreeView_1 = __webpack_require__(/*! ../novel/tree-view/TreeView */ "./src/components/novel/tree-view/TreeView.tsx");
-const ContentManager_1 = __webpack_require__(/*! ../novel/editor/ContentManager */ "./src/components/novel/editor/ContentManager.tsx");
-const novel_1 = __webpack_require__(/*! ../../lib/types/novel */ "./src/lib/types/novel.ts");
+const project_1 = __webpack_require__(/*! ../../lib/types/project */ "./src/lib/types/project.ts");
+const NovelStateManager_1 = __webpack_require__(/*! ../novel/NovelStateManager */ "./src/components/novel/NovelStateManager.tsx");
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function Workbench() {
-    const project = useBind_1.useBind(4 /* project_data */, new novel_1.Project());
-    console.log(JSON.stringify(project));
+    const project = useBind_1.useBind(4 /* project_data */, new project_1.Project());
     return (React.createElement(React.Fragment, null,
-        React.createElement(TreeView_1.TreeView, { novel: project.novel }),
-        React.createElement(ContentManager_1.ContentManager, null)));
+        React.createElement(NovelStateManager_1.NovelStateManager, { novel: project.novel, record: project.record })));
 }
 exports.Workbench = Workbench;
 
@@ -41597,28 +41756,29 @@ exports.useBind = useBind;
 
 /***/ }),
 
-/***/ "./src/lib/browser/hooks/useBindObs.ts":
-/*!*********************************************!*\
-  !*** ./src/lib/browser/hooks/useBindObs.ts ***!
-  \*********************************************/
+/***/ "./src/lib/browser/section-cache.ts":
+/*!******************************************!*\
+  !*** ./src/lib/browser/section-cache.ts ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const Observer_1 = __webpack_require__(/*! ../Observer */ "./src/lib/browser/Observer.ts");
-function useBindObs(event, init) {
-    const [obs, setObs] = react_1.useState(init);
-    Observer_1.observer.trigger(event, init);
-    function trigger(e) {
-        setObs(e);
-        Observer_1.observer.trigger(event, e);
-    }
-    return [obs, trigger];
+const sectionCache = new Map();
+function getCache(uuid) {
+    return sectionCache.get(uuid);
 }
-exports.useBindObs = useBindObs;
+exports.getCache = getCache;
+function updateCache(uuid, content) {
+    sectionCache.set(uuid, content);
+}
+exports.updateCache = updateCache;
+function deleteCache(uuid) {
+    sectionCache.delete(uuid);
+}
+exports.deleteCache = deleteCache;
 
 
 /***/ }),
@@ -41634,17 +41794,25 @@ exports.useBindObs = useBindObs;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Color = __webpack_require__(/*! color */ "./node_modules/color/index.js");
-function closeColor(hex, dis) {
+function getInfo(hex) {
     const color = Color(hex, "hex");
-    const light = color.isLight() ? -1 : 1;
-    let [h, s, l] = color.hsl().array();
+    const check = color.isLight();
+    const [h, s, l] = color.hsl().array();
+    return [h, s, l, check];
+}
+function closeColor(hex, dis) {
+    let [h, s, l, islight] = getInfo(hex);
+    const light = islight ? 1 : -1;
     s = Math.abs(s + light * dis);
-    l = Math.abs(l + light * dis);
     return Color.hsl(h, s, l).hex();
 }
-exports.ColorUtils = {
-    closeColor
-};
+exports.closeColor = closeColor;
+function textColor(hex) {
+    let [h, s, l, islight] = getInfo(hex);
+    l = Math.abs(islight ? l * 4.5 : l / 4.5);
+    return Color.hsl(h, s, l).hex();
+}
+exports.textColor = textColor;
 
 
 /***/ }),
@@ -41661,18 +41829,16 @@ exports.ColorUtils = {
 Object.defineProperty(exports, "__esModule", { value: true });
 const color_utils_1 = __webpack_require__(/*! ./color-utils */ "./src/lib/browser/theme/color-utils.ts");
 class ColorTheme {
-    constructor(app, editor, decoration, editorTxt, appTxt) {
-        this.app = app; //user interface
-        this.appTxt = appTxt;
-        this.appClose = color_utils_1.ColorUtils.closeColor(app, 20); //e.g. hover color
-        this.decoration = decoration; //e.g. button
-        this.editor = editor;
-        this.editorTxt = editorTxt;
+    constructor(main, point) {
+        this.main = main;
+        this.dec = color_utils_1.closeColor(main, 40);
+        this.point = point;
+        this.point_text = color_utils_1.textColor(point);
+        this.text = color_utils_1.textColor(main);
     }
 }
 exports.ColorTheme = ColorTheme;
-exports.defalutTheme = new ColorTheme("#EEE8D5", "FDF6E3", "#B58900", "#ccc", "#ccc");
-exports.warnColor = "#d81e06";
+exports.defaultTheme = new ColorTheme("##f5f5f5", "#096dd9");
 
 
 /***/ }),
@@ -41686,9 +41852,23 @@ exports.warnColor = "#d81e06";
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const storage_info_1 = __webpack_require__(/*! ../node/storage-info */ "./src/lib/node/storage-info.ts");
 const safeWrite_1 = __webpack_require__(/*! ../node/safeWrite */ "./src/lib/node/safeWrite.ts");
+const fs = __webpack_require__(/*! fs-extra */ "./node_modules/_fs-extra@8.1.0@fs-extra/lib/index.js");
+const project_1 = __webpack_require__(/*! ../types/project */ "./src/lib/types/project.ts");
+const Observer_1 = __webpack_require__(/*! ../browser/Observer */ "./src/lib/browser/Observer.ts");
+const section_cache_1 = __webpack_require__(/*! ../browser/section-cache */ "./src/lib/browser/section-cache.ts");
+const v1 = __webpack_require__(/*! uuid/v1 */ "./node_modules/uuid/v1.js");
 exports.projectIO = null;
 function setProjectIO(e) {
     exports.projectIO = e;
@@ -41699,23 +41879,91 @@ class ProjectIO {
         this.projectDir = dir;
         this.novelPath = this.getPath(storage_info_1.novelfile);
         this.metaPath = this.getPath(storage_info_1.metafile);
+        this.recordPath = this.getPath(storage_info_1.recordfile);
+    }
+    initProject() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.project = new project_1.Project(yield fs.readJSON(this.metaPath), yield fs.readJSON(this.novelPath), yield fs.readJSON(this.recordPath));
+            yield new Promise(() => {
+                this.novel = this.project.novel;
+                this.meta = this.project.meta;
+                this.record = this.project.record;
+            });
+        });
+    }
+    beforeUpdateNovel(callback) {
+        callback(this.novel);
+        this.saveNovel(this.novel);
+        Observer_1.observer.trigger(6 /* updateNovel_data */, Object.create(this.novel));
+    }
+    beforeUpdateMeta(callback) {
+        callback(this.meta);
+        this.saveMeta(this.meta);
+        Observer_1.observer.trigger(7 /* updateMeta_data */, Object.create(this.meta));
     }
     getPath(file) {
-        console.log("getpathruned:" + this.projectDir);
         return storage_info_1.getPath(this.projectDir, file);
     }
     getSectionPath(uuid) {
         return this.getPath(uuid);
     }
+    getSectionData(uuid) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const data = section_cache_1.getCache(uuid);
+            return data ? data : yield fs.readFile(this.getSectionPath(uuid), "utf8");
+        });
+    }
+    //rename
+    renamePart(pos, name) {
+        this.beforeUpdateNovel((e) => {
+            e.content[pos[0]].name = name;
+        });
+    }
+    renameChapter(pos, name) {
+        this.beforeUpdateNovel((e) => {
+            e.content[pos[0]].content[pos[1]].name = name;
+        });
+    }
+    renameSection(pos, name) {
+        this.beforeUpdateNovel((e) => {
+            e.content[pos[0]].content[pos[1]].content[pos[2]].name = name;
+        });
+    }
+    //add
+    addPart(pos, name) {
+        this.beforeUpdateNovel(e => {
+            e.content.splice(pos[0] + 1, 0, new project_1.Part(name));
+        });
+    }
+    addChapter(pos, name) {
+        this.beforeUpdateNovel(e => {
+            e.content[pos[0]].content.splice(pos[1] + 1, 0, new project_1.Chapter(name));
+        });
+    }
+    addSection(pos, name) {
+        const uuid = v1();
+        this.beforeUpdateNovel(e => {
+            e.content[pos[0]].content[pos[1]].content.splice(pos[0] + 1, 0, new project_1.Section(name, uuid));
+        });
+        fs.writeFile(this.getSectionPath(uuid), "", "utf8");
+    }
     saveNovel(content) {
-        safeWrite_1.safeWrite(this.novelPath, content).catch(e => {
+        safeWrite_1.safeWrite(JSON.stringify(this.novelPath), content).catch(e => {
             throw new Error("saving file fail");
         });
     }
-    saveSection(uuid, content) {
+    saveMeta(content) {
+        safeWrite_1.safeWrite(JSON.stringify(this.metaPath), content).catch(e => {
+            throw new Error("saving file fail");
+        });
+    }
+    updateSection(uuid, content) {
         safeWrite_1.safeWrite(this.getSectionPath(uuid), content).catch(e => {
             throw new Error("saving file fail");
         });
+    }
+    removeSection(uuid) {
+        fs.unlink(this.getSectionPath(uuid));
     }
 }
 exports.ProjectIO = ProjectIO;
@@ -41743,14 +41991,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const uuid_1 = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
+const project_1 = __webpack_require__(/*! ../types/project */ "./src/lib/types/project.ts");
 const fs = __webpack_require__(/*! fs-extra */ "./node_modules/_fs-extra@8.1.0@fs-extra/lib/index.js");
 const storage_info_1 = __webpack_require__(/*! ../node/storage-info */ "./src/lib/node/storage-info.ts");
 const initWorkBench_1 = __webpack_require__(/*! ./initWorkBench */ "./src/lib/common/initWorkBench.ts");
 function createNewNovel(name, author) {
     return __awaiter(this, void 0, void 0, function* () {
         const firstSectionUUID = uuid_1.v1();
+        const record = new project_1.Record([0, 0, 0]);
         const defaultNovel = {
-            cur: [0, 0, 0],
             content: [
                 {
                     name: "",
@@ -41774,6 +42023,7 @@ function createNewNovel(name, author) {
         yield fs.writeJSON(storage_info_1.getPath(name, storage_info_1.metafile), meta);
         yield fs.writeJSON(storage_info_1.getPath(name, storage_info_1.novelfile), defaultNovel);
         yield fs.writeFile(storage_info_1.getPath(name, firstSectionUUID), "");
+        yield fs.writeFile(storage_info_1.getPath(name, storage_info_1.recordfile), record);
         yield initWorkBench_1.initWorkbench(name);
     });
 }
@@ -41802,16 +42052,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const bindTrigger_1 = __webpack_require__(/*! ../browser/hooks/bindTrigger */ "./src/lib/browser/hooks/bindTrigger.ts");
-const getProject_1 = __webpack_require__(/*! ../node/novel/getProject */ "./src/lib/node/novel/getProject.ts");
 const ProjectIO_1 = __webpack_require__(/*! ./ProjectIO */ "./src/lib/common/ProjectIO.ts");
 function initWorkbench(dir) {
     return __awaiter(this, void 0, void 0, function* () {
         ProjectIO_1.setProjectIO(new ProjectIO_1.ProjectIO(dir));
+        yield ProjectIO_1.projectIO.initProject();
         const settings = [
-            [2 /* newnovel_show */, false],
-            [1 /* welcomepage_show */, false],
+            [2 /* newNovel_show */, false],
+            [1 /* welcomePage_show */, false],
             [3 /* launch_show */, false],
-            [4 /* project_data */, yield getProject_1.getProject()]
+            [4 /* project_data */, ProjectIO_1.projectIO.project]
         ];
         settings.forEach(e => {
             bindTrigger_1.bindTrigger(e[0], e[1]);
@@ -41858,38 +42108,6 @@ function getNovelList() {
     });
 }
 exports.getNovelList = getNovelList;
-
-
-/***/ }),
-
-/***/ "./src/lib/node/novel/getProject.ts":
-/*!******************************************!*\
-  !*** ./src/lib/node/novel/getProject.ts ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const novel_1 = __webpack_require__(/*! ../../types/novel */ "./src/lib/types/novel.ts");
-const fs = __webpack_require__(/*! fs-extra */ "./node_modules/_fs-extra@8.1.0@fs-extra/lib/index.js");
-const ProjectIO_1 = __webpack_require__(/*! ../../common/ProjectIO */ "./src/lib/common/ProjectIO.ts");
-function getProject() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return new novel_1.Project(yield fs.readJSON(ProjectIO_1.projectIO.metaPath), yield fs.readJSON(ProjectIO_1.projectIO.novelPath));
-    });
-}
-exports.getProject = getProject;
 
 
 /***/ }),
@@ -41942,15 +42160,16 @@ exports.dir_store = "F:/p";
 exports.path_firststart = `F:/first`;
 exports.metafile = 'meta.json';
 exports.novelfile = "novel.json";
+exports.recordfile = "record.json";
 exports.getPath = (dir, file = '') => path.join(exports.dir_store, dir, file);
 
 
 /***/ }),
 
-/***/ "./src/lib/types/novel.ts":
-/*!********************************!*\
-  !*** ./src/lib/types/novel.ts ***!
-  \********************************/
+/***/ "./src/lib/types/project.ts":
+/*!**********************************!*\
+  !*** ./src/lib/types/project.ts ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41979,19 +42198,11 @@ class Part {
 }
 exports.Part = Part;
 class Novel {
-    constructor(cur = [], content = []) {
-        this.cur = cur;
+    constructor(content = []) {
         this.content = content;
     }
 }
 exports.Novel = Novel;
-class Project {
-    constructor(meta = new Meta(), novel = new Novel()) {
-        this.meta = meta;
-        this.novel = novel;
-    }
-}
-exports.Project = Project;
 class Meta {
     constructor(name = "", author = "", startTime = "", lastUpdateTime = "") {
         this.name = name;
@@ -42001,6 +42212,20 @@ class Meta {
     }
 }
 exports.Meta = Meta;
+class Record {
+    constructor(cur = null) {
+        this.cur = cur;
+    }
+}
+exports.Record = Record;
+class Project {
+    constructor(meta = new Meta(), novel = new Novel(), record = new Record()) {
+        this.meta = meta;
+        this.novel = novel;
+        this.record = record;
+    }
+}
+exports.Project = Project;
 
 
 /***/ }),

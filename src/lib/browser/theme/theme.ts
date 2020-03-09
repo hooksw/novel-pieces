@@ -1,27 +1,20 @@
-import { ColorUtils } from "./color-utils"
+import {closeColor, textColor} from "./color-utils";
 
 export class ColorTheme {
-    app: string
-    editor: string
-    decoration: string
-    editorTxt: string
-    appTxt: string
-    appClose: string
-    constructor(app: string,
-        editor: string,
-        decoration: string,
-        editorTxt: string,
-        appTxt: string) {
-        this.app = app//user interface
-        this.appTxt = appTxt
-        this.appClose = ColorUtils.closeColor(app, 20)//e.g. hover color
-        this.decoration = decoration //e.g. button
-        this.editor = editor
-        this.editorTxt = editorTxt
+    main:string
+    dec:string
+    point:string
+    point_text:string
+    text:string
+
+    constructor(main: string , point: string) {
+        this.main = main;
+        this.dec = closeColor(main,40);
+        this.point = point;
+        this.point_text = textColor(point);
+        this.text = textColor(main);
     }
 }
 
 
-export const defalutTheme=new ColorTheme("#EEE8D5","FDF6E3","#B58900","#ccc","#ccc")
-
-export const warnColor="#d81e06"
+export const defaultTheme=new ColorTheme("##f5f5f5","#096dd9")

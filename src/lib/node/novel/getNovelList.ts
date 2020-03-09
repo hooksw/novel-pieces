@@ -1,7 +1,7 @@
 import * as fs from "fs-extra";
 import {dir_store, getPath, metafile} from "../storage-info";
 import * as path from "path";
-import {NovelListItem} from "../../types/novel";
+import {NovelListItem} from "../../types/project";
 
 export async function getNovelList() :Promise<NovelListItem[]>{
     let dirs = await fs.readdir(dir_store)

@@ -1,15 +1,15 @@
 import {bindTrigger} from "../browser/hooks/bindTrigger";
 import {Events} from "../browser/observer-events";
-import {getProject} from "../node/novel/getProject";
-import {ProjectIO, setProjectIO} from "./ProjectIO";
+import {projectIO, ProjectIO, setProjectIO} from "./ProjectIO";
 
 export async function initWorkbench(dir: string) {
     setProjectIO(new ProjectIO(dir))
+    await projectIO.initProject()
     const settings:Array<[Events,any]>=[
-        [Events.newnovel_show,false],
-        [Events.welcomepage_show,false],
+        [Events.newNovel_show,false],
+        [Events.welcomePage_show,false],
         [Events.launch_show,false],
-        [Events.project_data,await getProject()]
+        [Events.project_data,projectIO.project]
     ]
     settings.forEach(e=>{
         bindTrigger(e[0],e[1])

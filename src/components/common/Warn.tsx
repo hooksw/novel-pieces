@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { warnColor as warnColor} from '../../lib/browser/theme/theme'
 import styled from 'styled-components'
-import { SmallIcon } from './styled-componets'
+import { SIcon } from './styled-componets'
 import warn from '../../assests/icon/warn.svg'
 
 const Container = styled.span`
@@ -21,7 +21,7 @@ export function Warn(props:{
 
     return (
         <Container>
-            <SmallIcon src={warn} />
+            <SIcon src={warn} />
             {props.msg}
         </Container>
     )

@@ -3,13 +3,13 @@ import { ContentManager } from './novel/editor/ContentManager';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { Launch } from './activities/launch/Launch';
 import { observer } from '../lib/browser/Observer';
-import { defalutTheme, ColorTheme } from '../lib/browser/theme/theme';
+import { defaultTheme, ColorTheme } from '../lib/browser/theme/theme';
 import {GlobalStyle} from "./common/globalStyle";
 import {ActivityManager} from "./activities/ActivityManager";
 import {Workbench} from "./workbench/Workbench";
 
 export function App() {
-  const [theme, setTheme] = React.useState(defalutTheme)
+  const [theme, setTheme] = React.useState(defaultTheme)
 
   const changeTheme = (theme: ColorTheme) => {
     setTheme(theme)

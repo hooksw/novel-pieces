@@ -26,21 +26,10 @@ export class Part {
     }
 }
 export class Novel{
-    cur:number[]
     content:Part[]
 
-    constructor(cur: number[]=[], content: Part[]=[]) {
-        this.cur = cur;
+    constructor( content: Part[]=[]) {
         this.content = content;
-    }
-}
-export class Project {
-    meta:Meta
-    novel:Novel
-
-    constructor(meta: Meta=new Meta(), novel: Novel=new Novel()) {
-        this.meta = meta;
-        this.novel = novel;
     }
 }
 export class Meta {
@@ -57,6 +46,24 @@ export class Meta {
     }
 }
 
+export class Record{
+    cur:number[]
+    constructor(cur:number[]=null) {
+        this.cur=cur
+    }
+}
+
+export class Project {
+    meta:Meta
+    novel:Novel
+    record:Record
+
+    constructor(meta: Meta=new Meta(), novel: Novel=new Novel(),record=new Record()) {
+        this.meta = meta;
+        this.novel = novel;
+        this.record=record
+    }
+}
 export interface NovelListItem {
     dir:string,
     meta:Meta

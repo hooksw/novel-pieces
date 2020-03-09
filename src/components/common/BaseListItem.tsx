@@ -14,10 +14,10 @@ const Container = styled.div<ContainerProp>`
     width:${p=>p.width+"rem"};
     min-width: 8rem;
     padding:8px 16px;
-    color:${p=>p.theme.appTxt};
-    background:${p=>p.theme.app};
+    color:${p=>p.theme.text};
+    background:${p=>p.theme.main};
     &:hover{
-        background:${p=>p.theme.appClose};
+        background:${p=>p.theme.dec};
     }
 `
 const Text=styled.span`

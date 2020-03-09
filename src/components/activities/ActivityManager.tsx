@@ -7,8 +7,8 @@ import {Welcome} from "./Welcome";
 import {Launch} from "./launch/Launch";
 
 export  function ActivityManager() {
-    const welcomeShow=useBind(Events.welcomepage_show,false)
-    const newNovelShow=useBind(Events.newnovel_show,false)
+    const welcomeShow=useBind(Events.welcomePage_show,false)
+    const newNovelShow=useBind(Events.newNovel_show,false)
     const launchShow=useBind(Events.launch_show, true)
     return(
         <>

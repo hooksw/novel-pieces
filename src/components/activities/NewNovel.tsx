@@ -1,8 +1,8 @@
 import * as React from "react";
 import {useState} from "react";
 import styled, {keyframes} from "styled-components";
-import {BaseButton, FullScreen, SmallIcon} from "../common/styled-componets";
-import {BaseInput} from "../common/BaseInput";
+import {BaseButton, FullScreen, SIcon} from "../common/styled-componets";
+import {BaseInput} from "../common/input/BaseInput";
 import loading from "../../assests/icon/loading.svg"
 import {Warn} from "../common/Warn";
 import {createNewNovel} from "../../lib/common/createNewNovel";
@@ -45,7 +45,7 @@ const rotate = keyframes`
     transform: rotate(360deg);
   }
 `
-const LoadingIcon = styled(SmallIcon)`
+const LoadingIcon = styled(SIcon)`
   filter: drop-shadow(${p => p.theme.appTxt} 80 0);
   animation: ${rotate} 1s linear 0s infinite;
   margin: 0 0.3rem;

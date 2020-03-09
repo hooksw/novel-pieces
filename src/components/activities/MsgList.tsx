@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import * as React from "react"
 import {MsgType} from "../../lib/types/msg";
-import {LargeIcon} from "../common/styled-componets";
+import {LIcon} from "../common/styled-componets";
 import warn from "../../assests/icon/warn.svg"
 import {useEffect, useState} from "react";
 
@@ -22,7 +22,7 @@ export interface MsgProp {
 function MsgItem(props: MsgProp) {
     return (
         <ItemContainer>
-            <LargeIcon src={warn}/>
+            <LIcon src={warn}/>
             <span>{props.msg}</span>
         </ItemContainer>
     )

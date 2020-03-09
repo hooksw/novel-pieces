@@ -1,8 +1,11 @@
 export const enum Events {
     test,
-    welcomepage_show,
-    newnovel_show,
+    welcomePage_show,
+    newNovel_show,
     launch_show,
     project_data,
-    curnovel_data
+    curSection_data,
+    updateNovel_data,
+    updateMeta_data
+
 }

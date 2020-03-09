@@ -25,7 +25,7 @@ export function NovelLaunch() {
     return (
         <Container>
             <Title>Novels</Title>
-            <CreateButton onClick={() => bindTrigger(Events.newnovel_show, true)}>create new Novel</CreateButton>
+            <CreateButton onClick={() => bindTrigger(Events.newNovel_show, true)}>create new Novel</CreateButton>
              <NovelList/>
         </Container>
     )

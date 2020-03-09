@@ -4,11 +4,12 @@ import {MsgType} from "../../lib/types/msg";
 import {LIcon} from "../common/styled-componets";
 import warn from "../../assests/icon/warn.svg"
 import {useEffect, useState} from "react";
+import {design} from "../common/design";
 
 
 const ItemContainer = styled.div`
   width:100%;
-  padding: 0.5rem;
+  padding: ${design.space_s};
   display: flex;
   align-items: center;
   justify-content: space-around;

@@ -15,9 +15,9 @@ const Container = styled.div<ContainerProp>`
     min-width: 8rem;
     padding:8px 16px;
     color:${p=>p.theme.text};
-    background:${p=>p.theme.main};
+    background:${p=>p.theme.content};
     &:hover{
-        background:${p=>p.theme.dec};
+        background:${p=>p.theme.panel};
     }
 `
 const Text=styled.span`

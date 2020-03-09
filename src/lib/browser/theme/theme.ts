@@ -1,15 +1,15 @@
 import {closeColor, textColor} from "./color-utils";
 
 export class ColorTheme {
-    main:string
-    dec:string
+    content:string
+    panel:string
     point:string
     point_text:string
     text:string
 
     constructor(main: string , point: string) {
-        this.main = main;
-        this.dec = closeColor(main,40);
+        this.content = main;
+        this.panel = closeColor(main,40);
         this.point = point;
         this.point_text = textColor(point);
         this.text = textColor(main);

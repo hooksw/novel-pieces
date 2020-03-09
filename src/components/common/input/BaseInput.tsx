@@ -15,16 +15,16 @@ const Container = styled.div`
     position: relative;
 `
 const Input = styled.input<InputProp>`
-    background:${p => p.theme.app};
+    background:${p => p.theme.content};
     width: 100%;
     border: none;
-    border-bottom: 2px solid ${p => p.focus ? p.theme.decoration : p.theme.appClose};
+    border-bottom: 2px solid ${p => p.focus ? p.theme.point : p.theme.panel};
     outline: none;
     padding: 8px 3px;
     vertical-align: baseline;
-    color:${p => p.theme.appTxt};
+    color:${p => p.theme.text};
      &:hover {
-        border-bottom-color: ${p=>p.theme.appClose};
+        border-bottom-color: ${p=>p.theme.panel};
      }
 `
 const Label = styled.span<LabelProp>`
@@ -32,14 +32,14 @@ const Label = styled.span<LabelProp>`
     top: ${p => p.labelUp ? '-1rem' : '5px'};
     left: 0;
     z-index: 100;
-    color:${p => p.labelUp ? p.theme.decoration : p.theme.appTxt};
+    color:${p => p.labelUp ? p.theme.point : p.theme.text};
   transition:all ease-in-out 0.25s;
 `
 const Count = styled.span`
     position:absolute;
     top:3rem;
     right:0;
-    color:${p => p.theme.appTxt};
+    color:${p => p.theme.text};
     font-size:50%
 `
 const Warn=styled.span`

@@ -11,7 +11,7 @@ interface AppOrEditor {
 
 const Container = styled.div<AppOrEditor>`
   padding:0.5rem 1rem;
-  background: ${p => p.isApp ? p.theme.app : p.theme.editor};
+  background: ${p => p.isApp ? p.theme.panel : p.theme.content};
   position: fixed;
   left:${p => p.x + "px"};
   top:${p => p.y + "px"};

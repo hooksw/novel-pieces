@@ -40773,9 +40773,10 @@ const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const styled_componets_1 = __webpack_require__(/*! ../common/styled-componets */ "./src/components/common/styled-componets.ts");
 const warn_svg_1 = __webpack_require__(/*! ../../assests/icon/warn.svg */ "./src/assests/icon/warn.svg");
 const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const design_1 = __webpack_require__(/*! ../common/design */ "./src/components/common/design.ts");
 const ItemContainer = styled_components_1.default.div `
   width:100%;
-  padding: 0.5rem;
+  padding: ${design_1.design.space_s};
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -40825,8 +40826,9 @@ const BaseInput_1 = __webpack_require__(/*! ../common/input/BaseInput */ "./src/
 const loading_svg_1 = __webpack_require__(/*! ../../assests/icon/loading.svg */ "./src/assests/icon/loading.svg");
 const Warn_1 = __webpack_require__(/*! ../common/Warn */ "./src/components/common/Warn.tsx");
 const createNewNovel_1 = __webpack_require__(/*! ../../lib/common/createNewNovel */ "./src/lib/common/createNewNovel.ts");
+const design_1 = __webpack_require__(/*! ../common/design */ "./src/components/common/design.ts");
 const BG = styled_components_1.default(styled_componets_1.FullScreen) `
-  z-index: 200;
+  z-index: ${design_1.design.z_panel};
   background: rgba(255,255,255,0.5);
   display: flex;
   align-items: center;
@@ -40842,7 +40844,7 @@ const Container = styled_components_1.default.div `
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-evenly;
-  box-shadow: #cccccc 3px 3px 3px;
+  box-shadow: ${design_1.design.shadow_l};
 `;
 const Input = styled_components_1.default(BaseInput_1.BaseInput) `
   width:50%;
@@ -40915,9 +40917,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 const styled_componets_1 = __webpack_require__(/*! ../common/styled-componets */ "./src/components/common/styled-componets.ts");
+const design_1 = __webpack_require__(/*! ../common/design */ "./src/components/common/design.ts");
 const Container = styled_components_1.default(styled_componets_1.FullScreen) `
     background:rgba(255,255,255,0.5);
-    z-index:300;
+    z-index:${design_1.design.z_panel};
 `;
 function Welcome() {
     return (React.createElement(Container, null));
@@ -40942,7 +40945,7 @@ const styled_componets_1 = __webpack_require__(/*! ../../common/styled-componets
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const NovelLaunch_1 = __webpack_require__(/*! ./novel/NovelLaunch */ "./src/components/activities/launch/novel/NovelLaunch.tsx");
 const Container = styled_components_1.default(styled_componets_1.FullScreen) `
-    background:${p => p.theme.app};
+    background:${p => p.theme.panel};
     z-index:100;
     display:flex;
     
@@ -41039,16 +41042,16 @@ exports.NovelList = NovelList;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const theme_1 = __webpack_require__(/*! ../../lib/browser/theme/theme */ "./src/lib/browser/theme/theme.ts");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 const styled_componets_1 = __webpack_require__(/*! ./styled-componets */ "./src/components/common/styled-componets.ts");
 const warn_svg_1 = __webpack_require__(/*! ../../assests/icon/warn.svg */ "./src/assests/icon/warn.svg");
+const design_1 = __webpack_require__(/*! ./design */ "./src/components/common/design.ts");
 const Container = styled_components_1.default.span `
     border-radius:2px;
     display:inline-flex;
     background:rgba(256,256,256,0.5);
     padding:8px;
-    color:${theme_1.warnColor};
+    color:${design_1.design.color.warn};
     font-size:75%;
     max-width:80%;
 `;
@@ -41080,7 +41083,7 @@ exports.ScrollContainer = styled_components_1.default.div `
     display: inline-block;
   };
   &::-webkit-scrollbar-thumb {
-     background-color: ${p => p.isScrollDec ? p.theme.dec : p.theme.main};
+     background-color: ${p => p.scrollColor};
      border-radius: 1rem;
   };
 `;
@@ -41172,16 +41175,16 @@ const Container = styled_components_1.default.div `
     position: relative;
 `;
 const Input = styled_components_1.default.input `
-    background:${p => p.theme.app};
+    background:${p => p.theme.content};
     width: 100%;
     border: none;
-    border-bottom: 2px solid ${p => p.focus ? p.theme.decoration : p.theme.appClose};
+    border-bottom: 2px solid ${p => p.focus ? p.theme.point : p.theme.panel};
     outline: none;
     padding: 8px 3px;
     vertical-align: baseline;
-    color:${p => p.theme.appTxt};
+    color:${p => p.theme.text};
      &:hover {
-        border-bottom-color: ${p => p.theme.appClose};
+        border-bottom-color: ${p => p.theme.panel};
      }
 `;
 const Label = styled_components_1.default.span `
@@ -41189,14 +41192,14 @@ const Label = styled_components_1.default.span `
     top: ${p => p.labelUp ? '-1rem' : '5px'};
     left: 0;
     z-index: 100;
-    color:${p => p.labelUp ? p.theme.decoration : p.theme.appTxt};
+    color:${p => p.labelUp ? p.theme.point : p.theme.text};
   transition:all ease-in-out 0.25s;
 `;
 const Count = styled_components_1.default.span `
     position:absolute;
     top:3rem;
     right:0;
-    color:${p => p.theme.appTxt};
+    color:${p => p.theme.text};
     font-size:50%
 `;
 const Warn = styled_components_1.default.span `
@@ -41345,21 +41348,21 @@ exports.ExpandNode = ExpandNode;
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const design_1 = __webpack_require__(/*! ../design */ "./src/components/common/design.ts");
 const Container = styled_components_1.default.div `
     width:100%;
     height:2.5rem;
-    padding-top:0.5rem;
-    padding-bottom:0.5rem;
+    padding-top:${design_1.design.space_s} 0px;
     text-overflow: ellipsis;
     user-select: none;
     display:flex;
     align-items:center;
     color:${p => p.theme.appTxt};
-    border-left: ${p => p.selected ? ("0.2rem solid " + p.theme.decoration) : "none"};
+    border-left: ${p => p.selected ? ("0.2rem solid " + p.theme.point) : "none"};
     justify-content: ${p => p.hasOperation ? "space-between" : "flex-start"};
-    background:${p => p.theme.app};
+    background:${p => p.theme.content};
     &:hover{
-        background:${p => p.selected && p.theme.appClose};
+        background:${p => p.selected && p.theme.panel};
     };
     padding-left:${p => (p.indent * 2) + "rem"}
 `;
@@ -41830,8 +41833,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const color_utils_1 = __webpack_require__(/*! ./color-utils */ "./src/lib/browser/theme/color-utils.ts");
 class ColorTheme {
     constructor(main, point) {
-        this.main = main;
-        this.dec = color_utils_1.closeColor(main, 40);
+        this.content = main;
+        this.panel = color_utils_1.closeColor(main, 40);
         this.point = point;
         this.point_text = color_utils_1.textColor(point);
         this.text = color_utils_1.textColor(main);

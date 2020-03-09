@@ -17,8 +17,16 @@ const Container=styled(ScrollContainer)`
     display: flex;
     align-items: center;
     flex-flow: column nowrap;
-    background-color: ${p=>p.dec};
+    background-color: ${p=> p.theme.panel};
     &>*{
       margin: ${design.space_m} ;
-    }
+    };
 `
+
+export const Drawer=(props:{
+    children?:any
+})=>(<BG>
+    <Container forPanel={true}>
+        {props.children}
+    </Container>
+</BG>)

@@ -10,7 +10,7 @@ const TipContainer = styled.div`
   transform: translateX(-50%);
   box-shadow: ${design.shadow_s};
   padding: ${design.space_s};
-  background: ${p => p.theme.dec};
+  background: ${p => p.theme.panel};
   &:after{
       width: 0;
       height: 0;
@@ -21,7 +21,7 @@ const TipContainer = styled.div`
       transform: translateX(-50%);
       border-left: 8px solid transparent;
       border-right: 8px solid transparent;
-      border-bottom: 16px solid ${p => p.theme.dec};
+      border-bottom: 16px solid ${p => p.theme.panel};
   }
 `
 

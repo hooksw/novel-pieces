@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface Props {
-    isScrollDec:boolean
+    forPanel:boolean
 }
 
 export const ScrollContainer = styled.div<Props>`
@@ -11,7 +11,7 @@ export const ScrollContainer = styled.div<Props>`
     display: inline-block;
   };
   &::-webkit-scrollbar-thumb {
-     background-color: ${p=>p.isScrollDec?p.theme.dec:p.theme.main};
+     background-color: ${p=>p.forPanel?p.theme.panel:p.theme.content};
      border-radius: 1rem;
   };
 `

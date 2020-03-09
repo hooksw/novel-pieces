@@ -4,7 +4,7 @@ import * as React from 'react'
 import { NovelLaunch } from "./novel/NovelLaunch";
 
 const Container = styled(FullScreen)`
-    background:${p=>p.theme.app};
+    background:${p=>p.theme.panel};
     z-index:100;
     display:flex;
     

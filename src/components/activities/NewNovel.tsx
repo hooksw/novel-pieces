@@ -6,9 +6,10 @@ import {BaseInput} from "../common/input/BaseInput";
 import loading from "../../assests/icon/loading.svg"
 import {Warn} from "../common/Warn";
 import {createNewNovel} from "../../lib/common/createNewNovel";
+import {design} from "../common/design";
 
 const BG = styled(FullScreen)`
-  z-index: 200;
+  z-index: ${design.z_panel};
   background: rgba(255,255,255,0.5);
   display: flex;
   align-items: center;
@@ -24,7 +25,7 @@ const Container = styled.div`
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-evenly;
-  box-shadow: #cccccc 3px 3px 3px;
+  box-shadow: ${design.shadow_l};
 `
 const Input = styled(BaseInput)`
   width:50%;

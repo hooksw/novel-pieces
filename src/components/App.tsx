@@ -1,9 +1,6 @@
 import * as React from 'react';
-import { ContentManager } from './novel/editor/ContentManager';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { Launch } from './activities/launch/Launch';
-import { observer } from '../lib/browser/Observer';
-import { defaultTheme, ColorTheme } from '../lib/browser/theme/theme';
+import {ThemeProvider} from 'styled-components';
+import {ColorTheme, defaultTheme} from '../lib/browser/theme/theme';
 import {GlobalStyle} from "./common/globalStyle";
 import {ActivityManager} from "./activities/ActivityManager";
 import {Workbench} from "./workbench/Workbench";

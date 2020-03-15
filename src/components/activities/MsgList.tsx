@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import * as React from "react"
 import {MsgType} from "../../lib/types/msg";
-import {LIcon} from "../common/styled-componets";
 import warn from "../../assests/icon/warn.svg"
 import {useEffect, useState} from "react";
 import {design} from "../common/design";
+import {LIcon} from "../common/icons";
 
 
 const ItemContainer = styled.div`

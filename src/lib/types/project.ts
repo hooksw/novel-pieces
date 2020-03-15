@@ -48,7 +48,7 @@ export class Meta {
 
 export class Record{
     cur:number[]
-    constructor(cur:number[]=null) {
+    constructor(cur:number[]=[0,0,0]) {
         this.cur=cur
     }
 }

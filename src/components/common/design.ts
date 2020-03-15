@@ -10,14 +10,15 @@ export const design = {
     shadow_l: `0px 6px 16px -8px rgba(0,0,0,0.08),
         0px 9px 28px 0px rgba(0,0,0,0.05),
         0px 12px 48px 16px rgba(0,0,0,0.03)`,
-    space_s: "8px",
-    space_m: "16px",
-    space_l: "24px",
+    space_s: "0.5rem",
+    space_m: "1rem",
+    space_l: "1.5rem",
     color:{
         warn:"#f5222d"
     },
     radius:'2px',
     z_panel:900,
+    z_bg:899,
     z_float:100,
     z_msg:1000,
     z_launch:200,

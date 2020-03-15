@@ -3,8 +3,8 @@ import {design} from "../design";
 
 export const ConfirmButton = styled.button`
     min-height:2rem;
-    border-radius:${design.radius};
-    padding:0px ${design.space_s};
+    border-radius:8px;
+    padding:0px ${design.space_l};
     outline: none;
     border: none;
     background:${p=>p.theme.point};

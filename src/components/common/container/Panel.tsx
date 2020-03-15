@@ -2,50 +2,63 @@ import styled from "styled-components";
 import {design} from "../design";
 import {ExitButton} from "../button/ExitButton";
 import * as React from "react"
-import {FullScreen} from "../styled-componets";
 
 const Container=styled.div`
   border-radius: ${design.radius};
-  box-shadow: ${design.shadow_s};
+  box-shadow: ${design.shadow_l};
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
+    z-index: ${design.z_panel};
+    background: ${p=>p.theme.panel};
+    display: flex;
+    flex-flow: column nowrap;
+    &>div{
+      flex:1
+    }
 `
-const Header=styled.div`
+const Header=styled.span`
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  &>*{
-    margin: ${design.space_m};
-  }
-`
-const BG=styled(FullScreen)`
-  z-index: ${design.z_panel};
+  padding:0 ${design.space_l};
 `
 
 
 function Panel(props:{
     children?:any
-    onClose:(e:boolean)=>void
+    onClose:()=>void
     title?:string
+    className?:any
 }) {
 
 
     function exitClick() {
-        props.onClose(false)
+        props.onClose()
     }
 
     return (
-        <BG>
-            <Container>
+            <Container className={props.className}>
                 <Header>
-                    <div>{props.title}</div>
+                    <span>{props.title}</span>
                     <ExitButton onClick={exitClick}/>
                 </Header>
                 {props.children}
             </Container>
-        </BG>
     )
 }
+
+export const SPanel=styled(Panel)`
+  width: 25rem;
+  height: 25rem;
+`
+export const MPanel=styled(Panel)`
+  width: 35rem;
+  height: 30rem;
+`
+export const LPanel=styled(Panel)`
+  width: 45rem;
+  height: 35rem;
+`

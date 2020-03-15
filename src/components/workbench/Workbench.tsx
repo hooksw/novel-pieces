@@ -1,15 +1,25 @@
-import {useBind} from "../../lib/browser/hooks/useBind";
-import {Events} from "../../lib/browser/observer-events";
 import {Project} from "../../lib/types/project";
-import {NovelStateManager} from "../novel/NovelStateManager";
+import {NovelContainer} from "../novel/NovelContainer";
+import {FlexRow} from "../common/layouts";
+import {Aside} from "./aside/Aside";
+import {useModel} from "../../lib/browser/modle/useModel";
+import {model} from "../../lib/browser/modle/Model";
 import React = require("react");
 
-export function Workbench() {
-    const project = useBind<Project>(Events.project_data, new Project())
+export const mProject=model<Project>()
 
+export function Workbench() {
+    const [project] = useModel<Project>(mProject, null)
     return (
         <>
-            <NovelStateManager novel={project.novel} record={project.record}/>
+            {
+                project && (
+                    <FlexRow>
+                        <Aside/>
+                        <NovelContainer novel={project.novel} cur={project.record.cur}/>
+                    </FlexRow>
+                )
+            }
         </>
     )
 }

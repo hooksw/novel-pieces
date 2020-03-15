@@ -7,9 +7,9 @@ import {SectionNode} from "./SectionNode";
 import {ScrollContainer} from "../../common/container/ScrollContainer";
 
 const Container = styled(ScrollContainer)`
-    min-width:20rem;
-    height:100%;
+    height:inherit;
     position: relative;
+    overflow: auto;
 `
 
 
@@ -30,7 +30,7 @@ export function TreeView(props: {
 
     return (
         // <MenuContext.Provider value={menuChange}>
-        <Container forPanel={true}>
+        <Container>
             {props.novel.content.map((e0, i0) => <PartNode depth={[i0]} key={e0.name} name={nameTrans(e0.name)}
                                                            expanded={i0 === cur[0]}>
                 {e0.content.map((e1, i1) => <ChapterNode depth={[i0, i1]} key={e1.name} name={nameTrans(e1.name)}

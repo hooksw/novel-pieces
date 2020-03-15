@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { SIcon } from './styled-componets'
 import warn from '../../assests/icon/warn.svg'
 import {design} from "./design";
+import {SIcon} from "./icons";
 
 const Container = styled.span`
     border-radius:2px;

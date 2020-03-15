@@ -1,12 +1,16 @@
+const cache = new Map<string, string>()
 
-const sectionCache=new Map<string,string>()
+function getCache(uuid: string): string | undefined {
+    return cache.get(uuid)
+}
 
-export function getCache(uuid:string):string|undefined{
-    return sectionCache.get(uuid)
+function updateCache(uuid: string, content: string) {
+    cache.set(uuid, content)
 }
-export function updateCache(uuid:string,content:string) {
-    sectionCache.set(uuid,content)
+
+function deleteCache(uuid: string) {
+    cache.delete(uuid)
 }
-export function deleteCache(uuid:string) {
-    sectionCache.delete(uuid)
+export const sectionCache={
+    getCache,updateCache,deleteCache
 }

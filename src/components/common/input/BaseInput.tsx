@@ -15,34 +15,42 @@ const Container = styled.div`
     position: relative;
 `
 const Input = styled.input<InputProp>`
+    background-color: rgba(0,0,0,0);
     width: 100%;
     border: none;
-    border-bottom: 2px solid ${p => p.focus ? p.theme.point : p.theme.panel};
+    border-bottom: 2px solid ${p => p.focus ? p.theme.point : p.theme.text};
     outline: none;
-    padding: 8px 3px;
+    padding: ${design.space_s} 0px;
     vertical-align: baseline;
     color:${p => p.theme.text};
      &:hover {
         border-bottom-color: ${p=>p.theme.point};
-     }
+     };
+     font-size: 1rem;
 `
 const Label = styled.span<LabelProp>`
     position: absolute;
-    top: ${p => p.labelUp ? '-1rem' : '5px'};
+    top: ${p => p.labelUp ? '-1rem' : '0.3rem'};
     left: 0;
     z-index: 100;
     color:${p => p.labelUp ? p.theme.point : p.theme.text};
   transition:all ease-in-out 0.25s;
+  user-select: none;
+`
+const Sub=styled.div`
+  margin-top: ${design.space_s};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 const Count = styled.span`
-    position:absolute;
-    top:3rem;
-    right:0;
     color:${p => p.theme.text};
-    font-size:50%
+    font-size:75%;
+    user-select: none;
 `
 const Warn=styled.span`
     color:${design.color.warn};
+    font-size: 75%;
 `
 export interface ErrorCheck {
     check:(e:string)=>boolean
@@ -67,7 +75,7 @@ export function BaseInput(props: {
         if (size == 0) {
             setLabelUp(false)
         }
-        console.log(size)
+        console.log("blur")
     }
 
     function changeHandle(e: string) {
@@ -89,11 +97,15 @@ export function BaseInput(props: {
                    onChange={e => changeHandle(e.target.value)}
                    maxLength={maxSize}
             />
-            {warn&&<Warn>{props.errorCheck.error}</Warn>}
             <Label labelUp={labelUp}>{props.label}</Label>
-            {
-                props.count && (<Count>{size}/{props.maxSize}</Count>)
-            }
+            {(warn||props.count)&&<Sub>
+                <div>
+                    {warn&&<Warn>{props.errorCheck.error}</Warn>}
+                </div>
+                <div>
+                    {props.count && (<Count>{size}/{props.maxSize}</Count>)}
+                </div>
+            </Sub>}
         </Container>
     )
 }

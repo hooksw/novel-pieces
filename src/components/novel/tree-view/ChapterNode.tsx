@@ -1,7 +1,7 @@
 import {ExpandNode} from "../../common/tree/ExpandNode";
 import chapter from "../../../assests/icon/chapter.svg"
-import {SIcon} from "../../common/styled-componets";
 import * as React from "react";
+import {SIcon} from "../../common/icons";
 
 export function ChapterNode(props:{
     depth:Array<number>

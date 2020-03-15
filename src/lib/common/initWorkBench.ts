@@ -1,17 +1,18 @@
-import {bindTrigger} from "../browser/hooks/bindTrigger";
-import {Events} from "../browser/observer-events";
-import {projectIO, ProjectIO, setProjectIO} from "./ProjectIO";
+import {projectManager} from "../browser/utils/ProjectManager";
+import {Model} from "../browser/modle/Model";
+import {mLaunchShow, mNewNovelShow, mWelcomeShow} from "../../components/activities/ActivityManager";
+import {mProject} from "../../components/workbench/Workbench";
 
 export async function initWorkbench(dir: string) {
-    setProjectIO(new ProjectIO(dir))
-    await projectIO.initProject()
-    const settings:Array<[Events,any]>=[
-        [Events.newNovel_show,false],
-        [Events.welcomePage_show,false],
-        [Events.launch_show,false],
-        [Events.project_data,projectIO.project]
+    await projectManager.init(dir)
+    const settings:Array<[Model<any>,any]>=[
+        [mNewNovelShow,false],
+        [mWelcomeShow,false],
+        [mLaunchShow,false],
+        [mProject,projectManager.project]
     ]
+
     settings.forEach(e=>{
-        bindTrigger(e[0],e[1])
+        e[0].set(e[1])
     })
 }

@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import {FullScreen} from "../styled-componets";
+import {FullScreen} from "../layouts";
 import {design} from "../design";
 import {ScrollContainer} from "./ScrollContainer";
 
@@ -26,7 +26,7 @@ const Container=styled(ScrollContainer)`
 export const Drawer=(props:{
     children?:any
 })=>(<BG>
-    <Container forPanel={true}>
+    <Container>
         {props.children}
     </Container>
 </BG>)

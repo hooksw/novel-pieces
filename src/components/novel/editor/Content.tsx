@@ -19,8 +19,8 @@ export function Content(props: {
         <Input
             contentEditable='true'
             onInput={e => { valueChangeHandle(e.currentTarget.textContent || 'error') }}
-            defaultValue={props.value}
         >
+            {props.value}
         </Input>
     )
 }

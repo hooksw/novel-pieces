@@ -1,27 +1,21 @@
 import * as React from 'react'
-import {useState, useEffect, useContext} from 'react'
 import styled from 'styled-components'
 // import {MenuContext} from "../novel/tree-view/TreeView";
-import {Menu} from "../../../lib/types/menu";
 import {design} from "../design";
 
 interface NodeProps{
-    hasOperation:boolean
+    // hasOperation:boolean
     selected:boolean
     indent:number
 }
 const Container=styled.div<NodeProps>`
     width:100%;
-    height:2.5rem;
-    padding-top:${design.space_s} 0px;
+    padding:${design.space_s} 0px;
     text-overflow: ellipsis;
+    overflow-x: hidden;
     user-select: none;
-    display:flex;
-    align-items:center;
     color:${p=>p.theme.appTxt};
-    border-left: ${p=>p.selected?("0.2rem solid "+p.theme.point):"none"};
-    justify-content: ${p=>p.hasOperation?"space-between":"flex-start"};
-    background:${p=>p.theme.content};
+    background:${p=>p.theme.panel};
     &:hover{
         background:${p=> p.selected&&p.theme.panel};
     };
@@ -33,7 +27,7 @@ export function TreeNode(props:{
     front:any,
     name:string,
     // menu:Menu,
-    operation?:any,
+    // operation?:any,
     clickHandle?:(e:any)=>void,
     selected?:boolean
 }){
@@ -62,10 +56,11 @@ export function TreeNode(props:{
             // onContextMenu={contextMenuHandle}
             selected={props.selected!=null||props.selected}
             indent={props.indent} 
-            hasOperation={props.operation!=null}>
+            // hasOperation={props.operation!=null}
+        >
             {props.front}
             {props.name}
-            {props.operation}
+            {/*{props.operation}*/}
         </Container>
     )
 }

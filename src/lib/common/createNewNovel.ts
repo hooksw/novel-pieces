@@ -6,20 +6,18 @@ import {initWorkbench} from "./initWorkBench";
 
 export async function createNewNovel(name: string, author: string) {
     const firstSectionUUID = uuidv1()
-    const record:Record=new Record([0,0,0])
-    const defaultNovel: Novel = {
-        content:[
-            {
+    const record:Record=new Record()
+    const defaultNovel: Novel = new Novel([
+        {
+            name: "",
+            content: [{
                 name: "",
                 content: [{
                     name: "",
-                    content: [{
-                        name: "",
-                        uuid: firstSectionUUID
-                    }]
+                    uuid: firstSectionUUID
                 }]
             }]
-    }
+        }])
     const meta: Meta = {
         name: name,
         author: author,
@@ -29,8 +27,8 @@ export async function createNewNovel(name: string, author: string) {
     await fs.promises.mkdir(getPath(name),{ recursive: true })
     await fs.writeJSON(getPath(name,metafile), meta)
     await fs.writeJSON(getPath(name,novelfile), defaultNovel)
-    await fs.writeFile(getPath(name,firstSectionUUID), "")
-    await fs.writeFile(getPath(name,recordfile), record)
+    await fs.writeJSON(getPath(name,recordfile), record)
+    await fs.writeFile(getPath(name,firstSectionUUID), "section")
     await initWorkbench(name)
 }
 

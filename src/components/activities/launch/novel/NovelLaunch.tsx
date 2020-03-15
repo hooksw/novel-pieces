@@ -1,8 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components';
 import {NovelList} from './NovelList';
-import {bindTrigger} from "../../../../lib/browser/hooks/bindTrigger";
-import {Events} from "../../../../lib/browser/observer-events";
+import {observer} from "../../../../lib/browser/observer/Observer";
+import {mNewNovelShow} from "../../ActivityManager";
 
 const Container = styled.div`
     width:50%;
@@ -25,7 +25,7 @@ export function NovelLaunch() {
     return (
         <Container>
             <Title>Novels</Title>
-            <CreateButton onClick={() => bindTrigger(Events.newNovel_show, true)}>create new Novel</CreateButton>
+            <CreateButton onClick={() => mNewNovelShow.set(true)}>create new Novel</CreateButton>
              <NovelList/>
         </Container>
     )

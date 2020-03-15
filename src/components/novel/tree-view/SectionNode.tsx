@@ -1,8 +1,7 @@
 import {TreeNode} from "../../common/tree/TreeNode";
 import section from "../../../assests/icon/section.svg";
-import {SIcon} from "../../common/styled-componets";
 import * as React from "react";
-import {useContext} from "react";
+import {SIcon} from "../../common/icons";
 
 export function SectionNode(props:{
     name:string,

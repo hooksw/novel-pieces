@@ -1,10 +1,9 @@
 import * as React from 'react'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {TreeNode} from './TreeNode'
 import styled from 'styled-components'
 import fold from "../../../assests/icon/fold.svg"
-import {SIcon} from '../styled-componets'
-import {Menu} from "../../../lib/types/menu";
+import {SIcon} from "../icons";
 
 interface ExpandProps {
     expand: boolean

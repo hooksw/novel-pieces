@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FullScreen } from "../../common/styled-componets";
+import { FullScreen } from "../../common/layouts";
 import * as React from 'react'
 import { NovelLaunch } from "./novel/NovelLaunch";
 

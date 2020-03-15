@@ -6,7 +6,9 @@ function getInfo(hex:string) {
     const [h,s,l]=color.hsl().array()
     return [h,s,l,check] as const
 }
-
+function isLight(hex:string) {
+    return Color(hex,"hex").isLight()
+}
 function  closeColor(hex:string,dis:number):string{
     let [h,s,l,islight]=getInfo(hex)
     const light=islight?1:-1
@@ -15,11 +17,13 @@ function  closeColor(hex:string,dis:number):string{
 }
 function textColor(hex:string) {
     let [h,s,l,islight]=getInfo(hex)
-    l=Math.abs(islight?l*4.5:l/4.5)
-    return Color.hsl(h,s,l).hex()
+    const arg=islight?{m:1/5,h:0,s:0}:{m:5,h:255,s:255}
+    l=Math.abs(l*arg.m)
+    return Color.hsl(arg.h,arg.s,l).hex()
 }
 
 export {
     closeColor,
-    textColor
+    textColor,
+    isLight
 }

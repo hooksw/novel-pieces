@@ -3,7 +3,7 @@ import {Model} from "./Model";
 
 export function useModel<T>(m: Model<T>,init:T) {
     const value:T=m.init?m.init:init
-    console.log(`value:m.init-${m.init};init-${init}`)
+    // console.log(`value:m.init-${m.init};init-${init}`)
     const [state, setState] = useState<T>(value)
     m.updateMethod = setState
 

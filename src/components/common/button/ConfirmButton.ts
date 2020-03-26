@@ -4,11 +4,11 @@ import {design} from "../design";
 export const ConfirmButton = styled.button`
     min-height:2rem;
     border-radius:8px;
-    padding:0px ${design.space_l};
+    padding:0 ${design.space_l};
     outline: none;
     border: none;
-    background:${p=>p.theme.point};
-    color:${p=>p.theme.point_text};
+    background:${p => p.theme.point};
+    color:${p => p.theme.point_text};
     user-select:none;
     &:hover{
         box-shadow:${design.shadow_s};

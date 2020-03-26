@@ -7,8 +7,10 @@ const Container = styled(Background)`
     z-index:${design.z_panel};
 `
 
-export function Welcome() {
+function Welcome() {
     return (
         <Container></Container>
     )
 }
+
+export const welcome=<Welcome/>

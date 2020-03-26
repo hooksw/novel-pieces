@@ -2,14 +2,23 @@ import * as React from 'react';
 import {ThemeContext, ThemeProvider} from 'styled-components';
 import {ColorTheme, defaultTheme} from '../lib/browser/theme/theme';
 import {GlobalStyle} from "./common/globalStyle";
-import {ActivityManager} from "./activities/ActivityManager";
+import {PanelsManager} from "./panels/PanelsManager";
 import {Workbench} from "./workbench/Workbench";
 import {useContext} from "react";
+import {Launch} from "./launch/Launch";
+import {MsgList} from "./msg/MsgList";
+import {showModel} from "../lib/browser/model/Model";
+import {useModel} from "../lib/browser/model/useModel";
+
+
+export const mLaunchShow=showModel()
 
 export function App() {
+  const [launchShow]=useModel(mLaunchShow,true)
+
   const [theme, setTheme] = React.useState(defaultTheme)
   const themec=useContext(ThemeContext)
-  console.log(JSON.stringify(themec))
+
   const changeTheme = (theme: ColorTheme) => {
     setTheme(theme)
   }
@@ -19,7 +28,9 @@ export function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Workbench/>
-        <ActivityManager/>
+        <PanelsManager/>
+        {launchShow&&<Launch/>}
+        <MsgList/>
       </ThemeProvider>
     </ThemeChange.Provider>
   );

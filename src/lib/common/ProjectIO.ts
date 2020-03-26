@@ -1,7 +1,7 @@
 import {getPath, metafile, novelfile, recordfile} from "../node/storage-info";
 import {safeWrite} from "../node/safeWrite";
 import * as fs from "fs-extra"
-import {Meta, Novel, Project} from "../types/project";
+import {Meta, Novel, Project, Record} from "../types/project";
 
 
 class ProjectIO {
@@ -41,13 +41,20 @@ class ProjectIO {
     }
 
     saveNovel(content: Novel) {
-        safeWrite(JSON.stringify(this.novelPath), content).catch(e => {
+        console.log(this.novelPath)
+        safeWrite(this.novelPath, JSON.stringify(content)).catch(e => {
+            throw new Error("saving file fail:"+e)
+        })
+    }
+
+    saveRecord(content:Record){
+        safeWrite(this.recordPath, JSON.stringify(content)).catch(e => {
             throw new Error("saving file fail")
         })
     }
 
     saveMeta(content: Meta) {
-        safeWrite(JSON.stringify(this.metaPath), content).catch(e => {
+        safeWrite(this.metaPath, JSON.stringify(content)).catch(e => {
             throw new Error("saving file fail")
         })
     }

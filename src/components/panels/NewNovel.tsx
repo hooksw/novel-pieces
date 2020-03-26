@@ -1,18 +1,17 @@
 import * as React from "react";
 import {useState} from "react";
 import styled, {keyframes} from "styled-components";
-import {BaseInput, ErrorCheck} from "../common/input/BaseInput";
+import {MDInput, ErrorCheck} from "../common/input/MDInput";
 import loading from "../../assests/icon/loading.svg"
 import {createNewNovel} from "../../lib/common/createNewNovel";
 import {ConfirmButton} from "../common/button/ConfirmButton";
-import {SIcon} from "../common/icons";
+import {STIcon} from "../common/icons";
 import {Background, FlexCol} from "../common/layouts";
 import {MPanel} from "../common/container/Panel";
-import {observer} from "../../lib/browser/observer/Observer";
-import {mNewNovelShow} from "./ActivityManager";
+import {panelsManager} from "./PanelsManager";
 
 
-const Input = styled(BaseInput)`
+const Input = styled(MDInput)`
   width:50%;
   max-width: 30rem;
 `
@@ -30,12 +29,12 @@ const rotate = keyframes`
     transform: rotate(360deg);
   }
 `
-const LoadingIcon = styled(SIcon)`
+const LoadingIcon = styled(STIcon)`
   animation: ${rotate} 1s linear 0s infinite;
   margin: 0 0.3rem;
 `
 
-export function NewNovel() {
+function NewNovel() {
     const [creating, setCreating] = useState(false)
     let name: string = ""
     let author: string = ""
@@ -52,7 +51,7 @@ export function NewNovel() {
     }
 
     function closeHandle() {
-        mNewNovelShow.set(false)
+        panelsManager.delete(key)
     }
 
     const emptyCheck: ErrorCheck = {
@@ -87,3 +86,6 @@ export function NewNovel() {
 
     )
 }
+
+export const key="new novel"
+export const newNovel=<NewNovel/>

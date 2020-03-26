@@ -40616,6 +40616,19 @@ module.exports = v4;
 
 /***/ }),
 
+/***/ "./src/assests/icon/book.svg":
+/*!***********************************!*\
+  !*** ./src/assests/icon/book.svg ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "public/img/9c1d57ffa96dce7c49b1057a1585417d.svg");
+
+/***/ }),
+
 /***/ "./src/assests/icon/chapter.svg":
 /*!**************************************!*\
   !*** ./src/assests/icon/chapter.svg ***!
@@ -40642,6 +40655,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/assests/icon/info.svg":
+/*!***********************************!*\
+  !*** ./src/assests/icon/info.svg ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "public/img/60f01ee66dbe861d421ee1d03398553a.svg");
+
+/***/ }),
+
+/***/ "./src/assests/icon/left.svg":
+/*!***********************************!*\
+  !*** ./src/assests/icon/left.svg ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "public/img/2b1119bdd05992348eb6b81a8c636a25.svg");
+
+/***/ }),
+
 /***/ "./src/assests/icon/loading.svg":
 /*!**************************************!*\
   !*** ./src/assests/icon/loading.svg ***!
@@ -40652,6 +40691,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "public/img/bd39181beb8297d642f8c116c4174ca6.svg");
+
+/***/ }),
+
+/***/ "./src/assests/icon/name.svg":
+/*!***********************************!*\
+  !*** ./src/assests/icon/name.svg ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "public/img/f58417a31012823c8939f5d0f9203157.svg");
 
 /***/ }),
 
@@ -40708,13 +40760,18 @@ const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 const theme_1 = __webpack_require__(/*! ../lib/browser/theme/theme */ "./src/lib/browser/theme/theme.ts");
 const globalStyle_1 = __webpack_require__(/*! ./common/globalStyle */ "./src/components/common/globalStyle.ts");
-const ActivityManager_1 = __webpack_require__(/*! ./activities/ActivityManager */ "./src/components/activities/ActivityManager.tsx");
+const PanelsManager_1 = __webpack_require__(/*! ./panels/PanelsManager */ "./src/components/panels/PanelsManager.tsx");
 const Workbench_1 = __webpack_require__(/*! ./workbench/Workbench */ "./src/components/workbench/Workbench.tsx");
 const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const Launch_1 = __webpack_require__(/*! ./launch/Launch */ "./src/components/launch/Launch.tsx");
+const MsgList_1 = __webpack_require__(/*! ./msg/MsgList */ "./src/components/msg/MsgList.tsx");
+const Model_1 = __webpack_require__(/*! ../lib/browser/model/Model */ "./src/lib/browser/model/Model.ts");
+const useModel_1 = __webpack_require__(/*! ../lib/browser/model/useModel */ "./src/lib/browser/model/useModel.ts");
+exports.mLaunchShow = Model_1.showModel();
 function App() {
+    const [launchShow] = useModel_1.useModel(exports.mLaunchShow, true);
     const [theme, setTheme] = React.useState(theme_1.defaultTheme);
     const themec = react_1.useContext(styled_components_1.ThemeContext);
-    console.log(JSON.stringify(themec));
     const changeTheme = (theme) => {
         setTheme(theme);
     };
@@ -40723,51 +40780,18 @@ function App() {
         React.createElement(styled_components_1.ThemeProvider, { theme: theme },
             React.createElement(globalStyle_1.GlobalStyle, null),
             React.createElement(Workbench_1.Workbench, null),
-            React.createElement(ActivityManager_1.ActivityManager, null))));
+            React.createElement(PanelsManager_1.PanelsManager, null),
+            launchShow && React.createElement(Launch_1.Launch, null),
+            React.createElement(MsgList_1.MsgList, null))));
 }
 exports.App = App;
 
 
 /***/ }),
 
-/***/ "./src/components/activities/ActivityManager.tsx":
-/*!*******************************************************!*\
-  !*** ./src/components/activities/ActivityManager.tsx ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const MsgList_1 = __webpack_require__(/*! ./MsgList */ "./src/components/activities/MsgList.tsx");
-const NewNovel_1 = __webpack_require__(/*! ./NewNovel */ "./src/components/activities/NewNovel.tsx");
-const Welcome_1 = __webpack_require__(/*! ./Welcome */ "./src/components/activities/Welcome.tsx");
-const Launch_1 = __webpack_require__(/*! ./launch/Launch */ "./src/components/activities/launch/Launch.tsx");
-const Model_1 = __webpack_require__(/*! ../../lib/browser/modle/Model */ "./src/lib/browser/modle/Model.ts");
-const useModel_1 = __webpack_require__(/*! ../../lib/browser/modle/useModel */ "./src/lib/browser/modle/useModel.ts");
-exports.mWelcomeShow = Model_1.showModel();
-exports.mNewNovelShow = Model_1.showModel();
-exports.mLaunchShow = Model_1.showModel();
-function ActivityManager() {
-    const [welcomeShow] = useModel_1.useModel(exports.mWelcomeShow, false);
-    const [newNovelShow] = useModel_1.useModel(exports.mNewNovelShow, false);
-    const [launchShow] = useModel_1.useModel(exports.mLaunchShow, true);
-    return (React.createElement(React.Fragment, null,
-        welcomeShow && React.createElement(Welcome_1.Welcome, null),
-        newNovelShow && React.createElement(NewNovel_1.NewNovel, null),
-        launchShow && React.createElement(Launch_1.Launch, null),
-        React.createElement(MsgList_1.MsgList, null)));
-}
-exports.ActivityManager = ActivityManager;
-
-
-/***/ }),
-
-/***/ "./src/components/activities/MsgList.tsx":
+/***/ "./src/components/common/ContextMenu.tsx":
 /*!***********************************************!*\
-  !*** ./src/components/activities/MsgList.tsx ***!
+  !*** ./src/components/common/ContextMenu.tsx ***!
   \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -40777,128 +40801,24 @@ exports.ActivityManager = ActivityManager;
 Object.defineProperty(exports, "__esModule", { value: true });
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const warn_svg_1 = __webpack_require__(/*! ../../assests/icon/warn.svg */ "./src/assests/icon/warn.svg");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const design_1 = __webpack_require__(/*! ../common/design */ "./src/components/common/design.ts");
-const icons_1 = __webpack_require__(/*! ../common/icons */ "./src/components/common/icons.ts");
-const ItemContainer = styled_components_1.default.div `
-  width:100%;
-  padding: ${design_1.design.space_s};
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;
-function MsgItem(props) {
-    return (React.createElement(ItemContainer, null,
-        React.createElement(icons_1.LIcon, { src: warn_svg_1.default }),
-        React.createElement("span", null, props.msg)));
-}
 const Container = styled_components_1.default.div `
-  width:30vw;
-  padding: 0.5rem;
-  overflow: scroll;
+  padding:0.5rem 1rem;
+  background: ${p => p.theme.panel};
   position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-flow: column-reverse nowrap;
+  box-shadow: 3px 3px 3px #cccccc;
 `;
-function MsgList() {
-    const [list, setList] = react_1.useState([]);
-    return (React.createElement(React.Fragment, null, list.length != 0 && (React.createElement(Container, null, list.map(e => React.createElement(MsgItem, { key: e.msg, msg: e.msg, type: e.type }))))));
+function ContextMenu(props) {
+    return (React.createElement(Container, { style: { left: props.x, top: props.y } }, props.menu.map(e => React.createElement("span", { onClick: e.onClick }, e.label))));
 }
-exports.MsgList = MsgList;
+exports.ContextMenu = ContextMenu;
 
 
 /***/ }),
 
-/***/ "./src/components/activities/NewNovel.tsx":
-/*!************************************************!*\
-  !*** ./src/components/activities/NewNovel.tsx ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-const BaseInput_1 = __webpack_require__(/*! ../common/input/BaseInput */ "./src/components/common/input/BaseInput.tsx");
-const loading_svg_1 = __webpack_require__(/*! ../../assests/icon/loading.svg */ "./src/assests/icon/loading.svg");
-const createNewNovel_1 = __webpack_require__(/*! ../../lib/common/createNewNovel */ "./src/lib/common/createNewNovel.ts");
-const ConfirmButton_1 = __webpack_require__(/*! ../common/button/ConfirmButton */ "./src/components/common/button/ConfirmButton.ts");
-const icons_1 = __webpack_require__(/*! ../common/icons */ "./src/components/common/icons.ts");
-const layouts_1 = __webpack_require__(/*! ../common/layouts */ "./src/components/common/layouts.ts");
-const Panel_1 = __webpack_require__(/*! ../common/container/Panel */ "./src/components/common/container/Panel.tsx");
-const ActivityManager_1 = __webpack_require__(/*! ./ActivityManager */ "./src/components/activities/ActivityManager.tsx");
-const Input = styled_components_1.default(BaseInput_1.BaseInput) `
-  width:50%;
-  max-width: 30rem;
-`;
-const Button = styled_components_1.default(ConfirmButton_1.ConfirmButton) `
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-around;
-`;
-const rotate = styled_components_1.keyframes `
-  from{
-    transform: rotate(0deg);
-  }
-  to{
-    transform: rotate(360deg);
-  }
-`;
-const LoadingIcon = styled_components_1.default(icons_1.SIcon) `
-  animation: ${rotate} 1s linear 0s infinite;
-  margin: 0 0.3rem;
-`;
-function NewNovel() {
-    const [creating, setCreating] = react_1.useState(false);
-    let name = "";
-    let author = "";
-    function clickHandle() {
-        if (creating)
-            return;
-        const isEmpty = name.trim().length == 0 || author.trim().length == 0;
-        if (!isEmpty) {
-            setCreating(true);
-            createNewNovel_1.createNewNovel(name, author);
-        }
-    }
-    function closeHandle() {
-        ActivityManager_1.mNewNovelShow.set(false);
-    }
-    const emptyCheck = {
-        check: (e) => e.trim().length === 0,
-        error: "该字段不能为空"
-    };
-    return (React.createElement(layouts_1.Background, null,
-        React.createElement(Panel_1.MPanel, { onClose: closeHandle, title: "\u65B0\u5EFA\u5C0F\u8BF4" },
-            React.createElement(layouts_1.FlexCol, null,
-                React.createElement(Input, { label: "name", maxSize: 50, count: true, valueChangeHandle: e => {
-                        name = e;
-                    }, errorCheck: emptyCheck }),
-                React.createElement(Input, { label: "author", valueChangeHandle: e => {
-                        author = e;
-                    }, errorCheck: emptyCheck }),
-                React.createElement(Button, { onClick: clickHandle },
-                    "\u5B8C\u6210",
-                    creating && (React.createElement(LoadingIcon, { src: loading_svg_1.default })))))));
-}
-exports.NewNovel = NewNovel;
-
-
-/***/ }),
-
-/***/ "./src/components/activities/Welcome.tsx":
-/*!***********************************************!*\
-  !*** ./src/components/activities/Welcome.tsx ***!
-  \***********************************************/
+/***/ "./src/components/common/Warn.tsx":
+/*!****************************************!*\
+  !*** ./src/components/common/Warn.tsx ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40907,116 +40827,23 @@ exports.NewNovel = NewNovel;
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-const layouts_1 = __webpack_require__(/*! ../common/layouts */ "./src/components/common/layouts.ts");
-const design_1 = __webpack_require__(/*! ../common/design */ "./src/components/common/design.ts");
-const Container = styled_components_1.default(layouts_1.Background) `
-    z-index:${design_1.design.z_panel};
+const warn_svg_1 = __webpack_require__(/*! ../../assests/icon/warn.svg */ "./src/assests/icon/warn.svg");
+const design_1 = __webpack_require__(/*! ./design */ "./src/components/common/design.ts");
+const icons_1 = __webpack_require__(/*! ./icons */ "./src/components/common/icons.ts");
+const Container = styled_components_1.default.span `
+    border-radius:2px;
+    display:inline-flex;
+    background:rgba(256,256,256,0.5);
+    padding:${design_1.design.space_s};
+    color:${design_1.design.color.warn};
+    font-size:75%;
 `;
-function Welcome() {
-    return (React.createElement(Container, null));
+function Warn(props) {
+    return (React.createElement(Container, { className: props.className },
+        React.createElement(icons_1.SIcon, { src: warn_svg_1.default }),
+        props.children));
 }
-exports.Welcome = Welcome;
-
-
-/***/ }),
-
-/***/ "./src/components/activities/launch/Launch.tsx":
-/*!*****************************************************!*\
-  !*** ./src/components/activities/launch/Launch.tsx ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-const layouts_1 = __webpack_require__(/*! ../../common/layouts */ "./src/components/common/layouts.ts");
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const NovelLaunch_1 = __webpack_require__(/*! ./novel/NovelLaunch */ "./src/components/activities/launch/novel/NovelLaunch.tsx");
-const Container = styled_components_1.default(layouts_1.FullScreen) `
-    background:${p => p.theme.panel};
-    z-index:100;
-    display:flex;
-    
-`;
-function Launch() {
-    return (React.createElement(Container, null,
-        React.createElement(NovelLaunch_1.NovelLaunch, null)));
-}
-exports.Launch = Launch;
-
-
-/***/ }),
-
-/***/ "./src/components/activities/launch/novel/NovelLaunch.tsx":
-/*!****************************************************************!*\
-  !*** ./src/components/activities/launch/novel/NovelLaunch.tsx ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-const NovelList_1 = __webpack_require__(/*! ./NovelList */ "./src/components/activities/launch/novel/NovelList.tsx");
-const ActivityManager_1 = __webpack_require__(/*! ../../ActivityManager */ "./src/components/activities/ActivityManager.tsx");
-const Container = styled_components_1.default.div `
-    width:50%;
-    min-width: 300px;
-    height:80%;
-    min-height: 600px;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-`;
-const Title = styled_components_1.default.h2 `
-    
-`;
-const CreateButton = styled_components_1.default.button `
-
-`;
-function NovelLaunch() {
-    return (React.createElement(Container, null,
-        React.createElement(Title, null, "Novels"),
-        React.createElement(CreateButton, { onClick: () => ActivityManager_1.mNewNovelShow.set(true) }, "create new Novel"),
-        React.createElement(NovelList_1.NovelList, null)));
-}
-exports.NovelLaunch = NovelLaunch;
-
-
-/***/ }),
-
-/***/ "./src/components/activities/launch/novel/NovelList.tsx":
-/*!**************************************************************!*\
-  !*** ./src/components/activities/launch/novel/NovelList.tsx ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const getNovelList_1 = __webpack_require__(/*! ../../../../lib/node/novel/getNovelList */ "./src/lib/node/novel/getNovelList.ts");
-const initWorkBench_1 = __webpack_require__(/*! ../../../../lib/common/initWorkBench */ "./src/lib/common/initWorkBench.ts");
-function NovelList() {
-    const [list, setList] = react_1.useState([]);
-    react_1.useEffect(() => {
-        getNovelList_1.getNovelList().then(e => {
-            setList(e);
-        });
-    }, []);
-    function clickHandle(dir) {
-        initWorkBench_1.initWorkbench(dir);
-    }
-    return (React.createElement("div", null, list.map(e => React.createElement("li", { key: e.dir, onClick: () => clickHandle(e.dir) }, e.meta.name))));
-}
-exports.NovelList = NovelList;
+exports.Warn = Warn;
 
 
 /***/ }),
@@ -41055,7 +40882,7 @@ const design_1 = __webpack_require__(/*! ../design */ "./src/components/common/d
 exports.ConfirmButton = styled_components_1.default.button `
     min-height:2rem;
     border-radius:8px;
-    padding:0px ${design_1.design.space_l};
+    padding:0 ${design_1.design.space_l};
     outline: none;
     border: none;
     background:${p => p.theme.point};
@@ -41183,78 +41010,6 @@ exports.ScrollContainer = styled_components_1.default.div `
 
 /***/ }),
 
-/***/ "./src/components/common/container/TwoColumn.tsx":
-/*!*******************************************************!*\
-  !*** ./src/components/common/container/TwoColumn.tsx ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const layouts_1 = __webpack_require__(/*! ../layouts */ "./src/components/common/layouts.ts");
-const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const Left = styled_components_1.default.div `
-    height: inherit;
-    position: relative;
-    display: ${p => p.show ? 'block' : 'none'};
-    &>*:first-child{
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      z-index: 1;
-    }
-`;
-const Right = styled_components_1.default.div `
-    height: inherit;
-    flex: 1;
-`;
-const Line = styled_components_1.default.div `
-    width: 1px;
-    margin: 0 1px;
-    height: inherit;
-    background: #ccc;
-    cursor: col-resize;
-`;
-function TwoColumn(props) {
-    let x = -1;
-    let w;
-    const ref = react_1.useRef(null);
-    react_1.useEffect(() => {
-        document.addEventListener('mousemove', calculate);
-        document.addEventListener('mouseup', getOnMouseUp);
-        return () => {
-            document.removeEventListener('mousemove', calculate);
-            document.removeEventListener('mouseup', getOnMouseUp);
-        };
-    }, []);
-    function calculate(e) {
-        if (x < 0)
-            return;
-        ref.current.style.width = (w + (e.clientX - x)) + 'px';
-    }
-    function getOnMouseDown(e) {
-        x = e.clientX;
-        w = ref.current.offsetWidth;
-    }
-    function getOnMouseUp(e) {
-        x = -1;
-    }
-    return (React.createElement(layouts_1.FlexRow, { className: props.className },
-        React.createElement(Left, { ref: ref, show: props.leftShow },
-            React.createElement(Line, { onMouseDown: getOnMouseDown }),
-            props.left),
-        React.createElement(Right, null, props.right)));
-}
-exports.TwoColumn = TwoColumn;
-
-
-/***/ }),
-
 /***/ "./src/components/common/design.ts":
 /*!*****************************************!*\
   !*** ./src/components/common/design.ts ***!
@@ -41333,8 +41088,22 @@ body {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const ThemedIcon = styled_components_1.default.img `
+`;
+exports.STIcon = styled_components_1.default(ThemedIcon) `
+    width:0.8rem;
+    height:0.8rem;
+`;
+exports.MTIcon = styled_components_1.default(ThemedIcon) `
+    width:1.2rem;
+    height:1.2rem;
+`;
+exports.LTIcon = styled_components_1.default(ThemedIcon) `
+    width:2rem;
+    height:2rem;
+`;
 const BaseIcon = styled_components_1.default.img `
-    filter: brightness(${p => p.theme.isLight ? 0 : 100});
+  
 `;
 exports.SIcon = styled_components_1.default(BaseIcon) `
     width:0.8rem;
@@ -41352,10 +41121,10 @@ exports.LIcon = styled_components_1.default(BaseIcon) `
 
 /***/ }),
 
-/***/ "./src/components/common/input/BaseInput.tsx":
-/*!***************************************************!*\
-  !*** ./src/components/common/input/BaseInput.tsx ***!
-  \***************************************************/
+/***/ "./src/components/common/input/MDInput.tsx":
+/*!*************************************************!*\
+  !*** ./src/components/common/input/MDInput.tsx ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41366,6 +41135,7 @@ const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 const design_1 = __webpack_require__(/*! ../design */ "./src/components/common/design.ts");
+const Warn_1 = __webpack_require__(/*! ../Warn */ "./src/components/common/Warn.tsx");
 const Container = styled_components_1.default.div `
     position: relative;
 `;
@@ -41403,11 +41173,7 @@ const Count = styled_components_1.default.span `
     font-size:75%;
     user-select: none;
 `;
-const Warn = styled_components_1.default.span `
-    color:${design_1.design.color.warn};
-    font-size: 75%;
-`;
-function BaseInput(props) {
+function MDInput(props) {
     const maxSize = props.maxSize || 100;
     const [focus, setFocus] = react_1.useState(false);
     const [labelUp, setLabelUp] = react_1.useState(false);
@@ -41434,13 +41200,31 @@ function BaseInput(props) {
             }, onBlur: e => blurHandle(), onChange: e => changeHandle(e.target.value), maxLength: maxSize }),
         React.createElement(Label, { labelUp: labelUp }, props.label),
         (warn || props.count) && React.createElement(Sub, null,
-            React.createElement("div", null, warn && React.createElement(Warn, null, props.errorCheck.error)),
+            React.createElement("div", null, warn && React.createElement(Warn_1.Warn, null, props.errorCheck.error)),
             React.createElement("div", null, props.count && (React.createElement(Count, null,
                 size,
                 "/",
                 props.maxSize))))));
 }
-exports.BaseInput = BaseInput;
+exports.MDInput = MDInput;
+
+
+/***/ }),
+
+/***/ "./src/components/common/input/SimpleInput.tsx":
+/*!*****************************************************!*\
+  !*** ./src/components/common/input/SimpleInput.tsx ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+exports.SimpleInput = styled_components_1.default.input `
+    
+`;
 
 
 /***/ }),
@@ -41515,6 +41299,37 @@ exports.Center = styled_components_1.default.div `
 
 /***/ }),
 
+/***/ "./src/components/common/text.ts":
+/*!***************************************!*\
+  !*** ./src/components/common/text.ts ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const design_1 = __webpack_require__(/*! ./design */ "./src/components/common/design.ts");
+exports.Text = styled_components_1.default.p `
+  line-height: 145%;
+  margin: 0 ${design_1.design.space_s};
+`;
+exports.Legend = styled_components_1.default(exports.Text) `
+  font-size:125% ;
+`;
+exports.Title = styled_components_1.default.span `
+  text-align:center;
+  padding:${design_1.design.space_s} 0px;
+`;
+exports.Link = styled_components_1.default.a `
+  text-decoration: underline ${p => p.theme.point};
+  color: ${p => p.theme.point};
+`;
+
+
+/***/ }),
+
 /***/ "./src/components/common/tree/ExpandNode.tsx":
 /*!***************************************************!*\
   !*** ./src/components/common/tree/ExpandNode.tsx ***!
@@ -41531,7 +41346,7 @@ const TreeNode_1 = __webpack_require__(/*! ./TreeNode */ "./src/components/commo
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 const fold_svg_1 = __webpack_require__(/*! ../../../assests/icon/fold.svg */ "./src/assests/icon/fold.svg");
 const icons_1 = __webpack_require__(/*! ../icons */ "./src/components/common/icons.ts");
-const ExpandIcon = styled_components_1.default(icons_1.SIcon) `
+const ExpandIcon = styled_components_1.default(icons_1.STIcon) `
     transform:${props => props.expand ? "rotate(90deg)" : "rotate(0deg)"}
 `;
 const ItemContainer = styled_components_1.default.div `
@@ -41546,11 +41361,7 @@ function ExpandNode(props) {
         React.createElement(ExpandIcon, { expand: expand, src: fold_svg_1.default }),
         props.icon);
     return (React.createElement(React.Fragment, null,
-        React.createElement(TreeNode_1.TreeNode
-        // menu={props.menu}
-        , { 
-            // menu={props.menu}
-            indent: props.indent, front: expandPart, name: props.name, clickHandle: e => {
+        React.createElement(TreeNode_1.TreeNode, { menuBuilder: props.menuBuilder, indent: props.indent, front: expandPart, name: props.name, onClick: () => {
                 setExpand(!expand);
             } }),
         React.createElement(ItemContainer, { expand: expand }, props.children)));
@@ -41572,8 +41383,8 @@ exports.ExpandNode = ExpandNode;
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-// import {MenuContext} from "../novel/tree-view/TreeView";
 const design_1 = __webpack_require__(/*! ../design */ "./src/components/common/design.ts");
+const TreeView_1 = __webpack_require__(/*! ../../novel/tree-view/TreeView */ "./src/components/novel/tree-view/TreeView.tsx");
 const Container = styled_components_1.default.div `
     width:100%;
     padding:${design_1.design.space_s} 0px;
@@ -41588,27 +41399,25 @@ const Container = styled_components_1.default.div `
     padding-left:${p => (p.indent * 2) + "rem"}
 `;
 function TreeNode(props) {
-    // const menuContext=useContext(MenuContext)
-    // function contextMenuHandle(event:any) {
-    //     event.preventDefault()
-    //     let x,y
-    //
-    //     const screenH = window.innerHeight
-    //     const rootH = 50
-    //
-    //     const bottom = (screenH - event.clientY) > rootH
-    //
-    //     x = event.clientX
-    //     y=bottom?event.clientY:(event.clientY-rootH)
-    //     menuContext([{label:"console",click:()=>{console.log("menuhandle")}}],{x,y})
-    // }
-    function clickHandle() {
-        props.clickHandle && props.clickHandle("treenodeclick");
-        // menuContext(null,null)
+    function contextMenuHandle(event) {
+        event.preventDefault();
+        let x, y;
+        const screenH = window.innerHeight;
+        const rootH = 50;
+        const bottom = (screenH - event.clientY) > rootH;
+        x = event.clientX;
+        y = bottom ? event.clientY : (event.clientY - rootH);
+        const context = {
+            menu: props.menuBuilder(),
+            x: x, y: y
+        };
+        TreeView_1.mContextMenu.set(context);
     }
-    return (React.createElement(Container, { onClick: clickHandle, 
-        // onContextMenu={contextMenuHandle}
-        selected: props.selected != null || props.selected, indent: props.indent },
+    function clickHandle() {
+        props.onClick && props.onClick();
+        TreeView_1.mContextMenu.set(null);
+    }
+    return (React.createElement(Container, { onClick: clickHandle, onContextMenu: contextMenuHandle, selected: props.selected != null || props.selected, indent: props.indent },
         props.front,
         props.name));
 }
@@ -41617,10 +41426,10 @@ exports.TreeNode = TreeNode;
 
 /***/ }),
 
-/***/ "./src/components/novel/NovelContainer.tsx":
-/*!*************************************************!*\
-  !*** ./src/components/novel/NovelContainer.tsx ***!
-  \*************************************************/
+/***/ "./src/components/launch/Launch.tsx":
+/*!******************************************!*\
+  !*** ./src/components/launch/Launch.tsx ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41628,27 +41437,182 @@ exports.TreeNode = TreeNode;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-const TreeView_1 = __webpack_require__(/*! ./tree-view/TreeView */ "./src/components/novel/tree-view/TreeView.tsx");
-const ContentManager_1 = __webpack_require__(/*! ./editor/ContentManager */ "./src/components/novel/editor/ContentManager.tsx");
+const layouts_1 = __webpack_require__(/*! ../common/layouts */ "./src/components/common/layouts.ts");
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const TwoColumn_1 = __webpack_require__(/*! ../common/container/TwoColumn */ "./src/components/common/container/TwoColumn.tsx");
-const Model_1 = __webpack_require__(/*! ../../lib/browser/modle/Model */ "./src/lib/browser/modle/Model.ts");
-const useModel_1 = __webpack_require__(/*! ../../lib/browser/modle/useModel */ "./src/lib/browser/modle/useModel.ts");
-const ProjectManager_1 = __webpack_require__(/*! ../../lib/browser/utils/ProjectManager */ "./src/lib/browser/utils/ProjectManager.ts");
-const Container = styled_components_1.default(TwoColumn_1.TwoColumn) `
-  height: 100vh;
-  width: 100vw;
+const PanelsManager_1 = __webpack_require__(/*! ../panels/PanelsManager */ "./src/components/panels/PanelsManager.tsx");
+const NewNovel_1 = __webpack_require__(/*! ../panels/NewNovel */ "./src/components/panels/NewNovel.tsx");
+const NovelList_1 = __webpack_require__(/*! ./NovelList */ "./src/components/launch/NovelList.tsx");
+const text_1 = __webpack_require__(/*! ../common/text */ "./src/components/common/text.ts");
+const Container = styled_components_1.default(layouts_1.FullScreen) `
+    background:${p => p.theme.panel};
+    z-index:100;
+    display:flex;
+    flex-flow: column;
+    justify-content: space-around;
 `;
-exports.mNovel = Model_1.model();
-exports.mCurSection = Model_1.model();
-exports.mLeftShow = Model_1.showModel();
-function NovelContainer(props) {
-    const [novel] = useModel_1.useModel(exports.mNovel, props.novel);
-    const [curSection] = useModel_1.useModel(exports.mCurSection, ProjectManager_1.projectManager.novel.findSection(novel, props.cur));
-    const [leftShow] = useModel_1.useModel(exports.mLeftShow, true);
-    return (React.createElement(Container, { leftShow: leftShow, left: React.createElement(TreeView_1.TreeView, { novel: novel, cur: props.cur }), right: React.createElement(ContentManager_1.ContentManager, { section: curSection }) }));
+function Launch() {
+    return (React.createElement(Container, null,
+        React.createElement(text_1.Title, null, "Novels"),
+        React.createElement("button", { onClick: () => {
+                console.log("newNovel.key:" + NewNovel_1.newNovel.key);
+                PanelsManager_1.panelsManager.add(NewNovel_1.key, NewNovel_1.newNovel);
+            } }, "create new Novel"),
+        React.createElement(NovelList_1.NovelList, null)));
 }
-exports.NovelContainer = NovelContainer;
+exports.Launch = Launch;
+
+
+/***/ }),
+
+/***/ "./src/components/launch/NovelList.tsx":
+/*!*********************************************!*\
+  !*** ./src/components/launch/NovelList.tsx ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const getNovelList_1 = __webpack_require__(/*! ../../lib/node/novel/getNovelList */ "./src/lib/node/novel/getNovelList.ts");
+const initProject_1 = __webpack_require__(/*! ../../lib/browser/utils/initProject */ "./src/lib/browser/utils/initProject.ts");
+function NovelList() {
+    const [list, setList] = react_1.useState([]);
+    react_1.useEffect(() => {
+        getNovelList_1.getNovelList().then(e => {
+            setList(e);
+        });
+    }, []);
+    function clickHandle(dir) {
+        initProject_1.initProject(dir);
+    }
+    return (React.createElement("div", null, list.map(e => React.createElement("li", { key: e.dir, onClick: () => clickHandle(e.dir) }, e.meta.name))));
+}
+exports.NovelList = NovelList;
+
+
+/***/ }),
+
+/***/ "./src/components/meta/MetaPanel.tsx":
+/*!*******************************************!*\
+  !*** ./src/components/meta/MetaPanel.tsx ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const layouts_1 = __webpack_require__(/*! ../common/layouts */ "./src/components/common/layouts.ts");
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const icons_1 = __webpack_require__(/*! ../common/icons */ "./src/components/common/icons.ts");
+const book_svg_1 = __webpack_require__(/*! ../../assests/icon/book.svg */ "./src/assests/icon/book.svg");
+const name_svg_1 = __webpack_require__(/*! ../../assests/icon/name.svg */ "./src/assests/icon/name.svg");
+const Container = styled_components_1.default(layouts_1.FlexCol) `
+      &>*{
+        width:100%;
+      }
+      span{
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      width:inherit;
+      height: 10rem;
+      .head{
+        display: flex;
+        justify-content: space-between;
+      }
+      .cr{
+
+      }
+      .date{
+        font-size: 75%;
+      }
+`;
+function MetaPanel(props) {
+    return (React.createElement(Container, null,
+        React.createElement("div", { className: 'head' },
+            React.createElement("span", null, "meta"),
+            React.createElement("button", null, "edit")),
+        React.createElement("div", { className: 'cr' },
+            React.createElement(icons_1.STIcon, { src: book_svg_1.default, alt: 'book' }),
+            React.createElement("span", { className: 'info' }, props.meta.name)),
+        React.createElement("div", { className: 'cr' },
+            React.createElement(icons_1.STIcon, { src: name_svg_1.default, alt: 'author' }),
+            React.createElement("span", { className: 'info' }, props.meta.author)),
+        React.createElement("span", { className: 'date' }, props.meta.startTime)));
+}
+exports.MetaPanel = MetaPanel;
+
+
+/***/ }),
+
+/***/ "./src/components/msg/MsgItem.tsx":
+/*!****************************************!*\
+  !*** ./src/components/msg/MsgItem.tsx ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const icons_1 = __webpack_require__(/*! ../common/icons */ "./src/components/common/icons.ts");
+const info_svg_1 = __webpack_require__(/*! ../../assests/icon/info.svg */ "./src/assests/icon/info.svg");
+const warn_svg_1 = __webpack_require__(/*! ../../assests/icon/warn.svg */ "./src/assests/icon/warn.svg");
+const Container = styled_components_1.default.div `
+  
+`;
+function MsgItem(props) {
+    const icon = props.type == 'info' ? info_svg_1.default : warn_svg_1.default;
+    return (React.createElement(Container, null,
+        React.createElement(icons_1.LIcon, { src: icon }),
+        props.msg));
+}
+exports.MsgItem = MsgItem;
+
+
+/***/ }),
+
+/***/ "./src/components/msg/MsgList.tsx":
+/*!****************************************!*\
+  !*** ./src/components/msg/MsgList.tsx ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const Model_1 = __webpack_require__(/*! ../../lib/browser/model/Model */ "./src/lib/browser/model/Model.ts");
+const useModel_1 = __webpack_require__(/*! ../../lib/browser/model/useModel */ "./src/lib/browser/model/useModel.ts");
+const MsgItem_1 = __webpack_require__(/*! ./MsgItem */ "./src/components/msg/MsgItem.tsx");
+const Container = styled_components_1.default.div `
+  width:30vw;
+  padding: 0.5rem;
+  overflow: scroll;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: column-reverse nowrap;
+`;
+exports.mMsgList = Model_1.arrayModel();
+function MsgList() {
+    const [list] = useModel_1.useModel(exports.mMsgList, []);
+    return (React.createElement(React.Fragment, null, list.length != 0 && (React.createElement(Container, null, list.map(e => React.createElement(MsgItem_1.MsgItem, { key: e.msg, type: e.type, msg: e.msg }))))));
+}
+exports.MsgList = MsgList;
 
 
 /***/ }),
@@ -41669,68 +41633,77 @@ const Input = styled_components_1.default.p `
 
 `;
 function Content(props) {
-    function valueChangeHandle(v) {
+    function onChange(v) {
         props.onValueChange(v);
     }
-    return (React.createElement(Input, { contentEditable: 'true', onInput: e => { valueChangeHandle(e.currentTarget.textContent || 'error'); } }, props.value));
+    return (React.createElement(Input, { contentEditable: 'true', onInput: e => { onChange(e.currentTarget.textContent); }, defaultValue: props.value }));
 }
 exports.Content = Content;
 
 
 /***/ }),
 
-/***/ "./src/components/novel/editor/ContentManager.tsx":
-/*!********************************************************!*\
-  !*** ./src/components/novel/editor/ContentManager.tsx ***!
-  \********************************************************/
+/***/ "./src/components/novel/editor/EditorManager.tsx":
+/*!*******************************************************!*\
+  !*** ./src/components/novel/editor/EditorManager.tsx ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const Content_1 = __webpack_require__(/*! ./Content */ "./src/components/novel/editor/Content.tsx");
-const State_1 = __webpack_require__(/*! ./State */ "./src/components/novel/editor/State.tsx");
-const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const ProjectManager_1 = __webpack_require__(/*! ../../../lib/browser/utils/ProjectManager */ "./src/lib/browser/utils/ProjectManager.ts");
-const View = styled_components_1.default.div `
-
-`;
-function ContentManager(props) {
-    const [saved, setSaved] = react_1.useState(true);
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function EditorManager(props) {
+    const now = React.createRef();
     const [value, setValue] = react_1.useState(null);
-    ProjectManager_1.projectManager.novel.getSection(props.section.uuid).then(e => {
-        setValue(e);
-    });
-    function valuechangeHandle(v) {
-        setSaved(false);
-    }
-    return (React.createElement(View, null,
-        React.createElement(State_1.State, { state: saved }),
-        React.createElement(Content_1.Content, { value: value, onValueChange: v => valuechangeHandle(v) })));
+    ProjectManager_1.projectManager.novel.getSection(props.section.uuid).then(e => setValue(e));
+    let v;
+    react_1.useEffect(() => {
+        ProjectManager_1.projectManager.novel.updateSection(props.section.uuid, v);
+    }, [props.section]);
+    return (React.createElement(Content_1.Content, { value: value, onValueChange: (e) => v = e }));
 }
-exports.ContentManager = ContentManager;
+exports.EditorManager = EditorManager;
 
 
 /***/ }),
 
-/***/ "./src/components/novel/editor/State.tsx":
-/*!***********************************************!*\
-  !*** ./src/components/novel/editor/State.tsx ***!
-  \***********************************************/
+/***/ "./src/components/novel/novel-operations/NewFile.tsx":
+/*!***********************************************************!*\
+  !*** ./src/components/novel/novel-operations/NewFile.tsx ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const Panel_1 = __webpack_require__(/*! ../../common/container/Panel */ "./src/components/common/container/Panel.tsx");
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-function State(props) {
-    return (React.createElement("div", null, props.state ? null : React.createElement("i", null, "not saved")));
+const PanelsManager_1 = __webpack_require__(/*! ../../panels/PanelsManager */ "./src/components/panels/PanelsManager.tsx");
+const SimpleInput_1 = __webpack_require__(/*! ../../common/input/SimpleInput */ "./src/components/common/input/SimpleInput.tsx");
+const ConfirmButton_1 = __webpack_require__(/*! ../../common/button/ConfirmButton */ "./src/components/common/button/ConfirmButton.ts");
+const ProjectManager_1 = __webpack_require__(/*! ../../../lib/browser/utils/ProjectManager */ "./src/lib/browser/utils/ProjectManager.ts");
+function NewFile(props) {
+    let v = '';
+    function clickHandle() {
+        if (ProjectManager_1.projectManager.novel.checkNameExist(props.pos, v)) {
+        }
+        else {
+            props.onConfirm(v);
+            PanelsManager_1.panelsManager.delete(exports.key_newFile);
+        }
+    }
+    return (React.createElement(Panel_1.SPanel, { onClose: () => PanelsManager_1.panelsManager.delete(exports.key_newFile), title: props.title },
+        React.createElement(SimpleInput_1.SimpleInput, { placeholder: 'file name', onChange: e => v = e.target.value }),
+        React.createElement(ConfirmButton_1.ConfirmButton, { onClick: clickHandle }, "add")));
 }
-exports.State = State;
+exports.NewFile = NewFile;
+exports.key_newFile = 'new file';
 
 
 /***/ }),
@@ -41750,7 +41723,7 @@ const chapter_svg_1 = __webpack_require__(/*! ../../../assests/icon/chapter.svg 
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const icons_1 = __webpack_require__(/*! ../../common/icons */ "./src/components/common/icons.ts");
 function ChapterNode(props) {
-    return (React.createElement(ExpandNode_1.ExpandNode, { indent: 1, name: props.name, icon: React.createElement(icons_1.SIcon, { src: chapter_svg_1.default }), expanded: props.expanded }, props.children));
+    return (React.createElement(ExpandNode_1.ExpandNode, { menuBuilder: null, indent: 1, name: props.name, icon: React.createElement(icons_1.STIcon, { src: chapter_svg_1.default }), expanded: props.expanded }, props.children));
 }
 exports.ChapterNode = ChapterNode;
 
@@ -41772,7 +41745,7 @@ const part_svg_1 = __webpack_require__(/*! ../../../assests/icon/part.svg */ "./
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const icons_1 = __webpack_require__(/*! ../../common/icons */ "./src/components/common/icons.ts");
 function PartNode(props) {
-    return (React.createElement(ExpandNode_1.ExpandNode, { indent: 0, name: props.name, icon: React.createElement(icons_1.SIcon, { src: part_svg_1.default }), expanded: props.expanded }, props.children));
+    return (React.createElement(ExpandNode_1.ExpandNode, { menuBuilder: null, indent: 0, name: props.name, icon: React.createElement(icons_1.STIcon, { src: part_svg_1.default }), expanded: props.expanded }, props.children));
 }
 exports.PartNode = PartNode;
 
@@ -41793,11 +41766,26 @@ const TreeNode_1 = __webpack_require__(/*! ../../common/tree/TreeNode */ "./src/
 const section_svg_1 = __webpack_require__(/*! ../../../assests/icon/section.svg */ "./src/assests/icon/section.svg");
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const icons_1 = __webpack_require__(/*! ../../common/icons */ "./src/components/common/icons.ts");
+const PanelsManager_1 = __webpack_require__(/*! ../../panels/PanelsManager */ "./src/components/panels/PanelsManager.tsx");
+const NewFile_1 = __webpack_require__(/*! ../novel-operations/NewFile */ "./src/components/novel/novel-operations/NewFile.tsx");
+const ProjectManager_1 = __webpack_require__(/*! ../../../lib/browser/utils/ProjectManager */ "./src/lib/browser/utils/ProjectManager.ts");
+const ProjectContainer_1 = __webpack_require__(/*! ../../workbench/ProjectContainer */ "./src/components/workbench/ProjectContainer.tsx");
+const sectionMenuBuilder = (pos) => {
+    const menu = [
+        {
+            label: 'add',
+            onClick: () => PanelsManager_1.panelsManager.add(NewFile_1.key_newFile, React.createElement(NewFile_1.NewFile, { pos: pos, onConfirm: e => ProjectManager_1.projectManager.novel.addSection(pos, e), title: '\u65B0\u5EFAsection' }))
+        }
+    ];
+    return menu;
+};
 function SectionNode(props) {
     function clickHandle() {
-        if (!props.selected) { }
+        if (!props.selected) {
+            ProjectContainer_1.mCurPos.set(props.pos);
+        }
     }
-    return (React.createElement(TreeNode_1.TreeNode, { indent: 2, front: React.createElement(icons_1.SIcon, { src: section_svg_1.default }), name: props.name, selected: props.selected }));
+    return (React.createElement(TreeNode_1.TreeNode, { indent: 2, front: React.createElement(icons_1.STIcon, { src: section_svg_1.default }), name: props.name, selected: props.selected, menuBuilder: () => sectionMenuBuilder(props.pos), onClick: clickHandle }));
 }
 exports.SectionNode = SectionNode;
 
@@ -41820,30 +41808,317 @@ const PartNode_1 = __webpack_require__(/*! ./PartNode */ "./src/components/novel
 const ChapterNode_1 = __webpack_require__(/*! ./ChapterNode */ "./src/components/novel/tree-view/ChapterNode.tsx");
 const SectionNode_1 = __webpack_require__(/*! ./SectionNode */ "./src/components/novel/tree-view/SectionNode.tsx");
 const ScrollContainer_1 = __webpack_require__(/*! ../../common/container/ScrollContainer */ "./src/components/common/container/ScrollContainer.tsx");
+const useModel_1 = __webpack_require__(/*! ../../../lib/browser/model/useModel */ "./src/lib/browser/model/useModel.ts");
+const Model_1 = __webpack_require__(/*! ../../../lib/browser/model/Model */ "./src/lib/browser/model/Model.ts");
+const ContextMenu_1 = __webpack_require__(/*! ../../common/ContextMenu */ "./src/components/common/ContextMenu.tsx");
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const Container = styled_components_1.default(ScrollContainer_1.ScrollContainer) `
     height:inherit;
     position: relative;
     overflow: auto;
 `;
 const nameTrans = (name) => name.trim().length == 0 ? "untitled" : name;
+exports.mContextMenu = Model_1.model();
 function TreeView(props) {
-    // const [menu, setMenu] = useState<Menu>(null)
-    // const [menuPos,setMenuPos]=useState<Pos>(null)
-    //
-    // const menuChange:MenuChange=(m,pos)=>{
-    //     setMenuPos(pos)
-    //     setMenu(m);
-    // }
+    const [menuContext, setMC] = useModel_1.useModel(exports.mContextMenu, null);
     const cur = props.cur;
-    return (
-    // <MenuContext.Provider value={menuChange}>
-    React.createElement(Container, null, props.novel.content.map((e0, i0) => React.createElement(PartNode_1.PartNode, { depth: [i0], key: e0.name, name: nameTrans(e0.name), expanded: i0 === cur[0] }, e0.content.map((e1, i1) => React.createElement(ChapterNode_1.ChapterNode, { depth: [i0, i1], key: e1.name, name: nameTrans(e1.name), expanded: i0 === cur[0] && i1 === cur[1] }, e1.content.map((e2, i2) => React.createElement(SectionNode_1.SectionNode, { depth: [i0, i1, i2], key: e2.name, name: nameTrans(e2.name), selected: i0 === cur[0] && i1 === cur[1] && i2 == cur[2] })))))))
-    // </MenuContext.Provider>
-    );
+    react_1.useEffect(() => {
+        document.addEventListener('click', menuHide);
+        document.addEventListener('scroll', menuHide);
+        return () => {
+            document.removeEventListener('click', menuHide);
+            document.removeEventListener('scroll', menuHide);
+        };
+    }, [menuContext]);
+    function menuHide() {
+        if (menuContext != null)
+            setMC(null);
+    }
+    return (React.createElement(Container, null,
+        props.novel.content.map((e0, i0) => React.createElement(PartNode_1.PartNode, { pos: [i0], key: e0.name, name: nameTrans(e0.name), expanded: i0 === cur[0] }, e0.content.map((e1, i1) => React.createElement(ChapterNode_1.ChapterNode, { pos: [i0, i1], key: e1.name, name: nameTrans(e1.name), expanded: i0 === cur[0] && i1 === cur[1] }, e1.content.map((e2, i2) => React.createElement(SectionNode_1.SectionNode, { pos: [i0, i1, i2], key: e2.name, name: nameTrans(e2.name), selected: i0 === cur[0] && i1 === cur[1] && i2 == cur[2] })))))),
+        menuContext && (React.createElement(ContextMenu_1.ContextMenu, { menu: menuContext.menu, x: menuContext.x, y: menuContext.y }))));
 }
 exports.TreeView = TreeView;
-// export const MenuContext=React.createContext<MenuChange>(null)
-// type MenuChange =(e:Menu,pos:Pos)=>void
+
+
+/***/ }),
+
+/***/ "./src/components/panels/NewNovel.tsx":
+/*!********************************************!*\
+  !*** ./src/components/panels/NewNovel.tsx ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const MDInput_1 = __webpack_require__(/*! ../common/input/MDInput */ "./src/components/common/input/MDInput.tsx");
+const loading_svg_1 = __webpack_require__(/*! ../../assests/icon/loading.svg */ "./src/assests/icon/loading.svg");
+const createNewNovel_1 = __webpack_require__(/*! ../../lib/common/createNewNovel */ "./src/lib/common/createNewNovel.ts");
+const ConfirmButton_1 = __webpack_require__(/*! ../common/button/ConfirmButton */ "./src/components/common/button/ConfirmButton.ts");
+const icons_1 = __webpack_require__(/*! ../common/icons */ "./src/components/common/icons.ts");
+const layouts_1 = __webpack_require__(/*! ../common/layouts */ "./src/components/common/layouts.ts");
+const Panel_1 = __webpack_require__(/*! ../common/container/Panel */ "./src/components/common/container/Panel.tsx");
+const PanelsManager_1 = __webpack_require__(/*! ./PanelsManager */ "./src/components/panels/PanelsManager.tsx");
+const Input = styled_components_1.default(MDInput_1.MDInput) `
+  width:50%;
+  max-width: 30rem;
+`;
+const Button = styled_components_1.default(ConfirmButton_1.ConfirmButton) `
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+const rotate = styled_components_1.keyframes `
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+`;
+const LoadingIcon = styled_components_1.default(icons_1.STIcon) `
+  animation: ${rotate} 1s linear 0s infinite;
+  margin: 0 0.3rem;
+`;
+function NewNovel() {
+    const [creating, setCreating] = react_1.useState(false);
+    let name = "";
+    let author = "";
+    function clickHandle() {
+        if (creating)
+            return;
+        const isEmpty = name.trim().length == 0 || author.trim().length == 0;
+        if (!isEmpty) {
+            setCreating(true);
+            createNewNovel_1.createNewNovel(name, author);
+        }
+    }
+    function closeHandle() {
+        PanelsManager_1.panelsManager.delete(exports.key);
+    }
+    const emptyCheck = {
+        check: (e) => e.trim().length === 0,
+        error: "该字段不能为空"
+    };
+    return (React.createElement(layouts_1.Background, null,
+        React.createElement(Panel_1.MPanel, { onClose: closeHandle, title: "\u65B0\u5EFA\u5C0F\u8BF4" },
+            React.createElement(layouts_1.FlexCol, null,
+                React.createElement(Input, { label: "name", maxSize: 50, count: true, valueChangeHandle: e => {
+                        name = e;
+                    }, errorCheck: emptyCheck }),
+                React.createElement(Input, { label: "author", valueChangeHandle: e => {
+                        author = e;
+                    }, errorCheck: emptyCheck }),
+                React.createElement(Button, { onClick: clickHandle },
+                    "\u5B8C\u6210",
+                    creating && (React.createElement(LoadingIcon, { src: loading_svg_1.default })))))));
+}
+exports.key = "new novel";
+exports.newNovel = React.createElement(NewNovel, null);
+
+
+/***/ }),
+
+/***/ "./src/components/panels/PanelsManager.tsx":
+/*!*************************************************!*\
+  !*** ./src/components/panels/PanelsManager.tsx ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const Model_1 = __webpack_require__(/*! ../../lib/browser/model/Model */ "./src/lib/browser/model/Model.ts");
+const useModel_1 = __webpack_require__(/*! ../../lib/browser/model/useModel */ "./src/lib/browser/model/useModel.ts");
+const layouts_1 = __webpack_require__(/*! ../common/layouts */ "./src/components/common/layouts.ts");
+exports.panelsManager = Model_1.mapModel();
+function PanelsManager() {
+    const [map] = useModel_1.useModel(exports.panelsManager, new Map());
+    const isNotEmpty = map.size > 0;
+    const [...panels] = map.values();
+    return (React.createElement(React.Fragment, null, isNotEmpty && React.createElement(layouts_1.Background, null, panels)));
+}
+exports.PanelsManager = PanelsManager;
+
+
+/***/ }),
+
+/***/ "./src/components/workbench/Left.tsx":
+/*!*******************************************!*\
+  !*** ./src/components/workbench/Left.tsx ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const MetaPanel_1 = __webpack_require__(/*! ../meta/MetaPanel */ "./src/components/meta/MetaPanel.tsx");
+const TreeView_1 = __webpack_require__(/*! ../novel/tree-view/TreeView */ "./src/components/novel/tree-view/TreeView.tsx");
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const Container = styled_components_1.default.div `
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-flow: column nowrap;
+    &>*:last-child{
+        flex: 1;
+    }
+`;
+function Left(props) {
+    return (React.createElement(Container, null,
+        React.createElement(MetaPanel_1.MetaPanel, { meta: props.project.meta }),
+        React.createElement(TreeView_1.TreeView, { novel: props.project.novel, cur: props.curPos })));
+}
+exports.Left = Left;
+
+
+/***/ }),
+
+/***/ "./src/components/workbench/ProjectContainer.tsx":
+/*!*******************************************************!*\
+  !*** ./src/components/workbench/ProjectContainer.tsx ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const TwoColumn_1 = __webpack_require__(/*! ./TwoColumn */ "./src/components/workbench/TwoColumn.tsx");
+const Model_1 = __webpack_require__(/*! ../../lib/browser/model/Model */ "./src/lib/browser/model/Model.ts");
+const useModel_1 = __webpack_require__(/*! ../../lib/browser/model/useModel */ "./src/lib/browser/model/useModel.ts");
+const ProjectManager_1 = __webpack_require__(/*! ../../lib/browser/utils/ProjectManager */ "./src/lib/browser/utils/ProjectManager.ts");
+const Left_1 = __webpack_require__(/*! ./Left */ "./src/components/workbench/Left.tsx");
+const EditorManager_1 = __webpack_require__(/*! ../novel/editor/EditorManager */ "./src/components/novel/editor/EditorManager.tsx");
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const Container = styled_components_1.default(TwoColumn_1.TwoColumn) `
+  height: 100vh;
+  width: 100vw;
+`;
+exports.mProject = Model_1.model();
+exports.mCurPos = Model_1.model();
+function ProjectContainer() {
+    const [project] = useModel_1.useModel(exports.mProject, null);
+    const [curPos, setCS] = useModel_1.useModel(exports.mCurPos, null);
+    react_1.useEffect(() => {
+        const i = project ? project.record.cur : null;
+        setCS(i);
+    }, [project]);
+    return (React.createElement(React.Fragment, null, project && curPos &&
+        React.createElement(Container, { left: React.createElement(Left_1.Left, { project: project, curPos: curPos }), right: React.createElement(EditorManager_1.EditorManager, { section: ProjectManager_1.projectManager.novel.findSection(project.novel, curPos) }) })));
+}
+exports.ProjectContainer = ProjectContainer;
+
+
+/***/ }),
+
+/***/ "./src/components/workbench/TwoColumn.tsx":
+/*!************************************************!*\
+  !*** ./src/components/workbench/TwoColumn.tsx ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const layouts_1 = __webpack_require__(/*! ../common/layouts */ "./src/components/common/layouts.ts");
+const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+const left_svg_1 = __webpack_require__(/*! ../../assests/icon/left.svg */ "./src/assests/icon/left.svg");
+const Container = styled_components_1.default(layouts_1.FlexRow) `
+    .right{
+      position: relative;
+      height: inherit;
+      flex: 1;
+      .showControl{
+        left: 0;
+        transform: rotate(180deg) translateY(50%);
+      }
+    }
+    .showControl{
+      width:3rem;
+      height:3rem;
+      cursor: pointer;
+      background: ${p => p.theme.content} no-repeat url(${left_svg_1.default}) center;
+      background-size: 1rem 1rem;
+      border-top-left-radius: 25%;
+      border-bottom-left-radius: 25%;
+      position: absolute;
+      top: 50%;
+    }
+`;
+const Left = styled_components_1.default.div `
+      height: inherit;
+      min-width: 5rem;
+      position: relative;
+      display: ${p => p.show ? 'block' : 'none'};
+      .line{
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+        width: 1px;
+        margin: 0 1px;
+        height: inherit;
+        background: #ccc;
+        cursor: col-resize;
+      }
+      .showControl{
+        right: 0;
+        transform: translateY(-50%);
+      }
+`;
+function TwoColumn(props) {
+    const now = React.createRef();
+    const [leftshow, setLeftshow] = react_1.useState(false);
+    let x = -1;
+    let w;
+    const ref = react_1.useRef(null);
+    react_1.useEffect(() => {
+        document.addEventListener('mousemove', calculate);
+        document.addEventListener('mouseup', getOnMouseUp);
+        return () => {
+            document.removeEventListener('mousemove', calculate);
+            document.removeEventListener('mouseup', getOnMouseUp);
+        };
+    }, [now]);
+    function calculate(e) {
+        const width = w + (e.clientX - x);
+        if (x < 0 || width < 200)
+            return;
+        ref.current.style.width = width + 'px';
+    }
+    function getOnMouseDown(e) {
+        x = e.clientX;
+        w = ref.current.offsetWidth;
+    }
+    function getOnMouseUp() {
+        x = -1;
+    }
+    return (React.createElement(Container, { className: props.className },
+        React.createElement(Left, { className: 'left', ref: ref, show: leftshow },
+            React.createElement("div", { className: 'line', onMouseDown: getOnMouseDown }),
+            props.left,
+            leftshow && React.createElement("div", { className: 'showControl', onClick: () => setLeftshow(false) })),
+        React.createElement("div", { className: 'right' },
+            !leftshow && React.createElement("div", { className: 'showControl', onClick: () => setLeftshow(true) }),
+            props.right)));
+}
+exports.TwoColumn = TwoColumn;
 
 
 /***/ }),
@@ -41858,113 +42133,24 @@ exports.TreeView = TreeView;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const NovelContainer_1 = __webpack_require__(/*! ../novel/NovelContainer */ "./src/components/novel/NovelContainer.tsx");
+const ProjectContainer_1 = __webpack_require__(/*! ./ProjectContainer */ "./src/components/workbench/ProjectContainer.tsx");
 const layouts_1 = __webpack_require__(/*! ../common/layouts */ "./src/components/common/layouts.ts");
-const Aside_1 = __webpack_require__(/*! ./aside/Aside */ "./src/components/workbench/aside/Aside.tsx");
-const useModel_1 = __webpack_require__(/*! ../../lib/browser/modle/useModel */ "./src/lib/browser/modle/useModel.ts");
-const Model_1 = __webpack_require__(/*! ../../lib/browser/modle/Model */ "./src/lib/browser/modle/Model.ts");
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-exports.mProject = Model_1.model();
-function Workbench() {
-    const [project] = useModel_1.useModel(exports.mProject, null);
-    return (React.createElement(React.Fragment, null, project && (React.createElement(layouts_1.FlexRow, null,
-        React.createElement(Aside_1.Aside, null),
-        React.createElement(NovelContainer_1.NovelContainer, { novel: project.novel, cur: project.record.cur })))));
-}
-exports.Workbench = Workbench;
-
-
-/***/ }),
-
-/***/ "./src/components/workbench/aside/Aside.tsx":
-/*!**************************************************!*\
-  !*** ./src/components/workbench/aside/Aside.tsx ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const AsideContainer_1 = __webpack_require__(/*! ./AsideContainer */ "./src/components/workbench/aside/AsideContainer.tsx");
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const aside_list_1 = __webpack_require__(/*! ./aside-list */ "./src/components/workbench/aside/aside-list.tsx");
-function Aside() {
-    return (React.createElement(AsideContainer_1.AsideContainer, { list: aside_list_1.items }));
-}
-exports.Aside = Aside;
-
-
-/***/ }),
-
-/***/ "./src/components/workbench/aside/AsideContainer.tsx":
-/*!***********************************************************!*\
-  !*** ./src/components/workbench/aside/AsideContainer.tsx ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
 const styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const design_1 = __webpack_require__(/*! ../../common/design */ "./src/components/common/design.ts");
-const ScrollContainer_1 = __webpack_require__(/*! ../../common/container/ScrollContainer */ "./src/components/common/container/ScrollContainer.tsx");
-const Container = styled_components_1.default(ScrollContainer_1.ScrollContainer) `
-    height: inherit;
-    width: 15rem;
-    &>*{
-      padding: ${design_1.design.space_s};
-      margin: 0 auto;
+const Container = styled_components_1.default(layouts_1.FlexCol) `
+    width: 100vw;
+    height: 100vh;
+    .main{
+      width: 100%;
+      flex: 1;
     }
 `;
-function AsideContainer(props) {
-    return (React.createElement(Container, null, props.list));
+function Workbench() {
+    return (React.createElement(Container, null,
+        React.createElement("div", { className: 'menu' }),
+        React.createElement(ProjectContainer_1.ProjectContainer, null)));
 }
-exports.AsideContainer = AsideContainer;
-
-
-/***/ }),
-
-/***/ "./src/components/workbench/aside/AsideItem.tsx":
-/*!******************************************************!*\
-  !*** ./src/components/workbench/aside/AsideItem.tsx ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const icons_1 = __webpack_require__(/*! ../../common/icons */ "./src/components/common/icons.ts");
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-function AsideItem(props) {
-    return (React.createElement(icons_1.LIcon, { src: props.imgsrc, alt: props.alt, onClick: props.clickHandle }));
-}
-exports.AsideItem = AsideItem;
-
-
-/***/ }),
-
-/***/ "./src/components/workbench/aside/aside-list.tsx":
-/*!*******************************************************!*\
-  !*** ./src/components/workbench/aside/aside-list.tsx ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const AsideItem_1 = __webpack_require__(/*! ./AsideItem */ "./src/components/workbench/aside/AsideItem.tsx");
-const fold_svg_1 = __webpack_require__(/*! ../../../assests/icon/fold.svg */ "./src/assests/icon/fold.svg");
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const NovelContainer_1 = __webpack_require__(/*! ../../novel/NovelContainer */ "./src/components/novel/NovelContainer.tsx");
-const toggleLeft = React.createElement(AsideItem_1.AsideItem, { imgsrc: fold_svg_1.default, key: 'showTreeView', alt: "show/hide TreeView", clickHandle: () => NovelContainer_1.mLeftShow.toggle() });
-exports.items = [
-    toggleLeft
-];
+exports.Workbench = Workbench;
 
 
 /***/ }),
@@ -41987,9 +42173,9 @@ ReactDOM.render(React.createElement(App_1.App, null), document.getElementById('r
 
 /***/ }),
 
-/***/ "./src/lib/browser/modle/Model.ts":
+/***/ "./src/lib/browser/model/Model.ts":
 /*!****************************************!*\
-  !*** ./src/lib/browser/modle/Model.ts ***!
+  !*** ./src/lib/browser/model/Model.ts ***!
   \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -42010,6 +42196,10 @@ class Model {
     }
 }
 exports.Model = Model;
+function model() {
+    return new Model();
+}
+exports.model = model;
 class ShowModel extends Model {
     toggle() {
         super.set(e => !e);
@@ -42019,17 +42209,43 @@ function showModel() {
     return new ShowModel();
 }
 exports.showModel = showModel;
-function model() {
-    return new Model();
+class MapModel extends Model {
+    add(key, value) {
+        super.set(e => {
+            e.set(key, value);
+            return new Map([...e]);
+        });
+    }
+    delete(key) {
+        super.set(e => {
+            e.delete(key);
+            return new Map([...e]);
+        });
+    }
 }
-exports.model = model;
+function mapModel() {
+    return new MapModel();
+}
+exports.mapModel = mapModel;
+class ArrayModel extends Model {
+    add(v) {
+        super.set(e => {
+            e.push(v);
+            return new Array(...e);
+        });
+    }
+}
+function arrayModel() {
+    return new ArrayModel();
+}
+exports.arrayModel = arrayModel;
 
 
 /***/ }),
 
-/***/ "./src/lib/browser/modle/useModel.ts":
+/***/ "./src/lib/browser/model/useModel.ts":
 /*!*******************************************!*\
-  !*** ./src/lib/browser/modle/useModel.ts ***!
+  !*** ./src/lib/browser/model/useModel.ts ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -42040,7 +42256,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function useModel(m, init) {
     const value = m.init ? m.init : init;
-    console.log(`value:m.init-${m.init};init-${init}`);
     const [state, setState] = react_1.useState(value);
     m.updateMethod = setState;
     return [state, setState];
@@ -42168,16 +42383,46 @@ const ProjectIO_1 = __webpack_require__(/*! ../../common/ProjectIO */ "./src/lib
 const project_1 = __webpack_require__(/*! ../../types/project */ "./src/lib/types/project.ts");
 const section_cache_1 = __webpack_require__(/*! ../section-cache */ "./src/lib/browser/section-cache.ts");
 const v1 = __webpack_require__(/*! uuid/v1 */ "./node_modules/uuid/v1.js");
-const NovelContainer_1 = __webpack_require__(/*! ../../../components/novel/NovelContainer */ "./src/components/novel/NovelContainer.tsx");
+const ProjectContainer_1 = __webpack_require__(/*! ../../../components/workbench/ProjectContainer */ "./src/components/workbench/ProjectContainer.tsx");
+class RecordManager {
+    constructor(project) {
+        this.record = project.record;
+    }
+    beforeUpdate(callback) {
+        callback(this.record);
+        ProjectIO_1.projectIO.saveRecord(this.record);
+    }
+    updateCur(cur) {
+        this.beforeUpdate(e => {
+            e.cur = cur;
+        });
+    }
+    updateLastTime() {
+        this.beforeUpdate(e => {
+            e.lastUpdateTime = new Date().toLocaleDateString();
+        });
+    }
+}
 class NovelManager {
     constructor(project) {
         this.findSection = (novel, cur) => novel.content[cur[0]].content[cur[1]].content[cur[2]];
         this.novel = project.novel;
     }
-    beforeUpdateNovel(callback) {
+    beforeUpdate(callback) {
         callback(this.novel);
         ProjectIO_1.projectIO.saveNovel(this.novel);
-        NovelContainer_1.mNovel.set(Object.create(this.novel));
+        ProjectContainer_1.mProject.set((pre) => {
+            pre.novel = this.novel;
+            return projectCopy(pre);
+        });
+    }
+    checkNameExist(pos, name) {
+        let m = this.novel;
+        for (let i = 0; i < pos.length - 1; i++) {
+            m = m.content[pos[i]];
+        }
+        console.log(JSON.stringify(m));
+        return m.content.some((e) => e.name == name);
     }
     getSection(uuid) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -42186,33 +42431,33 @@ class NovelManager {
         });
     }
     renamePart(pos, name) {
-        this.beforeUpdateNovel((e) => {
+        this.beforeUpdate((e) => {
             e.content[pos[0]].name = name;
         });
     }
     renameChapter(pos, name) {
-        this.beforeUpdateNovel((e) => {
+        this.beforeUpdate((e) => {
             e.content[pos[0]].content[pos[1]].name = name;
         });
     }
     renameSection(pos, name) {
-        this.beforeUpdateNovel((e) => {
+        this.beforeUpdate((e) => {
             e.content[pos[0]].content[pos[1]].content[pos[2]].name = name;
         });
     }
     addPart(pos, name) {
-        this.beforeUpdateNovel(e => {
+        this.beforeUpdate(e => {
             e.content.splice(pos[0] + 1, 0, new project_1.Part(name));
         });
     }
     addChapter(pos, name) {
-        this.beforeUpdateNovel(e => {
+        this.beforeUpdate(e => {
             e.content[pos[0]].content.splice(pos[1] + 1, 0, new project_1.Chapter(name));
         });
     }
     addSection(pos, name) {
         const uuid = v1();
-        this.beforeUpdateNovel(e => {
+        this.beforeUpdate(e => {
             e.content[pos[0]].content[pos[1]].content.splice(pos[0] + 1, 0, new project_1.Section(name, uuid));
         });
         ProjectIO_1.projectIO.addSection(uuid);
@@ -42222,7 +42467,7 @@ class NovelManager {
         ProjectIO_1.projectIO.updateSection(uuid, content);
     }
     removeSection(pos, uuid) {
-        this.beforeUpdateNovel(e => {
+        this.beforeUpdate(e => {
             e.content[pos[0]].content[pos[1]].content.splice(pos[2], 1);
         });
         section_cache_1.sectionCache.deleteCache(uuid);
@@ -42234,10 +42479,55 @@ class ProjectManager {
         return __awaiter(this, void 0, void 0, function* () {
             this.project = yield ProjectIO_1.projectIO.initProject(dir);
             this.novel = new NovelManager(this.project);
+            this.record = new RecordManager(this.project);
         });
     }
 }
+function projectCopy(p) {
+    return Object.assign({}, p);
+}
 exports.projectManager = new ProjectManager();
+
+
+/***/ }),
+
+/***/ "./src/lib/browser/utils/initProject.ts":
+/*!**********************************************!*\
+  !*** ./src/lib/browser/utils/initProject.ts ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const ProjectManager_1 = __webpack_require__(/*! ./ProjectManager */ "./src/lib/browser/utils/ProjectManager.ts");
+const App_1 = __webpack_require__(/*! ../../../components/App */ "./src/components/App.tsx");
+const PanelsManager_1 = __webpack_require__(/*! ../../../components/panels/PanelsManager */ "./src/components/panels/PanelsManager.tsx");
+const ProjectContainer_1 = __webpack_require__(/*! ../../../components/workbench/ProjectContainer */ "./src/components/workbench/ProjectContainer.tsx");
+function initProject(dir) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield ProjectManager_1.projectManager.init(dir);
+        const settings = [
+            [PanelsManager_1.panelsManager, new Map()],
+            [App_1.mLaunchShow, false],
+            [ProjectContainer_1.mProject, ProjectManager_1.projectManager.project]
+        ];
+        settings.forEach(e => {
+            e[0].set(e[1]);
+        });
+    });
+}
+exports.initProject = initProject;
 
 
 /***/ }),
@@ -42290,12 +42580,18 @@ class ProjectIO {
         fs.writeFile(this.getSectionPath(uuid), "", "utf8");
     }
     saveNovel(content) {
-        safeWrite_1.safeWrite(JSON.stringify(this.novelPath), content).catch(e => {
+        console.log(this.novelPath);
+        safeWrite_1.safeWrite(this.novelPath, JSON.stringify(content)).catch(e => {
+            throw new Error("saving file fail:" + e);
+        });
+    }
+    saveRecord(content) {
+        safeWrite_1.safeWrite(this.recordPath, JSON.stringify(content)).catch(e => {
             throw new Error("saving file fail");
         });
     }
     saveMeta(content) {
-        safeWrite_1.safeWrite(JSON.stringify(this.metaPath), content).catch(e => {
+        safeWrite_1.safeWrite(this.metaPath, JSON.stringify(content)).catch(e => {
             throw new Error("saving file fail");
         });
     }
@@ -42336,7 +42632,7 @@ const uuid_1 = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
 const project_1 = __webpack_require__(/*! ../types/project */ "./src/lib/types/project.ts");
 const fs = __webpack_require__(/*! fs-extra */ "./node_modules/_fs-extra@8.1.0@fs-extra/lib/index.js");
 const storage_info_1 = __webpack_require__(/*! ../node/storage-info */ "./src/lib/node/storage-info.ts");
-const initWorkBench_1 = __webpack_require__(/*! ./initWorkBench */ "./src/lib/common/initWorkBench.ts");
+const initProject_1 = __webpack_require__(/*! ../browser/utils/initProject */ "./src/lib/browser/utils/initProject.ts");
 function createNewNovel(name, author) {
     return __awaiter(this, void 0, void 0, function* () {
         const firstSectionUUID = uuid_1.v1();
@@ -42356,59 +42652,17 @@ function createNewNovel(name, author) {
         const meta = {
             name: name,
             author: author,
-            startTime: new Date().toDateString(),
-            lastUpdateTime: this.startTime
+            startTime: new Date().toDateString()
         };
         yield fs.promises.mkdir(storage_info_1.getPath(name), { recursive: true });
         yield fs.writeJSON(storage_info_1.getPath(name, storage_info_1.metafile), meta);
         yield fs.writeJSON(storage_info_1.getPath(name, storage_info_1.novelfile), defaultNovel);
         yield fs.writeJSON(storage_info_1.getPath(name, storage_info_1.recordfile), record);
         yield fs.writeFile(storage_info_1.getPath(name, firstSectionUUID), "section");
-        yield initWorkBench_1.initWorkbench(name);
+        yield initProject_1.initProject(name);
     });
 }
 exports.createNewNovel = createNewNovel;
-
-
-/***/ }),
-
-/***/ "./src/lib/common/initWorkBench.ts":
-/*!*****************************************!*\
-  !*** ./src/lib/common/initWorkBench.ts ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const ProjectManager_1 = __webpack_require__(/*! ../browser/utils/ProjectManager */ "./src/lib/browser/utils/ProjectManager.ts");
-const ActivityManager_1 = __webpack_require__(/*! ../../components/activities/ActivityManager */ "./src/components/activities/ActivityManager.tsx");
-const Workbench_1 = __webpack_require__(/*! ../../components/workbench/Workbench */ "./src/components/workbench/Workbench.tsx");
-function initWorkbench(dir) {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield ProjectManager_1.projectManager.init(dir);
-        const settings = [
-            [ActivityManager_1.mNewNovelShow, false],
-            [ActivityManager_1.mWelcomeShow, false],
-            [ActivityManager_1.mLaunchShow, false],
-            [Workbench_1.mProject, ProjectManager_1.projectManager.project]
-        ];
-        settings.forEach(e => {
-            e[0].set(e[1]);
-        });
-    });
-}
-exports.initWorkbench = initWorkbench;
 
 
 /***/ }),
@@ -42544,17 +42798,17 @@ class Novel {
 }
 exports.Novel = Novel;
 class Meta {
-    constructor(name = "", author = "", startTime = "", lastUpdateTime = "") {
+    constructor(name = "", author = "", startTime = "") {
         this.name = name;
         this.author = author;
         this.startTime = startTime;
-        this.lastUpdateTime = lastUpdateTime;
     }
 }
 exports.Meta = Meta;
 class Record {
-    constructor(cur = [0, 0, 0]) {
+    constructor(cur = [0, 0, 0], lastUpdateTime = '') {
         this.cur = cur;
+        this.lastUpdateTime = lastUpdateTime;
     }
 }
 exports.Record = Record;

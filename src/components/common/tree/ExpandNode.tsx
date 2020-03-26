@@ -3,13 +3,14 @@ import {useState} from 'react'
 import {TreeNode} from './TreeNode'
 import styled from 'styled-components'
 import fold from "../../../assests/icon/fold.svg"
-import {SIcon} from "../icons";
+import {STIcon} from "../icons";
+import {Menu} from "../../../lib/types/MenuContext";
 
 interface ExpandProps {
     expand: boolean
 }
 
-const ExpandIcon = styled(SIcon) <ExpandProps>`
+const ExpandIcon = styled(STIcon) <ExpandProps>`
     transform:${props => props.expand ? "rotate(90deg)" : "rotate(0deg)"}
 `
 const ItemContainer = styled.div<ExpandProps>`
@@ -26,7 +27,7 @@ export function ExpandNode(props: {
     icon: any,
     children?: any,
     expanded: boolean,
-    // menu:Menu
+    menuBuilder:()=>Menu
 }) {
     const [expand, setExpand] = useState(props.expanded)
 
@@ -38,11 +39,11 @@ export function ExpandNode(props: {
     return (
         <>
             <TreeNode
-                // menu={props.menu}
+                menuBuilder={props.menuBuilder}
                 indent={props.indent}
                 front={expandPart}
                 name={props.name}
-                clickHandle={e => {
+                onClick={() => {
                     setExpand(!expand)
                 }}
             />

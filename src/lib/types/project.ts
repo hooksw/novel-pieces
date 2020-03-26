@@ -36,20 +36,20 @@ export class Meta {
     name:string
     author: string
     startTime: string
-    lastUpdateTime: string
 
-    constructor(name: string="", author: string="", startTime: string="", lastUpdateTime: string="") {
+    constructor(name: string="", author: string="", startTime: string="") {
         this.name = name;
         this.author = author;
         this.startTime = startTime;
-        this.lastUpdateTime = lastUpdateTime;
     }
 }
 
 export class Record{
     cur:number[]
-    constructor(cur:number[]=[0,0,0]) {
+    lastUpdateTime: string
+    constructor(cur:number[]=[0,0,0], lastUpdateTime: string='') {
         this.cur=cur
+        this.lastUpdateTime=lastUpdateTime
     }
 }
 

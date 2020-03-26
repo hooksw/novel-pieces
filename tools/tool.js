@@ -1,22 +1,14 @@
-//generate enum Channels, not for production
-let doubleChannelsName=[
-    "checkfirst",
-    "novellist",
-    "getMeta",
-    "updatemeta",
-    "getnovel",
-    "updatenovel",
-    "getconfig",
-    "updateconfig"
-]
-
-function createChannels(){
-    let t={msg:"msg"}
-    let i=0;
-    doubleChannelsName.forEach(v=>{
-        t["ask_"+v]=""+i++
-        t["reply_"+v]=""+i++
-    })
-    return t;
+class M {
+    a;
+    async init(){
+        await new Promise((rs,rj)=>{
+            rs(1)
+            console.log('log')
+        })
+    }
+    constructor(b) {
+        this.init().then(e=>this.a=e)
+    }
 }
-console.log((JSON.stringify(createChannels())).replace(RegExp(`":`,"g"),"=").replace(RegExp(`,"`,"g"),",\n").replace(`{"`,"{"))
+var b=new M(3)
+console.log(b.a)

@@ -1,25 +1,26 @@
 import {Project} from "../../lib/types/project";
-import {NovelContainer} from "../novel/NovelContainer";
-import {FlexRow} from "../common/layouts";
-import {Aside} from "./aside/Aside";
-import {useModel} from "../../lib/browser/modle/useModel";
-import {model} from "../../lib/browser/modle/Model";
+import {ProjectContainer} from "./ProjectContainer";
+import {FlexCol, FlexRow} from "../common/layouts";
+import {useModel} from "../../lib/browser/model/useModel";
+import {model} from "../../lib/browser/model/Model";
+import styled from "styled-components";
 import React = require("react");
 
-export const mProject=model<Project>()
+const Container = styled(FlexCol)`
+    width: 100vw;
+    height: 100vh;
+    .main{
+      width: 100%;
+      flex: 1;
+    }
+`
+
 
 export function Workbench() {
-    const [project] = useModel<Project>(mProject, null)
     return (
-        <>
-            {
-                project && (
-                    <FlexRow>
-                        <Aside/>
-                        <NovelContainer novel={project.novel} cur={project.record.cur}/>
-                    </FlexRow>
-                )
-            }
-        </>
+        <Container>
+            <div className='menu'></div>
+            <ProjectContainer />
+        </Container>
     )
 }

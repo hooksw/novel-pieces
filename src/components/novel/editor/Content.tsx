@@ -10,7 +10,7 @@ export function Content(props: {
     onValueChange: (v: string) => void
 }) {
 
-    function valueChangeHandle(v: string) {
+    function onChange(v: string) {
         props.onValueChange(v)
     }
 
@@ -18,9 +18,8 @@ export function Content(props: {
     return (
         <Input
             contentEditable='true'
-            onInput={e => { valueChangeHandle(e.currentTarget.textContent || 'error') }}
-        >
-            {props.value}
-        </Input>
+            onInput={e => { onChange(e.currentTarget.textContent) }}
+            defaultValue={props.value}
+        />
     )
 }

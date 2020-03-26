@@ -1,19 +1,23 @@
 
 interface MenuItem {
     label:string
-    click:()=>void
+    onClick:()=>void
 }
 interface Submenu {
     label:string
-    submenu:Menu
+    submenu:MenuContext
 }
 export type Menu=MenuItem[]
 
+export type MenuContext={
+    menu:Menu,
+    x:number,y:number
+}
 
 
 type MultilevelMenuItem=MenuItem|Submenu
-export type MultilevelMenu=MultilevelMenuItem[]
+type MultilevelMenu=MultilevelMenuItem[]
 
-export function hasSubmenu(m:MultilevelMenuItem):boolean {
+function hasSubmenu(m:MultilevelMenuItem):boolean {
     return (<Submenu>m).submenu==null||undefined
 }

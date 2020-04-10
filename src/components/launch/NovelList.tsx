@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {useState, useEffect} from 'react';
-import {NovelListItem} from "../../lib/types/project";
-import {getNovelList} from "../../lib/node/novel/getNovelList";
+import {NovelListItem} from "../../lib/interface/project";
+import {getNovelList} from "../../lib/elec/utils/init/getNovelList";
 import {initProject} from "../../lib/browser/utils/initProject";
 
 
@@ -22,7 +22,7 @@ export function NovelList() {
         <div>
             {
                 list.map(e =>
-                    <li key={e.dir} onClick={()=>clickHandle(e.dir)}>{e.meta.name}</li>
+                    <li key={e.name} onClick={()=>clickHandle(e.name)}>{e.meta.name}</li>
                 )
             }
         </div>

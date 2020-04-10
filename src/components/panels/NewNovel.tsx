@@ -1,14 +1,13 @@
 import * as React from "react";
 import {useState} from "react";
 import styled, {keyframes} from "styled-components";
-import {MDInput, ErrorCheck} from "../common/input/MDInput";
+import {ErrorCheck, MDInput} from "../../common components/input/MDInput";
 import loading from "../../assests/icon/loading.svg"
-import {createNewNovel} from "../../lib/common/createNewNovel";
-import {ConfirmButton} from "../common/button/ConfirmButton";
-import {STIcon} from "../common/icons";
-import {Background, FlexCol} from "../common/layouts";
-import {MPanel} from "../common/container/Panel";
-import {panelsManager} from "./PanelsManager";
+import {createNewNovel} from "../../lib/elec/utils/init/createNewNovel";
+import {ConfirmButton} from "../../common components/button/ConfirmButton";
+import {STIcon} from "../../common components/icons";
+import {Background, FlexCol} from "../../common components/layouts";
+import {MPanel} from "../../common components/container/Panel";
 
 
 const Input = styled(MDInput)`
@@ -34,7 +33,7 @@ const LoadingIcon = styled(STIcon)`
   margin: 0 0.3rem;
 `
 
-function NewNovel() {
+export function NewNovel() {
     const [creating, setCreating] = useState(false)
     let name: string = ""
     let author: string = ""
@@ -50,9 +49,6 @@ function NewNovel() {
         }
     }
 
-    function closeHandle() {
-        panelsManager.delete(key)
-    }
 
     const emptyCheck: ErrorCheck = {
         check: (e: string) => e.trim().length === 0,
@@ -61,12 +57,12 @@ function NewNovel() {
 
     return (
         <Background>
-            <MPanel onClose={closeHandle} title="新建小说">
+            <MPanel title="新建小说">
                 <FlexCol>
                     {/*<Title>新建小说</Title>*/}
                     <Input label="name"
                            maxSize={50}
-                           count={true}
+                           showCount={true}
                            valueChangeHandle={e => {
                                name = e
                            }}
@@ -86,6 +82,3 @@ function NewNovel() {
 
     )
 }
-
-export const key="new novel"
-export const newNovel=<NewNovel/>

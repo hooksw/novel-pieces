@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import * as React from "react"
-import {arrayModel} from "../../lib/browser/model/Model";
-import {useModel} from "../../lib/browser/model/useModel";
+import {ArrayModel} from "../../lib/browser/hooks/Model";
+import {useModel} from "../../lib/browser/hooks/useModel";
 import {MsgProps} from "./msg";
 import {MsgItem} from "./MsgItem";
 
@@ -9,7 +9,7 @@ import {MsgItem} from "./MsgItem";
 const Container = styled.div`
   width:30vw;
   padding: 0.5rem;
-  overflow: scroll;
+  overflow-y:auto;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -19,8 +19,22 @@ const Container = styled.div`
   align-items: center;
   flex-flow: column-reverse nowrap;
 `
+class MsgModel extends ArrayModel<MsgProps>{
+    addInfo(msg:string){
+        super.add({
+            type:"info",
+            msg:msg
+        })
+    }
+    addWarn(msg:string){
+        super.add({
+            type:"warn",
+            msg:msg
+        })
+    }
+}
 
-export const mMsgList=arrayModel<MsgProps>()
+export const mMsgList=new MsgModel()
 
 export function MsgList() {
     const [list] = useModel(mMsgList,[])
@@ -32,8 +46,8 @@ export function MsgList() {
                 list.length != 0 && (
                     <Container>
                         {
-                            list.map(e =>
-                                <MsgItem key={e.msg} type={e.type} msg={e.msg}/>
+                            list.map((e,i) =>
+                                <MsgItem key={i} type={e.type} msg={e.msg}/>
                             )
                         }
                     </Container>

@@ -1,11 +1,11 @@
-import {SPanel} from "../common/container/Panel";
-import {panelsManager} from "../panels/PanelsManager";
+import {SPanel} from "../../common components/container/Panel";
+import {panelsContainer} from "../panels/PanelsContainer";
 import * as React from "react";
 
 export function MetaChange() {
 
     return(
-        <SPanel onClose={()=>panelsManager.delete(key)}>
+        <SPanel onClose={()=>panelsContainer.delete(key)}>
 
         </SPanel>
     )

@@ -5,10 +5,11 @@ const Input = styled.p`
 
 `
 
-export function Content(props: {
-    value: string
-    onValueChange: (v: string) => void
-}) {
+export const Content = React.forwardRef((props: {
+    defaultValue: string
+    onValueChange?: (v: string) => void
+}, ref:any) => {
+
 
     function onChange(v: string) {
         props.onValueChange(v)
@@ -16,10 +17,12 @@ export function Content(props: {
 
 
     return (
-        <Input
+        <p
+            ref={ref}
             contentEditable='true'
-            onInput={e => { onChange(e.currentTarget.textContent) }}
-            defaultValue={props.value}
-        />
+            onInput={e => {
+                onChange(e.currentTarget.textContent || '')
+            }}
+        >{props.defaultValue}</p>
     )
-}
+})

@@ -1,13 +1,13 @@
 import * as React from "react";
 import {useEffect, useRef, useState} from "react";
-import {FlexRow} from "../common/layouts";
+import {FlexRow} from "../../common components/layouts";
 import styled from "styled-components";
 import left from '../../assests/icon/left.svg'
 
 interface LeftProps {
     show: boolean
 }
-
+const min_width=300;
 const Container = styled(FlexRow)`
     .right{
       position: relative;
@@ -32,7 +32,7 @@ const Container = styled(FlexRow)`
 `
 const Left=styled.div<LeftProps>`
       height: inherit;
-      min-width: 5rem;
+      min-width: ${min_width}px;
       position: relative;
       display: ${p => p.show ? 'block' : 'none'};
       .line{
@@ -41,10 +41,8 @@ const Left=styled.div<LeftProps>`
         top: 0;
         bottom: 0;
         z-index: 1;
-        width: 1px;
-        margin: 0 1px;
+        width: 2px;
         height: inherit;
-        background: #ccc;
         cursor: col-resize;
       }
       .showControl{
@@ -62,7 +60,7 @@ export function TwoColumn(props: {
     const [leftshow, setLeftshow] = useState(false)
     let x: number = -1;
     let w: number;
-    const ref = useRef(null)
+    const ref = useRef<HTMLDivElement>()
 
     useEffect(() => {
         document.addEventListener('mousemove', calculate)
@@ -75,12 +73,14 @@ export function TwoColumn(props: {
 
     function calculate(e: MouseEvent) {
         const width=w + (e.clientX - x)
-        if (x < 0||width<200) return;
+        if (x < 0||width<=min_width||width>=document.body.clientWidth-min_width) return;
+        // @ts-ignore
         ref.current.style.width = width + 'px'
     }
 
     function getOnMouseDown(e: React.MouseEvent<HTMLDivElement>) {
         x = e.clientX;
+        // @ts-ignore
         w = ref.current.offsetWidth;
     }
 

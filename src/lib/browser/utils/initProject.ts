@@ -1,18 +1,19 @@
-import {projectManager} from "./ProjectManager";
-import {mLaunchShow} from "../../../components/App";
-import {panelsManager} from "../../../components/panels/PanelsManager";
-import {Model} from "../model/Model";
-import {mProject} from "../../../components/workbench/ProjectContainer";
+import {getProject} from "../../elec/utils/init/novel";
+import {record$} from "../subjects/project-data/record";
+import {novel$} from "../subjects/project-data/novel";
+import {Novel, Record} from "../../interface/project";
+
 
 export async function initProject(dir: string) {
-    await projectManager.init(dir)
-    const settings:Array<[Model<any>,any]>=[
-        [panelsManager,new Map()],
-        [mLaunchShow,false],
-        [mProject,projectManager.project]
-    ];
+    const {novel,record,...operations}=await getProject(dir)
+    distribute(novel,record,operations)
 
-    settings.forEach(e=>{
-        e[0].set(e[1])
-    })
+}
+interface FunProps {
+    [index:string]:Function
+}
+function distribute(novel:Novel,record:Record,operation:FunProps) {
+    novel$.next(novel)
+    record$.next(record)
+
 }

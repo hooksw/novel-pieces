@@ -1,9 +1,9 @@
-import {SPanel} from "../../common/container/Panel";
+import {SPanel} from "../../../common components/container/Panel";
 import * as React from "react";
-import {panelsManager} from "../../panels/PanelsManager";
-import {SimpleInput} from "../../common/input/SimpleInput";
-import {ConfirmButton} from "../../common/button/ConfirmButton";
-import {projectManager} from "../../../lib/browser/utils/ProjectManager";
+import {SimpleInput} from "../../../common components/input/SimpleInput";
+import {ConfirmButton} from "../../../common components/button/ConfirmButton";
+import {closeCurPanel} from "../../../lib/browser/subjects/ui/panels";
+import {checkChildrenNameExist} from "../../../lib/browser/subjects/project-data/novel";
 
 
 export function NewFile(props: {
@@ -14,16 +14,16 @@ export function NewFile(props: {
     let v: string = ''
 
     function clickHandle() {
-        if(projectManager.novel.checkNameExist(props.pos,v)){
+        if(checkChildrenNameExist(props.pos,v,pos)){
 
         }else{
             props.onConfirm(v)
-            panelsManager.delete(key_newFile)
+            closeCurPanel()
         }
     }
 
     return (
-        <SPanel onClose={() => panelsManager.delete(key_newFile)} title={props.title}>
+        <SPanel  title={props.title}>
             <SimpleInput placeholder='file name'
                          onChange={e => v = e.target.value}
             />
@@ -31,5 +31,3 @@ export function NewFile(props: {
         </SPanel>
     )
 }
-
-export const key_newFile = 'new file'

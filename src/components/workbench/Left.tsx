@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import {MetaPanel} from "../meta/MetaPanel";
 import {TreeView} from "../novel/tree-view/TreeView";
-import {Project} from "../../lib/types/project";
 import * as React from "react";
+import {useObservable} from "rxjs-hooks";
+import {novel$} from "../../lib/browser/subjects/project-data/novel";
+import {Novel} from "../../lib/interface/project";
+import {curPos$} from "../../lib/browser/subjects/ui/cur";
 
 const Container=styled.div`
     width: inherit;
@@ -14,14 +16,12 @@ const Container=styled.div`
     }
 `
 
-export function Left(props:{
-    project:Project
-    curPos:number[]
-}) {
+export function Left() {
+    const novel =useObservable<Novel>(()=>novel$)
+    const curPos=useObservable(()=>curPos$)
     return(
         <Container>
-            <MetaPanel meta={props.project.meta}/>
-            <TreeView novel={props.project.novel} cur={props.curPos}/>
+            { novel&&<TreeView novel={novel} cur={curPos}/>}
         </Container>
     )
 }

@@ -1,4 +1,4 @@
-import {Drawer} from "../common/container/Drawer";
+import {Drawer} from "../../common components/container/Drawer";
 import * as React from "react";
 
 

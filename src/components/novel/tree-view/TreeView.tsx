@@ -1,60 +1,71 @@
 import * as React from 'react'
+import {useEffect} from 'react'
 import styled from 'styled-components'
-import {Novel} from "../../../lib/types/project";
+import {Novel} from "../../../lib/interface/project";
 import {PartNode} from "./PartNode";
 import {ChapterNode} from "./ChapterNode";
-import {SectionNode} from "./SectionNode";
-import {ScrollContainer} from "../../common/container/ScrollContainer";
-import {useModel} from "../../../lib/browser/model/useModel";
-import {model} from "../../../lib/browser/model/Model";
-import {ContextMenu} from "../../common/ContextMenu";
-import {MenuContext} from "../../../lib/types/MenuContext";
-import {useEffect} from "react";
+import {ScrollContainer} from "../../../common components/container/ScrollContainer";
+import {ContextMenu} from "../../../common components/ContextMenu";
+import {RootNode} from "./RootNode";
+import {useObservable} from "rxjs-hooks";
+import {menuContext$} from "../../../lib/browser/subjects/ui/menuContext";
+import {MenuContext} from "../../../lib/interface/MenuContext";
 
 const Container = styled(ScrollContainer)`
     height:inherit;
     position: relative;
     overflow: auto;
+    background: ${p => p.theme.panel};
 `
 
 
-const nameTrans = (name: string) => name.trim().length == 0 ? "untitled" : name
+const adjustName = (name: string) => name.trim().length == 0 ? "untitled" : name
 
-export const mContextMenu=model<MenuContext>()
 
 export function TreeView(props: {
     novel: Novel
-    cur: Array<number>
+    cur: number[] | null
 }) {
-    const [menuContext,setMC] = useModel(mContextMenu,null)
+    const menuContext = useObservable<MenuContext|null>(() => menuContext$)
 
-    const cur = props.cur
 
-    useEffect(()=>{
-        document.addEventListener('click',menuHide)
-        document.addEventListener('scroll',menuHide)
-        return ()=>{
-            document.removeEventListener('click',menuHide)
-            document.removeEventListener('scroll',menuHide)
+    useEffect(() => {
+        document.addEventListener('click', menuHide)
+        document.addEventListener('scroll', menuHide)
+        return () => {
+            document.removeEventListener('click', menuHide)
+            document.removeEventListener('scroll', menuHide)
         }
-    },[menuContext])
+    }, [menuContext])
 
     function menuHide() {
-        if(menuContext!=null) setMC(null)
+        if (menuContext != null) menuContext$.next(null)
+    }
+
+    function getActived(arr: number[]): boolean {
+        const cur = props.cur
+        if (cur == null) return false;
+        return arr.every((v, i) => v == cur[i])
     }
 
     return (
         <Container>
-            {props.novel.content.map((e0, i0) => <PartNode pos={[i0]} key={e0.name} name={nameTrans(e0.name)}
-                                                           expanded={i0 === cur[0]}>
-                {e0.content.map((e1, i1) => <ChapterNode pos={[i0, i1]} key={e1.name} name={nameTrans(e1.name)}
-                                                         expanded={i0 === cur[0] && i1 === cur[1]}>
-                    {e1.content.map((e2, i2) => <SectionNode pos={[i0, i1, i2]} key={e2.name}
-                                                             name={nameTrans(e2.name)}
-                                                             selected={i0 === cur[0] && i1 === cur[1] && i2 == cur[2]}/>)}
-                </ChapterNode>)}
-            </PartNode>)}
-            {menuContext&& (<ContextMenu  menu={menuContext.menu} x={menuContext.x} y={menuContext.y}/>) }
+            <RootNode name={props.novel.name}>
+                {props.novel.content.map((e0, i0) => <PartNode name={adjustName(e0.name)}
+                                                               pos={[i0]}
+                                                               path={[e0.name]}
+                                                               key={e0.name}
+                                                               expanded={getActived([i0])}>
+                    {e0.content.map((e1, i1) => <ChapterNode name={e1.name}
+                                                             pos={[i0, i1]}
+                                                             path={[e0.name, e1.name]}
+                                                             key={e1.name}
+                                                             selected={getActived([i0, i1])}/>)}
+
+                </PartNode>)}
+
+            </RootNode>
+            {menuContext && (<ContextMenu menu={menuContext.menu} x={menuContext.x} y={menuContext.y}/>)}
         </Container>
 
     )

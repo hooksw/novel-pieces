@@ -1,23 +1,41 @@
 import {Content} from "./Content";
 import * as React from "react";
-import {Section} from "../../../lib/types/project";
-import {projectManager} from "../../../lib/browser/utils/ProjectManager";
-import {useEffect, useState} from "react";
+import {createRef, useEffect} from "react";
+import {useObservable} from "rxjs-hooks";
+import {from, of} from "rxjs";
+import {fromPromise} from "rxjs/internal-compatibility";
+import {flatMap, tap} from "rxjs/operators";
+import {curPath$} from "../../../lib/browser/subjects/ui/cur";
+import {getChapter} from "../../../lib/browser/subjects/project-data/novel";
+import {IO} from "../../../lib/elec/utils/io";
 
-
+let value: string = ""
 export function EditorManager(props:{
-    section:Section
+    curPath:string[]|null
 }) {
-    const now=React.createRef()
-    const [value,setValue]=useState(null)
-    projectManager.novel.getSection(props.section.uuid).then(e=>setValue(e))
-    let v:string
 
-    useEffect(()=>{
-        projectManager.novel.updateSection(props.section.uuid,v)
-    },[props.section])
+    const contentRef=createRef<HTMLElement>()
+    const defaultValue: string = useObservable(() => props.curPath==null?
+        of(''):
+        fromPromise(getChapter(props.curPath)
+    ),'')
 
-    return(
-        <Content value={value} onValueChange={(e:string)=>v=e}/>
+
+    useEffect(() => {
+        return () => {
+            if (props.curPath &&contentRef.current!=null&& contentRef.current.innerText != defaultValue ) {
+                IO._updateChapter(props.curPath , contentRef.current.innerText)
+            }
+        }
+    }, [props.curPath])
+
+    return (
+        <div>
+            {
+                props.curPath && <Content defaultValue={defaultValue}
+                    ref={contentRef}
+                />
+            }
+        </div>
     )
 }

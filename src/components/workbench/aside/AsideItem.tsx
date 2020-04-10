@@ -1,7 +1,7 @@
-import {LTIcon} from "../../common/icons";
+import {LTIcon} from "../../../common components/icons";
 import * as React from "react";
 import styled from "styled-components";
-import {design} from "../../common/design";
+import {design} from "../../../common components/design";
 
 const Container=styled.div`
   padding: ${design.space_m};

@@ -1,0 +1,22 @@
+import {novelfile, recordfile} from "../../info/storage-info";
+import {safeWrite} from "../safeWrite";
+import * as fs from "fs-extra"
+import {initALl, Novel, Record} from "../../../interface/project";
+import * as path from "path";
+
+
+export async function getProject(dir: string) {
+    const getPath = (relativePath: string) => path.join(dir, relativePath)
+
+    const novelPath = getPath(novelfile)
+
+    const recordPath = getPath(recordfile)
+    const r: initALl = {
+
+        novel: await fs.readJSON(novelPath),
+        record: await fs.readJSON(recordPath),
+
+
+    }
+    return r
+}

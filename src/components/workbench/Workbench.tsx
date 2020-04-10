@@ -1,8 +1,5 @@
-import {Project} from "../../lib/types/project";
 import {ProjectContainer} from "./ProjectContainer";
-import {FlexCol, FlexRow} from "../common/layouts";
-import {useModel} from "../../lib/browser/model/useModel";
-import {model} from "../../lib/browser/model/Model";
+import {FlexCol} from "../../common components/layouts";
 import styled from "styled-components";
 import React = require("react");
 

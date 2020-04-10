@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import {FullScreen} from "../common/layouts";
+import {FullScreen} from "../../common components/layouts";
 import * as React from 'react'
-import {panelsManager} from "../panels/PanelsManager";
-import {key, newNovel} from "../panels/NewNovel";
 import {NovelList} from "./NovelList";
-import {Title} from "../common/text";
+import {Title} from "../../common components/text";
+import {addPanel} from "../../lib/browser/subjects/ui/panels";
+import {NewNovel} from "../panels/NewNovel";
 
 const Container = styled(FullScreen)`
     background:${p=>p.theme.panel};
@@ -19,8 +19,7 @@ export function Launch() {
         <Container>
                 <Title>Novels</Title>
                 <button onClick={() =>{
-                    console.log("newNovel.key:"+newNovel.key)
-                    panelsManager.add(key,newNovel)
+                    addPanel(<NewNovel/>)
                 }}
                 >
                     create new Novel

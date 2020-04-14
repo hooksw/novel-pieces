@@ -1,56 +1,57 @@
 import * as fs from "fs-extra";
 import {Novel, Record} from "../../interface/project";
 import {safeWrite} from "./safeWrite";
-import * as path from "path";
-import {novelfile, recordfile} from "../info/storage-info";
-import produce from "immer";
+import {getAbsChapterPath, getAbsPath, novelfile, recordfile} from "../info/storage-info";
+import {BehaviorSubject} from "rxjs";
+import {Array2} from "../../interface/common-types";
+import {log} from "../../../utils/debug";
 
-let rootDir: string = ''
+export const rootName$ = new BehaviorSubject('')
 
-export const setCurDir = (d: string) => rootDir = d
 
-const getPath = (...relativePath: string[]) => path.join(rootDir, ...relativePath)
-
+const getPath = (...relativePath: string[]) => getAbsPath(rootName$.value, ...relativePath)
+const getChapterPath = (...paths: string[]) => getAbsChapterPath(rootName$.value, ...paths)
 export namespace IO {
 
-    export async function _getChapter(paths: string[]) {
-        const r = await fs.readFile(getPath(...paths), "utf8")
-        console.log('io:' + r)
+
+//part
+    export function _addPart(part: string) {
+        fs.mkdir(getPath(part))
+    }
+
+    export function _renamePart(oldPart: string, newPart: string) {
+        fs.rename(getPath(oldPart),
+            getPath(newPart))
+    }
+
+    export function _removePart(part: string) {
+        fs.rmdir(getPath(part))
+    }
+
+
+    //chapter
+    export async function _getChapter(part:string,chapter:string) {
+        const r=  await fs.readFile(getChapterPath(part,chapter), "utf8")
+        log(r,'io getChapter')
         return r
     }
 
-//novel dir tree operations
-    export function _addPart(paths: string[]) {
-            fs.mkdir(getPath(...paths))
+    export function _addChapter(part: string, chapter: string) {
+        const p = getChapterPath(part, chapter)
+        fs.writeFile(p, "", "utf8")
     }
 
-    const getChapterWithExt=(paths:string[])=> produce(paths,i=>{
-            i[i.length-1]+='.txt'
-        })
-
-    export function _addChapter(paths:string[]){
-        const chapter=getChapterWithExt(paths)
-        fs.writeFile(getPath(...chapter), "", "utf8")
-    }
-    export function _renameChapter(oldPath: string[], newPath: string[]) {
-        const oldChapter=getChapterWithExt(oldPath)
-        const newChapter=getChapterWithExt(newPath)
-        fs.rename(getPath(...oldChapter),
-            getPath(...newChapter))
+    export function _renameChapter(oldPath: Array2<string>, newPath: Array2<string>) {
+        const oldChapter = getChapterPath(...oldPath)
+        const newChapter = getChapterPath(...newPath)
+        fs.rename(oldChapter, newChapter)
     }
 
-    export function _renamePart(oldPath: string[], newPath: string[]) {
-        fs.rename(getPath(...oldPath),
-            getPath(...newPath))
+    export function _removeChapter(part: string, chapter: string) {
+        const p = getChapterPath(part,chapter)
+        fs.unlink(p)
     }
 
-    export function _removePart(paths: string[]) {
-            fs.rmdir(getPath(...paths))
-    }
-    export function _removeChapter(paths:string[]) {
-        const chapter=getChapterWithExt(paths)
-        fs.unlink(getPath(...chapter))
-    }
 
 //update file
 
@@ -69,9 +70,9 @@ export namespace IO {
         })
     }
 
-    export function _updateChapter(paths: string[], content: string) {
-        const chapterPath=getPath(...paths)
-        safeWrite(chapterPath, content).catch(e => {
+    export function _updateChapter(part: string, chapter: string, content: string) {
+        const p = getChapterPath(part,chapter)
+        safeWrite(p, content).catch(e => {
             throw new Error("saving file fail")
         })
     }

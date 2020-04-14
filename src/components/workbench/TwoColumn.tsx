@@ -60,7 +60,7 @@ export function TwoColumn(props: {
     const [leftshow, setLeftshow] = useState(false)
     let x: number = -1;
     let w: number;
-    const ref = useRef<HTMLDivElement>()
+    const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         document.addEventListener('mousemove', calculate)

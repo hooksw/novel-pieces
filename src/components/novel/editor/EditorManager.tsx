@@ -1,41 +1,49 @@
 import {Content} from "./Content";
 import * as React from "react";
-import {createRef, useEffect} from "react";
-import {useObservable} from "rxjs-hooks";
-import {from, of} from "rxjs";
+import {useEffect, useState} from "react";
+import {getChapter, updateChapter} from "../../../lib/browser/subjects/project-data/novel";
+import {log} from "../../../utils/debug";
 import {fromPromise} from "rxjs/internal-compatibility";
-import {flatMap, tap} from "rxjs/operators";
-import {curPath$} from "../../../lib/browser/subjects/ui/cur";
-import {getChapter} from "../../../lib/browser/subjects/project-data/novel";
-import {IO} from "../../../lib/elec/utils/io";
 
-let value: string = ""
-export function EditorManager(props:{
-    curPath:string[]|null
-}) {
+interface Props {
+    curPath: string[] | null
+}
 
-    const contentRef=createRef<HTMLElement>()
-    const defaultValue: string = useObservable(() => props.curPath==null?
-        of(''):
-        fromPromise(getChapter(props.curPath)
-    ),'')
+export const EditorManager=React.memo((props: Props) =>{
+    const curPath = props.curPath
+    if (curPath == null) return null
 
+    log(curPath,'curPath')
 
-    useEffect(() => {
-        return () => {
-            if (props.curPath &&contentRef.current!=null&& contentRef.current.innerText != defaultValue ) {
-                IO._updateChapter(props.curPath , contentRef.current.innerText)
-            }
+    const [defaultValue,setDV] = useState('')
+
+    const getValue=fromPromise(getChapter(curPath[0], curPath[1]))
+    useEffect(()=>{
+        const sbs=getValue.subscribe(e=>setDV((e)))
+        return ()=>{
+            sbs.unsubscribe()
         }
-    }, [props.curPath])
+    },[props.curPath])
+
+
+    const onContentUnMount=(e:string)=>{
+        if(e!=defaultValue){
+            updateChapter(curPath[0], curPath[1], e)
+        }
+    }
 
     return (
         <div>
-            {
-                props.curPath && <Content defaultValue={defaultValue}
-                    ref={contentRef}
-                />
-            }
+            <Content defaultValue={defaultValue}
+                     onUnMount={onContentUnMount}
+            />
+
         </div>
     )
+},ifEqual)
+
+function ifEqual(prev:Props,next:Props) {
+    const pc=prev.curPath,nc=next.curPath
+    if(pc==null||nc==null) return false
+    return pc.every((v,i)=>v==nc[i])
 }

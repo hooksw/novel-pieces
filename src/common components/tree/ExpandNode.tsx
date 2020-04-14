@@ -31,10 +31,10 @@ export function ExpandNode(props: {
 }) {
     const [expand, setExpand] = useState(props.expanded)
 
-    const expandPart = <div>
+    const expandPart = <>
         <ExpandIcon expand={expand} src={fold}/>
         {props.icon}
-    </div>
+    </>
 
     return (
         <>

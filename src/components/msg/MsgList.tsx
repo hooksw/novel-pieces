@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import * as React from "react"
-import {ArrayModel} from "../../lib/browser/hooks/Model";
-import {useModel} from "../../lib/browser/hooks/useModel";
-import {MsgProps} from "./msg";
 import {MsgItem} from "./MsgItem";
+import {useObservable} from "rxjs-hooks";
+import {msgList$} from "../../lib/browser/subjects/ui/msg";
 
 
 const Container = styled.div`
@@ -19,25 +18,10 @@ const Container = styled.div`
   align-items: center;
   flex-flow: column-reverse nowrap;
 `
-class MsgModel extends ArrayModel<MsgProps>{
-    addInfo(msg:string){
-        super.add({
-            type:"info",
-            msg:msg
-        })
-    }
-    addWarn(msg:string){
-        super.add({
-            type:"warn",
-            msg:msg
-        })
-    }
-}
 
-export const mMsgList=new MsgModel()
 
 export function MsgList() {
-    const [list] = useModel(mMsgList,[])
+    const list=useObservable(()=>msgList$,[])
 
 
     return (

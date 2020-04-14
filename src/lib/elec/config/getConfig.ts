@@ -1,6 +1,6 @@
 import * as Store from "electron-store"
 import * as fs from "fs-extra"
-import app = Electron.app;
+import {app} from "electron";
 import * as path from "path";
 import {defaultConfig} from "./default-config";
 

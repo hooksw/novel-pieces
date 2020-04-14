@@ -1,5 +1,5 @@
 
 export interface NovelListItem {
-    name:string,
+    dir:string,
     lastUpdateTime:string
 }

@@ -7,14 +7,13 @@ import {PanelsManager} from "./panels/PanelsContainer";
 import {Workbench} from "./workbench/Workbench";
 import {Launch} from "./launch/Launch";
 import {MsgList} from "./msg/MsgList";
-import {ShowModel} from "../lib/browser/hooks/Model";
-import {useModel} from "../lib/browser/hooks/useModel";
+import {useObservable} from "rxjs-hooks";
+import {launchShow$} from "../lib/browser/subjects/ui/show";
+import {Functions} from "./functions/Functions";
 
-
-export const mLaunchShow=new ShowModel()
 
 export function App() {
-  const [launchShow]=useModel(mLaunchShow,true)
+  const launchShow=useObservable(()=>launchShow$,true)
 
   const [theme, setTheme] = React.useState(defaultTheme)
   const themec=useContext(ThemeContext)
@@ -27,6 +26,7 @@ export function App() {
     <ThemeChange.Provider value={changeTheme}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
+        <Functions/>
         <Workbench/>
         <PanelsManager/>
         {launchShow&&<Launch/>}

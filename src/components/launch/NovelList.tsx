@@ -1,18 +1,14 @@
 import * as React from 'react'
-import {useState, useEffect} from 'react';
-import {NovelListItem} from "../../lib/interface/project";
 import {getNovelList} from "../../lib/elec/utils/init/getNovelList";
 import {initProject} from "../../lib/browser/utils/initProject";
+import {useObservable} from "rxjs-hooks";
+import {fromPromise} from "rxjs/internal-compatibility";
+import {NovelListItem} from "../../lib/interface/ui";
 
 
 export function NovelList() {
-    const [list, setList] = useState<NovelListItem[]>([])
+    const novelList=useObservable<NovelListItem[]>(()=>fromPromise(getNovelList()),[])
 
-    useEffect(() => {
-        getNovelList().then(e => {
-            setList(e)
-        })
-    }, [])
 
     function clickHandle(dir:string) {
         initProject(dir)
@@ -21,8 +17,8 @@ export function NovelList() {
     return (
         <div>
             {
-                list.map(e =>
-                    <li key={e.name} onClick={()=>clickHandle(e.name)}>{e.meta.name}</li>
+                novelList.map(e =>
+                    <li key={e.dir} onClick={()=>clickHandle(e.dir)}>{e.dir}</li>
                 )
             }
         </div>

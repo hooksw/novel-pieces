@@ -9,9 +9,9 @@ function getInfo(hex:string) {
 function isLight(hex:string) {
     return Color(hex,"hex").isLight()
 }
-function  closeColor(hex:string,dis:number):string{
+function  lightColor(hex:string, dis:number):string{
     let [h,s,l,islight]=getInfo(hex)
-    const light=islight?1:-1
+    const light=islight?-1:1
     s=Math.abs(s+light*dis)
     return Color.hsl(h,s,l).hex()
 }
@@ -23,7 +23,7 @@ function textColor(hex:string) {
 }
 
 export {
-    closeColor,
+    lightColor,
     textColor,
     isLight
 }

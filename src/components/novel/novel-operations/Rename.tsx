@@ -3,18 +3,20 @@ import * as React from "react";
 import {SimpleInput} from "../../../common components/input/SimpleInput";
 import {ConfirmButton} from "../../../common components/button/ConfirmButton";
 import {closeCurPanel} from "../../../lib/browser/subjects/ui/panels";
-import {novelManager$} from "../../../lib/browser/subjects/Novel Manager";
+import {checkNameExist} from "../../../lib/browser/subjects/project-data/novel";
+import {Confirm} from "./common operations";
+import {Array0or1, Array1or2} from "../../../lib/interface/common-types";
 
 export function Rename(props:{
     oldName:string
-    pos:number[]
-    onConfirm:(e:string)=>void
+    pos:Array1or2<number>
+    onConfirm:Confirm
     title?:string
 }) {
     let v=""
 
     function clickHandle() {
-        if(novelManager$.getValue().checkChildrenNameExist(props.pos,v)||v==props.oldName){
+        if(checkNameExist(props.pos.slice(0,-1) as Array0or1<number>,v)||v==props.oldName){
 
         }else{
             props.onConfirm(v)

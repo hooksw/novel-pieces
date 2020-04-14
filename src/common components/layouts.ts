@@ -10,7 +10,7 @@ export const FullScreen = styled.div`
 `
 export const Background=styled(FullScreen)`
     background: rgba(255,255,255,0.5);
-    z-index: ${design.z_bg};
+    z-index: ${design.z_panel_bg};
 `
 export const FlexRow=styled.div`
     flex-flow: row nowrap;

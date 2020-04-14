@@ -36,16 +36,15 @@ const LoadingIcon = styled(STIcon)`
 export function NewNovel() {
     const [creating, setCreating] = useState(false)
     let name: string = ""
-    let author: string = ""
 
     function clickHandle() {
         if (creating) return;
-        const isEmpty = name.trim().length == 0 || author.trim().length == 0
+        const isEmpty = name.trim().length == 0
 
 
         if (!isEmpty) {
             setCreating(true)
-            createNewNovel(name, author)
+            createNewNovel(name)
         }
     }
 
@@ -65,11 +64,6 @@ export function NewNovel() {
                            showCount={true}
                            valueChangeHandle={e => {
                                name = e
-                           }}
-                           errorCheck={emptyCheck}/>
-                    <Input label="author"
-                           valueChangeHandle={e => {
-                               author = e
                            }}
                            errorCheck={emptyCheck}/>
                     <Button onClick={clickHandle}>

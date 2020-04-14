@@ -1,28 +1,40 @@
 import * as React from 'react'
-import styled from 'styled-components';
+import {useEffect, useRef} from 'react'
+import {log} from "../../../utils/debug";
 
-const Input = styled.p`
 
-`
-
-export const Content = React.forwardRef((props: {
+export const Content = (props: {
     defaultValue: string
+    onUnMount:(content:string)=>void
     onValueChange?: (v: string) => void
-}, ref:any) => {
+}) => {
 
+    const ref=useRef<HTMLInputElement>(null)
 
     function onChange(v: string) {
-        props.onValueChange(v)
+        //props.onValueChange(v)
     }
+
+    useEffect(()=>{
+        if(ref.current){
+            ref.current.value=props.defaultValue
+        }
+        return ()=>{
+            log(ref)
+            if(ref.current){
+                props.onUnMount(ref.current.value)
+            }
+        }
+    })
 
 
     return (
-        <p
+        <input
+            type='text'
             ref={ref}
-            contentEditable='true'
             onInput={e => {
                 onChange(e.currentTarget.textContent || '')
             }}
-        >{props.defaultValue}</p>
+        />
     )
-})
+}

@@ -1,29 +1,33 @@
 import {Record} from "../../../interface/project";
 import {BehaviorSubject} from "rxjs";
-import produce from "immer";
 import {IO} from "../../../elec/utils/io";
-import {curPos$} from "../ui/cur";
+import {shouldUpdate} from "./shouldUpdate";
+import {Array2} from "../../../interface/common-types";
+import produce from "immer";
 
 export const record$ = new BehaviorSubject<Record>(new Record(null,'',''))
 record$.subscribe(next => {
-    IO._updateRecord(next)
+    if(shouldUpdate){
+        IO._updateRecord(next)
+    }
 })
 
-const recordUpdate = (callback: (r: Record) => void) => {
-    const r = record$.getValue()
-    const newValue = produce(r, i => callback(i))
-    record$.next(newValue)
+function recordUpdate(callback:(r:Record)=>void) {
+    const old=record$.value
+    const newR=produce(old,i=>{
+        callback(i)
+    })
+    record$.next(newR)
+
 }
 
-export function updateCur(cur: number[] | null) {
-    curPos$.next(cur)
-    recordUpdate(r => r.cur = cur)
+export function updateCur(cur:Array2<number>|null) {
+    recordUpdate(r=>r.cur=cur)
 }
 
-export function updateLastTime() {
-    recordUpdate(
-        r => r.lastUpdateTime = new Date().toLocaleDateString()
-    )
+export function updateLastime(time:string) {
+    recordUpdate(r=>r.lastUpdateTime=time)
 }
+
 
 

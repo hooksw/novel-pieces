@@ -1,3 +1,5 @@
+import {Array2} from "./common-types";
+
 export class Chapter {
     name: string
 
@@ -15,19 +17,17 @@ export class Part {
     }
 }
 export class Novel{
-    name:string
     content:Part[]
 
-    constructor(name:string='', content: Part[]=[]) {
-        this.name=name
+    constructor( content: Part[]=[]) {
         this.content = content;
     }
 }
 export class Record{
-    cur:number[]|null
+    cur:Array2<number>|null
     lastUpdateTime: string
     startTime: string
-    constructor(cur:number[]|null=null, lastUpdateTime: string,startTime:string) {
+    constructor(cur:Array2<number>|null=null, lastUpdateTime: string,startTime:string) {
         this.cur=cur
         this.lastUpdateTime=lastUpdateTime
         this.startTime = startTime;

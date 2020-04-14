@@ -3,27 +3,28 @@ import section from "../../../assests/icon/section.svg";
 import * as React from "react";
 import {STIcon} from "../../../common components/icons";
 import {Menu} from "../../../lib/interface/MenuContext";
-import {mCurPos} from "../../workbench/ProjectContainer";
-import {remove, rename} from "../novel-operations/common operations";
+import {removeChapterPanel, renameChapterPanel} from "../novel-operations/common operations";
+import {Array2} from "../../../lib/interface/common-types";
+import {updateCur} from "../../../lib/browser/subjects/project-data/record";
 
-const chapterMenuBuilder = (pos: number[],paths:string[], name: string):Menu => {
+const chapterMenuBuilder = (pos: Array2<number>,paths:Array2<string>, name: string):Menu => {
     return [
-        rename(pos,paths,name,'rename chapter'),
-        remove(pos,paths,'delete chapter')
+        renameChapterPanel(pos,paths,name,'rename chapter'),
+        removeChapterPanel(pos,paths[0],paths[1],'delete chapter')
     ]
 }
 
 export function ChapterNode(props: {
     name: string,
-    path: string[]
-    pos:number[]
+    path: Array2<string>
+    pos:Array2<number>
     selected: boolean
 }) {
 
 
     function clickHandle() {
         if (!props.selected) {
-            mCurPos.set(props.path)
+            updateCur(props.pos)
         }
     }
 

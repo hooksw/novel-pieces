@@ -3,18 +3,20 @@ import * as React from "react";
 import {SimpleInput} from "../../../common components/input/SimpleInput";
 import {ConfirmButton} from "../../../common components/button/ConfirmButton";
 import {closeCurPanel} from "../../../lib/browser/subjects/ui/panels";
-import {checkChildrenNameExist} from "../../../lib/browser/subjects/project-data/novel";
+import {checkNameExist} from "../../../lib/browser/subjects/project-data/novel";
+import {Confirm} from "./common operations";
+import {Array0or1, Array1} from "../../../lib/interface/common-types";
 
 
-export function NewFile(props: {
-    pos: number[]
-    onConfirm: (e: string) => void
+export function NewChild(props: {
+    parent: Array0or1<number>
+    onConfirm: Confirm
     title: string
 }) {
     let v: string = ''
 
     function clickHandle() {
-        if(checkChildrenNameExist(props.pos,v,pos)){
+        if(checkNameExist(props.parent,v)){
 
         }else{
             props.onConfirm(v)

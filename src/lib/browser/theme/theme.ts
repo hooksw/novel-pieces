@@ -1,24 +1,24 @@
-import {closeColor, isLight, textColor} from "./color-utils";
+import {lightColor, isLight, textColor} from "./color-utils";
 
 export class ColorTheme {
     content:string
     panel:string
-    isLight:boolean
-    point:string
-    point_dec:string
-    isPointLight:boolean
-    point_text:string
     text:string
+    point:string
+    point_light:string
+    point_text:string
+
+    scrollbar:string
 
     constructor(main: string , point: string) {
         this.content = main;
-        this.panel = closeColor(main,40);
-        this.isLight=isLight(main)
+        this.panel = lightColor(main,40);
         this.point = point;
-        this.point_dec = closeColor(point,60);
-        this.isPointLight=isLight(point)
+        this.point_light = lightColor(point,60);
         this.point_text = textColor(point);
         this.text = textColor(main);
+
+        this.scrollbar=isLight(main)?'rgba(0,0,0,0.5)':'rgba(255,255,255,0.5'
     }
 }
 

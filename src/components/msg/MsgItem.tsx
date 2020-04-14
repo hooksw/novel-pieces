@@ -1,9 +1,9 @@
-import {MsgProps} from "./msg";
 import styled from "styled-components";
 import * as React from "react";
 import {LIcon} from "../../common components/icons";
 import info from '../../assests/icon/info.svg'
 import warn from '../../assests/icon/warn.svg'
+import {MsgProps} from "../../lib/interface/msg";
 
 const Container=styled.div`
   width: 100%;
@@ -15,7 +15,7 @@ export function MsgItem(props:MsgProps) {
     return(
         <Container>
             <LIcon src={icon}/>
-            {props.msg}
+            <p>{props.msg}</p>
         </Container>
     )
 }

@@ -2,21 +2,26 @@ import {BehaviorSubject} from "rxjs";
 import {IO} from "../../../elec/utils/io";
 import produce from "immer";
 import {Chapter, Novel, Part} from "../../../interface/project";
-import {sectionCache} from "../../utils/section-cache";
+import {chapterCache} from "../../utils/chapter-cache";
 import {record$, updateCur} from "./record";
+import {shouldUpdate} from "./shouldUpdate";
+import {Array0or1, Array1or2, Array2} from "../../../interface/common-types";
+import {log} from "../../../../utils/debug";
 
 
 export const novel$ = new BehaviorSubject<Novel>(new Novel())
 
 novel$.subscribe(next => {
-    IO._updateNovel(next)
+    if(shouldUpdate){
+        IO._updateNovel(next)
+    }
 })
 
 
 function novelUpdate(callback: (novel: Novel) => void) {
     const value = novel$.value;
     const newValue = produce(value, i => {
-        callback(value)
+        callback(i)
     })
     novel$.next(newValue)
 }
@@ -33,84 +38,112 @@ function novelUpdate(callback: (novel: Novel) => void) {
 //     return arr
 // }
 
-const getRenamedPath=(paths:string[],newName:string)=>produce(paths, i => {
-    i[i.length - 1] = newName
-})
 
-export function renamePart(pos:number,oldPath: string[], newName: string) {
-    const newPath: string[] = getRenamedPath(oldPath,newName)
-    IO._renamePart(oldPath, newPath)
+
+//part
+export function addPart(childName: string) {
+    IO._addPart(childName)
+
+    novelUpdate(e => {
+        e.content.push(new Part(childName))
+    })
+}
+export function renamePart(pos:number,oldName: string, newName: string) {
+    IO._renamePart(oldName, newName)
 
     novelUpdate(e=>{
             e.content[pos].name=newName
 
     })
 }
+export function removePart(pos:number,name:string) {
+    IO._removePart(name)
 
-export function renameChapter(pos:number[],oldPath:string[],newName:string) {
-    const newPath: string[] = getRenamedPath(oldPath,newName)
+    novelUpdate(e=>{
+        e.content.splice(pos, 1)
+    })
+    adjustCurPos([pos])
+}
+
+
+//chapter
+export  async function getChapter(part:string,chapter:string):Promise<string> {
+    let data = chapterCache.getCache(part,chapter)
+    log(data,'cache data')
+    if(!data) {
+        data=await IO._getChapter(part,chapter)
+        chapterCache.updateCache(part,chapter,data)
+    }
+    return data
+}
+
+export function addChapter(pos:number,part:string,chapter:string) {
+    IO._addChapter(part,chapter)
+
+    novelUpdate(e => {
+        e.content[pos].content.push(new Chapter(chapter))
+    })
+}
+export function renameChapter(pos:Array2<number>,oldPath:Array2<string>,newName:string) {
+    const newPath=produce(oldPath,i=>{
+        i[1]=newName
+    })
     IO._renameChapter(oldPath,newPath)
 
     novelUpdate(e=>{
         e.content[pos[0]].content[pos[1]].name=newName
     })
 }
-export function addPart(paths: string[], childName: string) {
-    const newPath = produce(paths, i => {
-        i.push(childName)
-    })
-    IO._addPart(newPath)
 
-    novelUpdate(e => {
-        e.content.push(new Part(childName))
-    })
-}
-
-export function addChapter(pos:number,paths: string[], childName: string) {
-    IO._addChapter(paths)
-
-    novelUpdate(e => {
-        e.content[pos].content.push(new Chapter(childName))
-    })
-}
-
-
-export function removeChapter(pos:number[],paths: string[]) {
-    IO._removeChapter(paths)
+export function removeChapter(pos:Array2<number>,part:string,chapter:string) {
+    IO._removeChapter(part, chapter)
 
     novelUpdate(e => {
         e.content[pos[0]].content.splice(pos[1], 1)
     })
-}
-export function removePart(pos:number,paths:string[]) {
-    IO._removePart(paths)
 
-    novelUpdate(e=>{
-        e.content.splice(pos, 1)
-    })
+    adjustCurPos(pos)
+
+    chapterCache.deleteCache(part,chapter)
 }
 
-export function checkChildrenNameExist(pos:number, name: string,ChildType:'chapter'|'part') {
+export function updateChapter(part:string,chapter:string,content:string) {
+    chapterCache.updateCache(part,chapter,content)
+
+    IO._updateChapter(part, chapter, content)
+}
+
+export function checkNameExist(parent:Array0or1<number>, name: string) {
+    // const parent=pos.slice(0,-1)
     const n=novel$.value
-    if(ChildType=="part"){
+    if(parent.length==0){
         return n.content.some((e) => e.name == name)
     }else{
-        return n.content[pos].content.some(e=>e.name==name)
+        return n.content[parent[0]].content.some(e=>e.name==name)
     }
 }
 
 
-export  async function getChapter(paths:string[]) {
-    const data = sectionCache.getCache(paths.join('/'))
-    return data ? data : await IO._getChapter(paths)
-}
 
-export function deleteNonSection(clickPos: number[]) {
+function adjustCurPos(pos:Array1or2<number>) {
     const curPos = record$.value.cur
-    const ifMatch = curPos != null && clickPos.every((v, i) => curPos[i] == v)
+    if(curPos==null) return
 
-    if (ifMatch) {
-        updateCur(null)
+    const ifMatch =  pos.every((v, i) => curPos[i] == v)
+
+    if(pos.length==2){
+        if(ifMatch){
+            updateCur(null)
+        }else if(pos[1]<curPos[1]){
+            const newPos=produce(curPos,i=>{
+                i[1]-=1
+            })
+            updateCur(newPos)
+        }
+    }else if(pos.length==1){
+        if(ifMatch){
+            updateCur(null)
+        }
     }
 
 }

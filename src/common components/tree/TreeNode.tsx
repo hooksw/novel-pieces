@@ -1,25 +1,19 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import {design} from "../design";
 import {Menu, MenuContext} from "../../lib/interface/MenuContext";
-import {mContextMenu} from "../../components/novel/tree-view/TreeView";
+import {treeContextMenu$} from "../../lib/browser/subjects/ui/menuContext";
+import {ListItem} from "../ListItem";
+import {maskShow$} from "../../lib/browser/subjects/ui/show";
 
 interface NodeProps {
-    // hasOperation:boolean
     selected: boolean
     indent: number
 }
 
-const Container = styled.div<NodeProps>`
-    width:100%;
-    padding:${design.space_s} 0px;
-    text-overflow: ellipsis;
-    overflow-x: hidden;
-    user-select: none;
-    color:${p => p.theme.appTxt};
-    background:${p => p.selected?p.theme.point:'none'};
+const Container = styled(ListItem)<NodeProps>`
+    background:${p => p.selected ? p.theme.point :'none'};
     &:hover{
-        background:${p =>  p.theme.point};
+        background:${p => p.theme.point_light};
     };
     padding-left:${p => (p.indent * 2) + "rem"}
 `
@@ -28,13 +22,13 @@ export function TreeNode(props: {
     indent: number,
     front: any,
     name: string,
-    menuBuilder: ()=>Menu,
-    // operation?:any,
+    menuBuilder: () => Menu,
     onClick?: () => void,
     selected?: boolean
 }) {
 
     function contextMenuHandle(event: any) {
+        maskShow$.next(true)
         event.preventDefault()
         let x, y
 
@@ -45,29 +39,30 @@ export function TreeNode(props: {
 
         x = event.clientX
         y = bottom ? event.clientY : (event.clientY - rootH)
-        const context:MenuContext={
-            menu:props.menuBuilder(),
-            x:x,y:y
+        const context: MenuContext = {
+            menu: props.menuBuilder(),
+            x: x, y: y
         }
-        mContextMenu.set(context)
+        treeContextMenu$.next(context)
     }
 
     function clickHandle() {
         props.onClick && props.onClick();
-        mContextMenu.set(null)
+        treeContextMenu$.next(null)
     }
+
+    const front = <>
+        {props.front}
+        {props.name}
+    </>
 
     return (
         <Container
             onClick={clickHandle}
             onContextMenu={contextMenuHandle}
-            selected={ props.selected==true}
+            selected={props.selected == true}
             indent={props.indent}
-            // hasOperation={props.operation!=null}
-        >
-            {props.front}
-            {props.name}
-            {/*{props.operation}*/}
-        </Container>
+            left={front}
+        />
     )
 }

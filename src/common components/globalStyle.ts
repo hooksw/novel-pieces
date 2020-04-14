@@ -12,4 +12,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+p,span{
+  line-height: 1.2;
+}
+
 `

@@ -17,9 +17,11 @@ export const design = {
         warn:"#f5222d"
     },
     radius:'2px',
-    z_panel:900,
-    z_bg:899,
-    z_float:100,
     z_msg:1000,
+    z_panel:900,
+    z_panel_bg:899,
+    z_menu:850,
+    z_mask:500,
     z_launch:200,
+    z_float:100,
 }

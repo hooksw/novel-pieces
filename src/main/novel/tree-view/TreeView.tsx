@@ -47,6 +47,7 @@ export function TreeView() {
                     {e0.content.map((e1, i1) => <ChapterNode name={e1.name}
                                                              pos={[i0, i1]}
                                                              path={[e0.name, e1.name]}
+                                                             uuid={e1.uuid}
                                                              key={e1.name}
                                                              selected={getActived([i0, i1])}/>)}
 

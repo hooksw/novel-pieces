@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import warn from '../assests/icon/warn.svg'
-import {design} from "./design";
+import {design} from "./design/design";
 import {SIcon} from "./icons";
 
 const Container = styled.span`

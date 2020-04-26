@@ -2,9 +2,11 @@ import {Array2} from "./common-types";
 
 export class Chapter {
     name: string
+    uuid:string
 
-    constructor(name: string) {
+    constructor(name: string,uuid:string) {
         this.name = name;
+        this.uuid=uuid
     }
 }
 export class Part {

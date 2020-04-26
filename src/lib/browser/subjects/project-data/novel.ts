@@ -7,6 +7,7 @@ import {record$, updateCur} from "./record";
 import {shouldUpdate} from "./shouldUpdate";
 import {Array0or1, Array1or2, Array2} from "../../../interface/common-types";
 import {log} from "../../../../utils/debug";
+import {v1} from "uuid";
 
 
 export const novel$ = new BehaviorSubject<Novel>(new Novel())
@@ -81,7 +82,7 @@ export function addChapter(pos:number,part:string,chapter:string) {
     IO._addChapter(part,chapter)
 
     novelUpdate(e => {
-        e.content[pos].content.push(new Chapter(chapter))
+        e.content[pos].content.push(new Chapter(chapter,v1()))
     })
 }
 export function renameChapter(pos:Array2<number>,oldPath:Array2<string>,newName:string) {

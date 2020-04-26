@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {design} from "../design";
+import {design} from "../design/design";
 import {ExitButton} from "../button/ExitButton";
 import * as React from "react"
 import {closeCurPanel} from "../../lib/browser/subjects/ui/panels";

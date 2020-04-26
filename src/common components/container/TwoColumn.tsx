@@ -1,13 +1,13 @@
 import * as React from "react";
 import {useEffect, useRef, useState} from "react";
-import {FlexRow} from "../../common components/layouts";
+import {FlexRow} from "../layouts";
 import styled from "styled-components";
 import left from '../../assests/icon/left.svg'
 
 interface LeftProps {
     show: boolean
 }
-const min_width=300;
+const min_width=100;
 const Container = styled(FlexRow)`
     .right{
       position: relative;
@@ -57,7 +57,7 @@ export function TwoColumn(props: {
     className?: any
 }) {
     const now=React.createRef()
-    const [leftshow, setLeftshow] = useState(false)
+    const [leftshow, setLeftshow] = useState(true)
     let x: number = -1;
     let w: number;
     const ref = useRef<HTMLDivElement>(null)
@@ -90,7 +90,7 @@ export function TwoColumn(props: {
 
     return (
         <Container className={props.className}>
-            <Left className='left' ref={ref} show={leftshow}>
+            <Left className='left' ref={ref} show={leftshow}  style={{width:300}}>
                 <div className='line' onMouseDown={getOnMouseDown}/>
                     {props.left}
                 {leftshow&&<div className='showControl' onClick={()=>setLeftshow(false)}/>}

@@ -4,9 +4,15 @@ import {initProject} from "../../lib/browser/utils/initProject";
 import {useObservable} from "rxjs-hooks";
 import {fromPromise} from "rxjs/internal-compatibility";
 import {NovelListItem} from "../../lib/interface/ui";
+import {ListItem} from "../../common components/ListItem";
+import styled from "styled-components";
 
+const Container=styled.div`
+`
 
-export function NovelList() {
+export function NovelList(props:{
+    className?:any
+}) {
     const novelList=useObservable<NovelListItem[]>(()=>fromPromise(getNovelList()),[])
 
 
@@ -15,12 +21,12 @@ export function NovelList() {
     }
 
     return (
-        <div>
+        <Container className={props.className}>
             {
                 novelList.map(e =>
-                    <li key={e.dir} onClick={()=>clickHandle(e.dir)}>{e.dir}</li>
+                    <ListItem onClick={()=>clickHandle(e.dir)} key={e.dir} left={e.dir} right={e.lastUpdateTime}/>
                 )
             }
-        </div>
+        </Container>
     )
 }

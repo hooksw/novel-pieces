@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {design} from "./design";
+import {design} from "./design/design";
 //define basic components style in layout and base colors like shadow,when used ,they need  to be colored based on theme
 export const FullScreen = styled.div`
     width: 100vw;

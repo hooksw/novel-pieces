@@ -1,9 +1,8 @@
 import {Novel, Record} from "../../../interface/project";
 import * as fs from "fs-extra";
-import {getAbsChapterPath, getAbsPath, novelfile, recordfile} from "../../info/storage-info";
+import {getAbsChapterPath, getAbsNovelDirPath, getAbsPath, novelfile, recordfile} from "../../info/storage-info";
 import {initProject} from "../../../browser/utils/initProject";
-import {from} from "rxjs";
-import {tap} from "rxjs/operators";
+import {v1} from "uuid";
 
 
 const time = new Date().toLocaleDateString()
@@ -13,7 +12,8 @@ const defaultNovel: Novel = new Novel([
     {
         name: "untitled",
         content: [{
-            name: "untitled"
+            name: "untitled",
+            uuid:v1()
         }]
     }]
 )
@@ -21,8 +21,11 @@ const defaultNovel: Novel = new Novel([
 export async function createNewNovel(name: string) {
 
     await fs.promises.mkdir(getAbsPath(name), {recursive: true})
-    await fs.writeJSON(getAbsPath(name, novelfile), defaultNovel)
-    await fs.writeJSON(getAbsPath(name, recordfile), record)
+    const n= fs.writeJSON(getAbsPath(name, novelfile), defaultNovel)
+    const r= fs.writeJSON(getAbsPath(name, recordfile), record)
+    const nd=fs.mkdir(getAbsNovelDirPath(name))
+
+    await Promise.all([n,r,nd])
 
     await buildContentFromNovel(name, defaultNovel)
 
@@ -30,7 +33,7 @@ export async function createNewNovel(name: string) {
 }
 
 async function buildContentFromNovel(dir: string, novel: Novel) {
-    const dirs = novel.content.map(part => fs.mkdir(getAbsPath(dir, part.name)).then(() => {
+    const dirs = novel.content.map(part => fs.mkdir(getAbsNovelDirPath(dir, part.name)).then(() => {
         const files=part.content.map(chapter=>fs.writeFile(getAbsChapterPath(dir,part.name,chapter.name),''))
         Promise.all(files)
     }))

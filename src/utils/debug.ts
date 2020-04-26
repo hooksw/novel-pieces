@@ -1,4 +1,4 @@
-const isDebug=true
+export const isDebug=true
 
 export function log(msg:any,type?:string) {
     if(isDebug){

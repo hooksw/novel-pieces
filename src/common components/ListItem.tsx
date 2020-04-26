@@ -22,8 +22,8 @@ const Container = styled(FlexRowBetw)`
 `
 
 export function ListItem(props: {
-    left: JSX.Element
-    right?:JSX.Element
+    left: any
+    right?:any
     onClick?:any
     onContextMenu?:any
     className?:any

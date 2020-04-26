@@ -1,7 +1,7 @@
 import * as fs from "fs-extra";
 import {Novel, Record} from "../../interface/project";
 import {safeWrite} from "./safeWrite";
-import {getAbsChapterPath, getAbsPath, novelfile, recordfile} from "../info/storage-info";
+import {getAbsChapterPath, getAbsNovelDirPath, getAbsPath, novelfile, recordfile} from "../info/storage-info";
 import {BehaviorSubject} from "rxjs";
 import {Array2} from "../../interface/common-types";
 import {log} from "../../../utils/debug";
@@ -10,22 +10,23 @@ export const rootName$ = new BehaviorSubject('')
 
 
 const getPath = (...relativePath: string[]) => getAbsPath(rootName$.value, ...relativePath)
+const getNovelDir = (...relativePath: string[]) => getAbsNovelDirPath(rootName$.value, ...relativePath)
 const getChapterPath = (...paths: string[]) => getAbsChapterPath(rootName$.value, ...paths)
 export namespace IO {
 
 
 //part
     export function _addPart(part: string) {
-        fs.mkdir(getPath(part))
+        fs.mkdir(getNovelDir(part))
     }
 
     export function _renamePart(oldPart: string, newPart: string) {
-        fs.rename(getPath(oldPart),
-            getPath(newPart))
+        fs.rename(getNovelDir(oldPart),
+            getNovelDir(newPart))
     }
 
     export function _removePart(part: string) {
-        fs.rmdir(getPath(part))
+        fs.rmdir(getNovelDir(part))
     }
 
 
@@ -76,4 +77,11 @@ export namespace IO {
             throw new Error("saving file fail")
         })
     }
+}
+
+export function updateAddOnData(name:string,JSONContent:string) {
+    const p=getPath(name+'.json')
+    safeWrite(p,JSONContent).catch(e=>{
+        console.log(e)
+    })
 }

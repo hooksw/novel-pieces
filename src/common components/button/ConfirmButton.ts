@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {design} from "../design";
+import {design} from "../design/design";
 
 export const ConfirmButton = styled.button`
     min-height:2rem;

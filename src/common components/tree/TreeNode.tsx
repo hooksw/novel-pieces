@@ -11,6 +11,10 @@ interface NodeProps {
 }
 
 const Container = styled(ListItem)<NodeProps>`
+    span *{
+      margin: 0 0.3rem;
+    }
+    white-space: nowrap;
     background:${p => p.selected ? p.theme.point :'none'};
     &:hover{
         background:${p => p.theme.point_light};

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {design} from "../design";
+import {design} from "../design/design";
 import * as React from "react"
 import {useState} from "react";
 

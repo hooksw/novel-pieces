@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {useState} from 'react'
 import styled from 'styled-components'
-import {design} from "../design";
+import {design} from "../design/design";
 import {Warn} from "../Warn";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;

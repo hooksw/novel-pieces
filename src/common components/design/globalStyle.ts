@@ -16,4 +16,8 @@ p,span{
   line-height: 1.2;
 }
 
+.adjust{
+  width: inherit;
+  height: inherit;
+}
 `

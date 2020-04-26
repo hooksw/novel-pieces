@@ -2,7 +2,7 @@ import {useObservable} from "rxjs-hooks";
 import {maskShow$} from "../../lib/browser/subjects/ui/show";
 import styled from "styled-components";
 import {FullScreen} from "../../common components/layouts";
-import {design} from "../../common components/design";
+import {design} from "../../common components/design/design";
 import * as React from "react";
 
 const BG = styled(FullScreen)`

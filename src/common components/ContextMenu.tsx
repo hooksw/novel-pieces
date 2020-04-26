@@ -1,7 +1,7 @@
 import {Menu} from "../lib/interface/MenuContext";
 import styled from "styled-components";
 import * as React from "react";
-import {design} from "./design";
+import {design} from "./design/design";
 import {FlexCol} from "./layouts";
 import {record$} from "../lib/browser/subjects/project-data/record";
 

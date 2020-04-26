@@ -3,26 +3,32 @@ import {record$} from "../project-data/record";
 import {Array2} from "../../../interface/common-types";
 import {map} from "rxjs/operators";
 import {log} from "../../../../utils/debug";
+import {BehaviorSubject} from "rxjs";
 
-export const curPos$=record$.pipe(
-    map(e=>e.cur)
+export const curPos$ = new BehaviorSubject<Array2<number> | null>(null)
+record$.subscribe(e => {
+        curPos$.next(e.cur)
+    }
 )
 
+export function getPathFromUUID(uuid: string): Array2<string> {
+    let a: Array2<string> | null = null
+    novel$.value.content.forEach(part => {
+        part.content.forEach(chapter => {
+            if (chapter.uuid == uuid)
+                a = [part.name, chapter.name]
+        })
+    })
+    if (a==null) throw 'getPathFromUUID null'
 
-function getPath(pos:Array2<number>) {
-    // log(pos)
-    const arr:string[]=[]
-    const n=novel$.value
-    let t:any=n.content[pos[0]]
-
-    arr.push(t.name)
-    t=t.content[pos[1]]
-    arr.push(t.name)
-    // log(arr)
-    return arr
+    return a
 }
 
-export const curPath$=curPos$.pipe(
-    map(e=>e==null?null:getPath(e))
+
+export const uuid$ = curPos$.pipe(
+    map(e => e == null ? null : getUUID(e))
 )
 
+function getUUID(pos: Array2<number>) {
+    return novel$.value.content[pos[0]].content[pos[1]].uuid
+}

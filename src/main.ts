@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 import { app, BrowserWindow } from 'electron'
+import {isDebug} from "./utils/debug";
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -10,6 +11,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 700,
+    minWidth:600,
+    minHeight:400,
     webPreferences: {
       nodeIntegration: true
     }
@@ -18,8 +21,11 @@ function createWindow() {
   // and load the index.html of the app.
   mainWindow.loadFile("./dist/index.html")
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  if(isDebug){
+    // Open the DevTools.
+    mainWindow.webContents.openDevTools()
+  }
+
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

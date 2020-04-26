@@ -18,6 +18,7 @@ export function ChapterNode(props: {
     name: string,
     path: Array2<string>
     pos:Array2<number>
+    uuid:string
     selected: boolean
 }) {
 

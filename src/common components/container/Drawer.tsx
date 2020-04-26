@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import {FullScreen} from "../layouts";
-import {design} from "../design";
+import {design} from "../design/design";
 import {ScrollContainer} from "./ScrollContainer";
 
 const BG=styled(FullScreen)`

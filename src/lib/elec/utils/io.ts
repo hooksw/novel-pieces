@@ -3,7 +3,7 @@ import {Novel, Record} from "../../interface/project";
 import {safeWrite} from "./safeWrite";
 import {getAbsChapterPath, getAbsNovelDirPath, getAbsPath, novelfile, recordfile} from "../info/storage-info";
 import {BehaviorSubject} from "rxjs";
-import {Array2} from "../../interface/common-types";
+import {Array2} from "../../interface/common";
 import {log} from "../../../utils/debug";
 
 export const rootName$ = new BehaviorSubject('')
@@ -26,7 +26,9 @@ export namespace IO {
     }
 
     export function _removePart(part: string) {
-        fs.rmdir(getNovelDir(part))
+        fs.promises.rmdir(getNovelDir(part),{
+            recursive:true
+        })
     }
 
 
@@ -66,9 +68,7 @@ export namespace IO {
 
     export function _updateRecord(content: Record) {
         const recordPath = getPath(recordfile)
-        safeWrite(recordPath, JSON.stringify(content)).catch(e => {
-            throw new Error("saving file fail")
-        })
+        safeWrite(recordPath, JSON.stringify(content))
     }
 
     export function _updateChapter(part: string, chapter: string, content: string) {
@@ -80,7 +80,7 @@ export namespace IO {
 }
 
 export function updateAddOnData(name:string,JSONContent:string) {
-    const p=getPath(name+'.json')
+    const p=getPath(name)
     safeWrite(p,JSONContent).catch(e=>{
         console.log(e)
     })

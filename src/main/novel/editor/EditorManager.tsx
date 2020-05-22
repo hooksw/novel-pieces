@@ -1,50 +1,42 @@
-import {Content} from "./Content";
+import {Monaco} from "./Monaco";
 import * as React from "react";
-import {useEffect, useState} from "react";
-import {getChapter, updateChapter} from "../../../lib/browser/subjects/project-data/novel";
+import {useCallback, useEffect, useState} from "react";
+import {getChapter, updateChapter} from "../../../lib/browser/model/novel";
+import {useObservable} from "rxjs-hooks";
+import {record$} from "../../../lib/browser/model/record";
+import {map} from "rxjs/operators";
 import {log} from "../../../utils/debug";
-import {fromPromise} from "rxjs/internal-compatibility";
-import {curPos$, getPathFromUUID} from "../../../lib/browser/subjects/ui/cur";
 
 
-export const EditorManager=React.memo((props: {
-    uuid:string|null
-    className?:any
-}) =>{
-    log(props.uuid,'editor uuid')
-    const uuid = props.uuid
-    if (uuid == null) return null
+export const EditorManager = (props: {
+    className?: any
+    style?:any
+}) => {
 
-    const [defaultValue,setDV] = useState('')
+    const uuid=useObservable<string|null>(()=>record$.pipe(
+        map(e=>e.curUUID)
+    ))
+    log(uuid,'uuid')
+    const [defaultValue, setDV] = useState<string | null>(null)
 
-
-
-    useEffect(()=>{
-        const curPath=getPathFromUUID(uuid)
-        const getValue=fromPromise(getChapter(curPath[0], curPath[1]))
-        const sbs=getValue.subscribe(e=>setDV((e)))
-        return ()=>{
-            sbs.unsubscribe()
+    useEffect(() => {
+        if (uuid == null) {
+            setDV(null)
+        } else {
+            getChapter(uuid).then(
+                e => setDV(e)
+            )
         }
-    },[props.uuid])
+    }, [uuid])
 
-
-    const onContentUnMount=(e:string)=>{
-        if(e!=defaultValue){
-            const curPath=getPathFromUUID(uuid)
-            updateChapter(curPath[0], curPath[1], e)
-        }
-    }
+    const save=useCallback((value:string)=>{
+        updateChapter(uuid!,value)
+    },[uuid])
 
     return (
-        <div className={props.className}>
-            <Content defaultValue={defaultValue}
-                     onUnMount={onContentUnMount}
-            />
+        <div className={props.className} style={props.style}>
+            {defaultValue!=null  && <Monaco defaultValue={defaultValue}  onSave={save}/>}
 
         </div>
     )
-},compare)
-function compare(pre:{uuid:string},next:{uuid:string}) {
-    return pre.uuid==next.uuid
 }

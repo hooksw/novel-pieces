@@ -1,14 +1,19 @@
-import {NodeType, Pos} from "../../../lib/interface/outline/NodeType";
+import {NodeType, Pos} from "./model/NodeType";
 import * as React from "react";
+import {useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
 import {SimpleNode} from "./SimpleNode";
-import {useEffect, useMemo, useState} from "react";
+import {outline$} from "./model/subject";
+import {useObservable} from "rxjs-hooks";
+import {map} from "rxjs/operators";
 
 const Container = styled.div`
     position: relative;
+    display: flex;
+    width: max-content;
+    flex-flow: row nowrap;
+    align-items: center;
     .children{
-        vertical-align: middle;
-        display: inline-block;
        margin-left: 2rem;
     }
     svg{
@@ -24,12 +29,11 @@ const Container = styled.div`
 export function NodeContainer(props: {
     node: NodeType
     className?: any
-    count: number
+    count:number
     style?: any
 }) {
     const ref = React.useRef<HTMLDivElement>(null)
     const [line, setLine] = useState<JSX.Element | null>(null)
-    const [isOpen, setOpen] = useState<boolean>(true)
     useEffect(() => {
         if (ref?.current != null) {
             const nodes = ref.current.children
@@ -42,17 +46,18 @@ export function NodeContainer(props: {
         }
     }, [props.node])
 
-    const contentClass = useMemo(() => props.count > 1 ? undefined : props.count == 0 ? 'main' : 'second', [props.count])
-    const openBtn = useMemo(() => (props.count > 1 || props.node.children.length <= 0) ? undefined :
-        <div className='openbutton' onClick={() => setOpen(e => !e)}>{isOpen ? '-' : "+"}</div>, [props.count, isOpen])
+    const contentClass = useMemo(() => props.count>1 ? undefined : props.count==0 ? 'main' : 'second', [props.count])
+    const isOpen=useObservable(()=>outline$.pipe(
+        map(e=>props.node.children.length==0?null:!e.closeKeys.includes(props.node.key))
+    ),false,[props.node])
 
     return (
         <Container ref={ref} className={props.className} style={props.style}>
-            <SimpleNode className={contentClass} nodeKey={props.node.key}>{props.node.value}{openBtn}</SimpleNode>
+            <SimpleNode isOpen={isOpen} contentClass={contentClass} nodeKey={props.node.key}>{props.node.value}</SimpleNode>
             <svg style={isOpen ? undefined : {visibility: 'hidden'}}>{line}</svg>
             <div className='children' style={isOpen ? undefined : {visibility: 'hidden'}}>
-                {props.node.children.map(node => <NodeContainer key={node.key} node={node}
-                                                                count={props.count > 1 ? 2 : props.count + 1}/>)}
+                {props.node.children.map((node) => <NodeContainer key={node.key} node={node}
+                                                                count={props.count<2?(props.count+1):2}/>)}
             </div>
         </Container>
     )

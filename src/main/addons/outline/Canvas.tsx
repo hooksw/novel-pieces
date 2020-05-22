@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import {MindMap} from "../../../lib/interface/outline/NodeType";
 import * as React from "react";
 import {MainNode} from "./MainNode";
-import {EditState} from "./EditState";
+import {useObservable} from "rxjs-hooks";
+import {outline$} from "./model/subject";
+import {ContentInput} from "./ContentInput";
 
 
 const  Container=styled.div`
@@ -14,38 +15,14 @@ const  Container=styled.div`
     width: 2000px;
     height:2000px;
 `
-const testNode:MindMap=[{
-    x:300,
-    y:300,
-    node:{
-        key:'sss',
-        value:'1',
-        children:[
-            {
-                key:'sss1',
-                value:'12',
-                children:[]
-            },
-            {
-                key:'sss2',
-                value:'123',
-                children:[]
-            },
-            {
-                key:'sss3',
-                value:'1234',
-                children:[]
-            }
-        ]
-    }
-}]
-export function Canvas() {
 
+export function Canvas() {
+    const outline=useObservable(()=>outline$)
 
     return(
         <Container>
-            {testNode.map(e=><MainNode key={e.x} node={e.node} x={e.x} y={e.y}/>)}
-            <EditState/>
+            {outline?.nodes.map((e)=><MainNode key={e.x}  node={e.node} x={e.x} y={e.y}/>)}
+            <ContentInput/>
         </Container>
     )
 }

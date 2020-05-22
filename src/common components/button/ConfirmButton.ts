@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {design} from "../design/design";
 
 export const ConfirmButton = styled.button`
-    min-height:2rem;
+    min-height:32px;
     border-radius:8px;
     padding:0 ${design.space_l};
     outline: none;

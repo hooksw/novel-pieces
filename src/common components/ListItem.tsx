@@ -6,7 +6,7 @@ const Container = styled(FlexRowBetw)`
     width:inherit;
     color:${p => p.theme.text};
     background:${p => p.theme.content};
-    padding: 0.2rem 0;
+    padding: 4px 0;
     &:hover{
         background:${p => p.theme.point};
     }

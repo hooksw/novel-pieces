@@ -1,14 +1,15 @@
-import {Menu} from "../lib/interface/MenuContext";
+import {ContextMenuTYpe, Menu} from "../lib/interface/ContextMenuTYpe";
 import styled from "styled-components";
 import * as React from "react";
 import {design} from "./design/design";
-import {FlexCol} from "./layouts";
-import {record$} from "../lib/browser/subjects/project-data/record";
+import {ScrollContainer} from "./container/ScrollContainer";
+import {useEffect} from "react";
+import {hideLastMenu} from "../main/over-interface/model/menuContext";
 
 
-const Container = styled(FlexCol)`
-  min-width: 10rem;
-  padding: 1rem 0.2rem;
+const Container = styled(ScrollContainer)`
+  min-width: 160px;
+  padding: 16px 4px;
   background: ${p => p.theme.panel};
   position: fixed;
   z-index: ${design.z_menu};
@@ -18,7 +19,7 @@ const Container = styled(FlexCol)`
       display: inline-flex;
       align-items: center;
       justify-content: flex-start;
-      padding:0.25rem 1rem;
+      padding:4px 14px;
       &:hover{
         background: ${p=>p.theme.point};
       };
@@ -30,15 +31,18 @@ const Container = styled(FlexCol)`
 `
 
 
-export function ContextMenu(props: {
-    menu: Menu,
-    x:number
-    y:number
-}) {
+export function ContextMenu(props: ContextMenuTYpe) {
+
+    useEffect(()=>{
+        document.addEventListener('click',hideLastMenu)
+        return ()=>{
+            document.removeEventListener('click',hideLastMenu)
+        }
+    },[])
     return (
         <Container style={{left:props.x,top:props.y}} >
             {props.menu.map(e =>
-                <div key={record$.value.cur+e.label} onClick={e.onClick}>
+                <div key={e.label} onClick={e.onClick}>
                     {e.label}
                 </div>)}
         </Container>)

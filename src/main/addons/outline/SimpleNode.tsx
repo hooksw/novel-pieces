@@ -1,22 +1,38 @@
-import {NodeKeyType, NodeType} from "../../../lib/interface/outline/NodeType";
 import * as React from "react";
+import {useCallback, useMemo} from "react";
 import styled from "styled-components";
-import {useEventCallback, useObservable} from "rxjs-hooks";
-import {map, tap} from "rxjs/operators";
-import {curSelected$, EditArg, editState$} from "./subject";
-import {EventHandler, useCallback, useRef} from "react";
+import {useObservable} from "rxjs-hooks";
+import {map} from "rxjs/operators";
+import {curSelected$, editState$, setContentInput} from "./model/subject";
+import {NodeKey} from "./model/NodeType";
+import {changeOpenState, moveNode} from "./model/manager";
 
 interface StyleProp {
     selected: boolean
 }
-export const nodeMaxWidth='10rem'
-const Container = styled.div<StyleProp>`
+
+export const nodeMaxWidth = '160px'
+
+const Container = styled.div`
+    width: min-content;
+    margin-left: 1rem;
+    .dragEdge{
+        width: 100%;
+        height: 12px;
+    }
+    .dragEnter{
+        background-color: ${p => p.theme.point};
+    }
+`
+
+const Content = styled.div<StyleProp>`
     position: relative;
     display: inline-block;
     z-index: 1;
     max-width: ${nodeMaxWidth};
-    margin: 1rem;
-    padding: 0 0.5rem;
+    width: max-content;
+    height: fit-content;
+    padding: 0 8px;
     color:${p => p.theme.text};
     outline: ${p => p.selected ? `${p.theme.point} 1px solid` : 'none'};
     &.main{
@@ -34,9 +50,9 @@ const Container = styled.div<StyleProp>`
         position: absolute;
         top:50%;
         transform: translateY(-50%);
-        right: -1.1rem;
-        width:1rem;
-        height:1rem;
+        right: -18px;
+        width:16px;
+        height:16px;
         cursor: pointer;
         user-select: none;
         border-radius: 50%;
@@ -45,51 +61,114 @@ const Container = styled.div<StyleProp>`
         background-color: ${p => p.theme.content};
         font-size: 50%;
         text-align: center;
-        line-height: 0.6rem;
+        line-height: 10px;
     }
 `
 
 export const SimpleNode = (props: {
-    nodeKey: NodeKeyType
+    isOpen: boolean | null
+    nodeKey: NodeKey
     children?: any
-    className?: 'main' | 'second'
+    contentClass?: 'main' | 'second'
 }) => {
-    const selected = useObservable<boolean>(() => curSelected$.pipe(
+    const selected = useObservable<boolean, any>(() => curSelected$.pipe(
         map(e => e === props.nodeKey)
-    ), false)
+    ), false, [props.nodeKey])
 
-    const [click] = useEventCallback<void>((event$) =>
-        event$.pipe(
-            tap(() => {(!selected)&&curSelected$.next(props.nodeKey)})
-        )
+    const click = useCallback(() => {
+        (!selected) && curSelected$.next(props.nodeKey)
+    }, [props.nodeKey])
+
+    const dbclick = useCallback((e: any) => {
+            const rect = e.target.getBoundingClientRect()
+            editState$.next(setContentInput(props.nodeKey, props.children, rect.left, rect.top, rect.width, rect.height))
+        }, [props.nodeKey, props.children]
     )
 
-    const [dbclick]=useEventCallback<any>((event$)=>
-        event$.pipe(
-            tap(e=>{
-                const {left,top,width,height}=e.target.getBoundingClientRect()
-                const t:EditArg={
-                    nodeKey:props.nodeKey,
-                    value:e.target.innerText,
-                    left:left,
-                    top:top,
-                    minWidth:width,
-                    height:height
-                }
-                editState$.next(t)
-            })
-        )
-    )
+    const openbtnClick = useCallback((e: any) => {
+        changeOpenState(props.nodeKey, !props.isOpen)
+        e.stopPropagation()
+    }, [props.nodeKey, props.isOpen])
+
+    const openbtnShow: any = useMemo(() => {
+        return {visibility: props.isOpen == null ? 'hidden' : 'visible'}
+    }, [props.isOpen])
+
+    const drag = useCallback((ev: React.DragEvent) => {
+        console.log(ev.dataTransfer)
+        ev.dataTransfer.setData('text/plain', props.nodeKey)
+        ev.dataTransfer.dropEffect = 'move'
+
+    }, [props.nodeKey])
+
+    const drop = useCallback((ev: React.DragEvent) => {
+        ev.preventDefault();
+        const data = ev.dataTransfer.getData('text/plain')
+        moveNode(data, props.nodeKey, "child")
+        unmark(ev)
+    }, [props.nodeKey])
+
+    const dropTop = useCallback((ev: React.DragEvent) => {
+        ev.preventDefault();
+        const data = ev.dataTransfer.getData('text/plain')
+        moveNode(data, props.nodeKey, "top")
+    }, [props.nodeKey])
+
+    const dropBtm = useCallback((ev: React.DragEvent) => {
+        ev.preventDefault();
+        const data = ev.dataTransfer.getData('text/plain')
+        moveNode(data, props.nodeKey, "bottom")
+    }, [props.nodeKey])
+
+
+
 
     return (
-        <Container
-            className={props.className}
-            selected={selected}
-            // contentEditable={'false'}
-            onClick={click}
-            onDoubleClick={dbclick}
-        >
-            {props.children}
+        <Container>
+            <div className='dragEdge'
+                 onDragEnter={mark}
+                 onDragLeave={unmark}
+                 onDrop={dropTop}
+                 onDragOver={allowDrop}
+            />
+            <Content
+                className={props.contentClass}
+                selected={selected}
+                onClick={click}
+                onDoubleClick={dbclick}
+                draggable='true'
+                onDragStart={drag}
+                onDrop={drop}
+                onDragOver={allowDrop}
+                onDragEnter={mark}
+                onDragLeave={unmark}
+            >
+                {props.children}
+                <div className='openbutton'
+                     style={openbtnShow}
+                     onDoubleClick={openbtnClick}
+                     onClick={openbtnClick}>{props.isOpen ? '-' : "+"}</div>
+            </Content>
+            <div className='dragEdge'
+                 onDrop={dropBtm}
+                 onDragEnter={mark}
+                 onDragLeave={unmark}
+                 onDragOver={allowDrop}
+            />
         </Container>
     )
+}
+
+function mark(ev: React.DragEvent) {
+    ev.preventDefault();
+    ev.currentTarget.classList.add('dragEnter')
+}
+
+function unmark(ev: React.DragEvent) {
+    ev.preventDefault();
+    ev.currentTarget.classList.remove('dragEnter')
+}
+
+function allowDrop(ev:React.DragEvent) {
+    ev.preventDefault()
 }

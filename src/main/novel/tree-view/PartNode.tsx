@@ -2,7 +2,7 @@ import {ExpandNode} from "../../../common components/tree/ExpandNode";
 import part from "../../../assests/icon/part.svg"
 import * as React from "react";
 import {STIcon} from "../../../common components/icons";
-import {Menu} from "../../../lib/interface/MenuContext";
+import {Menu} from "../../../lib/interface/ContextMenuTYpe";
 import {
     addChapterPanel,
     removePartPanel,
@@ -11,7 +11,7 @@ import {
 
 const partMenuBuilder = (pos: number,name:string):Menu => {
     return [
-        addChapterPanel([pos],name,'add chapter'),
+        addChapterPanel(pos,name,'add chapter'),
         renamePartPanel(pos,name,'rename part'),
         removePartPanel(pos,name,'delete part')
     ]

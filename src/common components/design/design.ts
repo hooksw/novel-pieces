@@ -1,6 +1,6 @@
 export const design = {
-    fw: "1rem",
-    fw_s: "1.5rem",
+    fw: "16px",
+    fw_s: "24px",
     shadow_s: `0px 1px 2px -2px rgba(0, 0, 0, 0.16), 
         0px 3px 6px 0px rgba(0, 0, 0, 0.12), 
         0px 5px 12px 4px rgba(0,0,0,0.09)`,
@@ -10,9 +10,9 @@ export const design = {
     shadow_l: `0px 6px 16px -8px rgba(0,0,0,0.08),
         0px 9px 28px 0px rgba(0,0,0,0.05),
         0px 12px 48px 16px rgba(0,0,0,0.03)`,
-    space_s: "0.5rem",
-    space_m: "1rem",
-    space_l: "1.5rem",
+    space_s: "8px",
+    space_m: "16px",
+    space_l: "24px",
     color:{
         warn:"#f5222d"
     },
@@ -21,7 +21,6 @@ export const design = {
     z_panel:900,
     z_panel_bg:899,
     z_menu:850,
-    z_mask:500,
     z_launch:200,
     z_float:100,
 }

@@ -1,9 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import {Menu, MenuContext} from "../../lib/interface/MenuContext";
-import {treeContextMenu$} from "../../lib/browser/subjects/ui/menuContext";
+import {ContextMenuTYpe, Menu} from "../../lib/interface/ContextMenuTYpe";
+import {setContextMenu} from "../../main/over-interface/model/menuContext";
 import {ListItem} from "../ListItem";
-import {maskShow$} from "../../lib/browser/subjects/ui/show";
 
 interface NodeProps {
     selected: boolean
@@ -12,14 +11,14 @@ interface NodeProps {
 
 const Container = styled(ListItem)<NodeProps>`
     span *{
-      margin: 0 0.3rem;
+      margin: 0 5px;
     }
     white-space: nowrap;
     background:${p => p.selected ? p.theme.point :'none'};
     &:hover{
         background:${p => p.theme.point_light};
     };
-    padding-left:${p => (p.indent * 2) + "rem"}
+    padding-left:${p => (p.indent * 32) + "px"}
 `
 
 export function TreeNode(props: {
@@ -31,28 +30,15 @@ export function TreeNode(props: {
     selected?: boolean
 }) {
 
-    function contextMenuHandle(event: any) {
-        maskShow$.next(true)
+    function contextMenuHandle(event: React.MouseEvent) {
         event.preventDefault()
-        let x, y
+        event.stopPropagation()
 
-        const screenH = window.innerHeight
-        const rootH = 50
-
-        const bottom = (screenH - event.clientY) > rootH
-
-        x = event.clientX
-        y = bottom ? event.clientY : (event.clientY - rootH)
-        const context: MenuContext = {
-            menu: props.menuBuilder(),
-            x: x, y: y
-        }
-        treeContextMenu$.next(context)
+        setContextMenu(event.clientX,event.clientY,props.menuBuilder())
     }
 
     function clickHandle() {
         props.onClick && props.onClick();
-        treeContextMenu$.next(null)
     }
 
     const front = <>

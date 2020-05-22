@@ -1,7 +1,7 @@
 import {ExpandNode} from "../../../common components/tree/ExpandNode";
 import * as React from "react";
-import {Menu} from "../../../lib/interface/MenuContext";
-import {addPartPanel} from "../novel-operations/common operations";
+import {Menu} from "../../../lib/interface/ContextMenuTYpe";
+import { addPartPanel} from "../novel-operations/common operations";
 
 const rootMenuBuilder = ( name: string):Menu => {
     return [

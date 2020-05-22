@@ -29,11 +29,11 @@ const Input = styled.input<InputProp>`
      &:hover {
         border-bottom-color: ${p => p.theme.point};
      };
-     font-size: 1rem;
+     font-size: 16px;
 `
 const Label = styled.span<LabelProp>`
     position: absolute;
-    top: ${p => p.labelUp ? '-1rem' : '0.3rem'};
+    top: ${p => p.labelUp ? '-6px' : '5px'};
     left: 0;
     z-index: 100;
     color:${p => p.labelUp ? p.theme.point : p.theme.text};

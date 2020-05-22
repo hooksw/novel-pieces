@@ -1,10 +1,10 @@
 import {getProject} from "../../elec/utils/init/getProject";
-import {record$} from "../subjects/project-data/record";
-import {novel$} from "../subjects/project-data/novel";
+import {record$} from "../model/record";
+import {novel$} from "../model/novel";
 import {Novel, Record} from "../../interface/project";
-import {setShouldUpdate} from "../subjects/project-data/shouldUpdate";
-import {launchShow$} from "../subjects/ui/show";
-import {panels$} from "../subjects/ui/panels";
+import {setShouldUpdate} from "../model/shouldUpdate";
+import {launchShow$} from "../../../main/over-interface/model/show";
+import {panels$} from "../../../main/over-interface/model/panels";
 import {rootName$} from "../../elec/utils/io";
 
 

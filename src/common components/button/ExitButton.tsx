@@ -8,4 +8,4 @@ const Container=styled(BaseButton)`
 `
 export const ExitButton=(props:{
     onClick:()=>void
-})=>(<Container title="关闭面板" onClick={props.onClick}>+</Container>)
+})=>(<Container title="关闭" onClick={props.onClick}>+</Container>)

@@ -1,4 +1,4 @@
-import {Array2} from "./common-types";
+import {Array2} from "./common";
 
 export class Chapter {
     name: string
@@ -26,11 +26,11 @@ export class Novel{
     }
 }
 export class Record{
-    cur:Array2<number>|null
+    curUUID:string|null
     lastUpdateTime: string
     startTime: string
-    constructor(cur:Array2<number>|null=null, lastUpdateTime: string,startTime:string) {
-        this.cur=cur
+    constructor(cur:string|null=null, lastUpdateTime: string,startTime:string) {
+        this.curUUID=cur
         this.lastUpdateTime=lastUpdateTime
         this.startTime = startTime;
     }

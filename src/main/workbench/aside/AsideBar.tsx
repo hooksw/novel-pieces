@@ -5,8 +5,7 @@ import {AsideItem} from "./AsideItem";
 
 
 const Container=styled(FlexColStart)`
-    width: 4rem;
-    height: inherit;
+    width: 48px;
     background: ${p=>p.theme.panel};
 `
 

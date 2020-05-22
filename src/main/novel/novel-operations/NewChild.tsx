@@ -2,14 +2,13 @@ import {SPanel} from "../../../common components/container/Panel";
 import * as React from "react";
 import {SimpleInput} from "../../../common components/input/SimpleInput";
 import {ConfirmButton} from "../../../common components/button/ConfirmButton";
-import {closeCurPanel} from "../../../lib/browser/subjects/ui/panels";
-import {checkNameExist} from "../../../lib/browser/subjects/project-data/novel";
+import {closeCurPanel} from "../../over-interface/model/panels";
+import {checkNameExist} from "../../../lib/browser/model/novel";
 import {Confirm} from "./common operations";
-import {Array0or1, Array1} from "../../../lib/interface/common-types";
 
 
 export function NewChild(props: {
-    parent: Array0or1<number>
+    parent: number|undefined
     onConfirm: Confirm
     title: string
 }) {

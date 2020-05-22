@@ -1,23 +1,30 @@
 import styled from "styled-components";
 import * as React from "react"
-import {TwoColumn} from "../../common components/container/TwoColumn";
-import {TreeView} from "../novel/tree-view/TreeView";
-import {Right} from "./Right";
+import {AsideBar} from "./aside/AsideBar";
+import {NovelResize} from "./NovelResize";
 
-const Container = styled(TwoColumn)`
-  height: 100vh;
-  width: 100vw;
+const Container = styled.div`
+  height: inherit;
+  width: inherit;
+  display: flex;
+  flex-flow: row nowrap;
+  &>*{
+    height: inherit;
+  }
+  &>.right{
+    flex:1;
+  }
 `
 
 
 export function ProjectContainer() {
 
     return (
-        <>
-            <Container
-                left={<TreeView/>}
-                right={<Right/>}
-            />
-        </>
+        <Container>
+            <AsideBar className='aside'/>
+            <div className='right'>
+                <NovelResize/>
+            </div>
+        </Container>
     )
 }

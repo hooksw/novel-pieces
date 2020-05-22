@@ -4,29 +4,29 @@ const ThemedIcon=styled.img`
 `
 
 export const STIcon = styled(ThemedIcon)`
-    width:0.8rem;
-    height:0.8rem;
+    width:12px;
+    height:12px;
 `
 export const MTIcon = styled(ThemedIcon)`
-    width:1.2rem;
-    height:1.2rem;
+    width:18px;
+    height:18px;
 `
 export const LTIcon = styled(ThemedIcon)`
-    width:2rem;
-    height:2rem;
+    width:24px;
+    height:24px;
 `
 const BaseIcon=styled.img`
   
 `
 export const SIcon= styled(BaseIcon)`
-    width:0.8rem;
-    height:0.8rem;
+    width:12px;
+    height:12px;
 `
 export const MIcon= styled(BaseIcon)`
-    width:1.2rem;
-    height:1.2rem;
+    width:18px;
+    height:18px;
 `
 export const LIcon= styled(BaseIcon)`
-    width:2rem;
-    height:2rem;
+    width:24px;
+    height:24px;
 `

@@ -9,7 +9,7 @@ interface LeftProps {
 }
 const min_width=100;
 const Container = styled(FlexRow)`
-    .right{
+    &>.right{
       position: relative;
       height: inherit;
       flex: 1;
@@ -19,11 +19,11 @@ const Container = styled(FlexRow)`
       }
     }
     .showControl{
-      width:3rem;
-      height:3rem;
+      width:48px;
+      height:48px;
       cursor: pointer;
       background: ${p=>p.theme.content} no-repeat url(${left}) center;
-      background-size: 1rem 1rem;
+      background-size: 12px 12px;
       border-top-left-radius: 25%;
       border-bottom-left-radius: 25%;
       position: absolute;

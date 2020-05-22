@@ -1,4 +1,4 @@
-import {ColorTheme} from "../../browser/theme/theme";
+import {ColorTheme} from "./theme/theme";
 
 class Config  {
     firstLaunchTime:string=new Date().toLocaleDateString()

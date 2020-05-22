@@ -1,17 +1,16 @@
 const cache = new Map<string, string>()
 
-const getKeyFromNames=(p:string,c:string)=>`${p}:${c}`
 
-function getCache(part: string,chapter:string): string | undefined {
-    return cache.get(getKeyFromNames(part,chapter))
+function getCache(uuid:string): string | undefined {
+    return cache.get(uuid)
 }
 
-function updateCache(part: string,chapter:string, content: string) {
-    cache.set(getKeyFromNames(part,chapter), content)
+function updateCache(uuid:string, content: string) {
+    cache.set(uuid, content)
 }
 
-function deleteCache(part: string,chapter:string) {
-    cache.delete(getKeyFromNames(part,chapter))
+function deleteCache(uuid:string) {
+    cache.delete(uuid)
 }
 export const chapterCache={
     getCache,updateCache,deleteCache
